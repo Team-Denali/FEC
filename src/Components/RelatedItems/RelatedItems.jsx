@@ -1,12 +1,17 @@
 import React from 'react';// Bring React in to build a component.
+import {useState, useEffect} from 'react';
+import RelatedItemsList from './/comp/RelatedItemsList.jsx';
+import YourOutfitList from './/comp/YourOutfitList.jsx';
 
-//import { createRoot } from "react-dom/client";
+var RelatedItems = () => {
 
-
-// Huzzah for jsx!
-var RelatedItems = () => { //include state variables for currently viewed product
-  return <h1>RelatedItems</h1>
+  return (
+    <div>
+      <h1>RelatedItems</h1>
+      <RelatedItemsList />
+      <YourOutfitList />
+    </div>
+  );
 }
-
 
 export default RelatedItems
