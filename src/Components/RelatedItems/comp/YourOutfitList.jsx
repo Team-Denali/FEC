@@ -4,13 +4,18 @@ import RelatedItemCard from './RelatedItemCard.jsx';
 
 
 var YourOutfitList = () => {
-  const divStyle = {
+  const outerDivStyle = {
     color: 'blue',
     borderStyle: 'solid',
-    margin: '5%',
-    padding: '5%',
+    margin: '2%',
+    padding: '2%',
     borderRadius: '10%',
-    textAlign: 'center'
+    overflow: 'hidden'
+  };
+  const divStyle = {
+    overflow: 'hidden',
+    height: '1%',
+    width: '400%'
   };
   const ulStyle = {
     display: 'inline-block',
@@ -22,18 +27,21 @@ var YourOutfitList = () => {
     display: 'inline-block',
     color: 'white',
     textAlign: 'center',
-    padding: '16px',
     textDecoration: 'none'
   }
   return (
-    <div style={divStyle} >
+    <div style={outerDivStyle} >
       <h2>Your Outfit</h2>
-      <ul style={ulStyle} >
-        <li style={liStyle} ><RelatedItemCard /></li>
-        <li style={liStyle} ><RelatedItemCard /></li>
-        <li style={liStyle} ><RelatedItemCard /></li>
-        <li style={liStyle} ><RelatedItemCard /></li>
-      </ul>
+      <div style={divStyle} >
+        <ul style={ulStyle} >
+          <li style={liStyle} ><RelatedItemCard /></li>
+          <li style={liStyle} ><RelatedItemCard /></li>
+          <li style={liStyle} ><RelatedItemCard /></li>
+          <li style={liStyle} ><RelatedItemCard /></li>
+          <li style={liStyle} ><RelatedItemCard /></li>
+          <li style={liStyle} ><RelatedItemCard /></li>
+        </ul>
+      </div>
     </div>
   );
 }
