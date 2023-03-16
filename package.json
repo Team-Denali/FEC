@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chordata88/FEC.git"
+    "url": "git+https://github.com/Team-Denali/FEC.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Chordata88/FEC/issues"
+    "url": "https://github.com/Team-Denali/FEC/issues"
   },
-  "homepage": "https://github.com/Chordata88/FEC#readme",
+  "homepage": "https://github.com/Team-Denali/FEC#readme",
   "dependencies": {
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
