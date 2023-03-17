@@ -12,7 +12,9 @@ const getReviews = (req, res) => {
 };
 
 const getProducts = (req, res) => {
-  const params = req.params.id === undefined ? {id:''} : req.params;
+  const params = req.params;
+  params.id = params.id === undefined ? '' : req.params.id;
+  params.related = params.related === undefined ? '' : req.params.related;
   console.log('params', params);
   API.getProducts(params, (err, products) => {
     if (err) {

@@ -6,28 +6,42 @@ const root = createRoot(document.getElementById("root"));
 
 // Huzzah for jsx!
 const App = () => {
-  const [current, setCurrent] = useState(getProducts('37311')); //current product
+  const [current, setCurrent] = useState({}); //current product
   function getProducts(id) {
     console.log(`/products${id === undefined ? '' : '/' + id}`)
-    axios.get(`/products${id === undefined ? '' : '/' + id}`, {
+    return axios.get(`/products${id === undefined ? '' : '/' + id}`, {
       params: {
         product_id: id
       }
     })
     .then((res) => {
       console.log('products:',res.data)
+      return res
     })
-    .catch((err)=> {
+    .catch((err) => {
       console.log(err);
     })
   }
+
+  function setCurrentById(id) {
+    getProducts(id)
+        .then(res => setCurrent(res.data))
+  }
+
+  useEffect(() => {
+    if(!current.id) {
+      getProducts('37311')
+        .then(res => setCurrent(res.data))
+    }
+  }, [])
+
   return ( <>
   <h1>Hello World</h1>
     <Overview current={current} />
 
     <QuestionsAnswers current={current} />
     <Reviews current={current} />
-    <RelatedItems current={current} setCurrent={setCurrent} getProducts={getProducts} />
+    <RelatedItems current={current} setCurrentById={setCurrentById} getProducts={getProducts} />
   </>)
 }
 

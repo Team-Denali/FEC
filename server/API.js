@@ -16,8 +16,8 @@ const getReviews = (params, callback) => {
 };
 
 const getProducts = (params, callback) => {
-  console.log('params.id = ', params.id);
-  const route = API + `products/${params.id}`;
+  console.log('params = ', params);
+  const route = API + `products/${params.id + (params.related === '' ? '' : ('/' + params.related))} `;
   axios.get(route, {headers:
     {Authorization: TOKEN}})
   .then((res) => {
