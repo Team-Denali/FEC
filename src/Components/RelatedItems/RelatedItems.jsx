@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import RelatedItemsList from './/comp/RelatedItemsList.jsx';
 import YourOutfitList from './/comp/YourOutfitList.jsx';
 
-var RelatedItems = () => {
+var RelatedItems = ({current, setCurrent, getProducts}) => {
   return (
     <div>
       {/* <h1>RelatedItems</h1> */}
