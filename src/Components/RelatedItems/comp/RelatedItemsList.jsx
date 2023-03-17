@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import RelatedItemCard from './RelatedItemCard.jsx';
 
 
-var RelatedItemsList = ({related, setCurrentById, getProducts}) => {
+var RelatedItemsList = () => {
   const outerDivStyle = {
     color: 'blue',
     borderStyle: 'solid',
@@ -34,13 +34,12 @@ var RelatedItemsList = ({related, setCurrentById, getProducts}) => {
       <h2>Related Items</h2>
       <div style={divStyle} >
         <ul style={ulStyle} >
-          {related.map(item => <li style={liStyle} ><RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} /></li>)}
-          {/* <li style={liStyle} ><RelatedItemCard /></li>
           <li style={liStyle} ><RelatedItemCard /></li>
           <li style={liStyle} ><RelatedItemCard /></li>
           <li style={liStyle} ><RelatedItemCard /></li>
           <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li> */}
+          <li style={liStyle} ><RelatedItemCard /></li>
+          <li style={liStyle} ><RelatedItemCard /></li>
         </ul>
       </div>
     </div>

@@ -34,12 +34,12 @@ var YourOutfitList = () => {
       <h2>Your Outfit</h2>
       <div style={divStyle} >
         <ul style={ulStyle} >
-          {/* <li style={liStyle} ><RelatedItemCard /></li>
           <li style={liStyle} ><RelatedItemCard /></li>
           <li style={liStyle} ><RelatedItemCard /></li>
           <li style={liStyle} ><RelatedItemCard /></li>
           <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li> */}
+          <li style={liStyle} ><RelatedItemCard /></li>
+          <li style={liStyle} ><RelatedItemCard /></li>
         </ul>
       </div>
     </div>
