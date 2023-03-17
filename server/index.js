@@ -13,5 +13,11 @@ app.get('/reviews/', (req,res) => {
   //console.log("running");
   controller.getReviews(req,res);
 })
+
+app.get(['/products', '/products/:id'], (req,res) => {
+  console.log('get products params: ', req.params);
+  controller.getProducts(req,res);
+})
+
 app.listen(PORT);
 console.log(`Server listening at http://localhost:${PORT}`);
