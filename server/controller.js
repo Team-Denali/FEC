@@ -10,19 +10,17 @@ const getReviews = (req, res) => {
     }
   })
 };
-
-const getProducts = (req, res) => {
-  const params = req.params;
-  params.id = params.id === undefined ? '' : req.params.id;
-  params.related = params.related === undefined ? '' : req.params.related;
-  console.log('params', params);
-  API.getProducts(params, (err, products) => {
+const getQuestions = (req, res) => {
+  const params = req.query;
+  API.getQuestions(params, (err, reviews) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(products);
+      res.status(200).send(reviews);
     }
   })
 };
 
-module.exports = {getReviews, getProducts}
+
+module.exports = {getReviews, getQuestions}
+

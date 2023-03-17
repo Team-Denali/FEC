@@ -21,7 +21,7 @@ const Reviews = () => { //include state variables for currently viewed product
     })
     .then((res) => {
       setReviews(res.data);
-      console.log('reviews:',res.data)
+      // console.log('reviews:',res.data)
     })
     .catch((err)=> {
       console.log(err);

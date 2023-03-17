@@ -2,7 +2,6 @@ const axios = require ('axios');
 const config = require('../config/myConfig.js');
 const TOKEN = config.token;
 const API = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`;
-
 const getReviews = (params, callback) => {
   const route = API + `reviews/`;
   axios.get(route, {headers:
@@ -14,12 +13,10 @@ const getReviews = (params, callback) => {
     callback(err);
   })
 };
-
-const getProducts = (params, callback) => {
-  console.log('params = ', params);
-  const route = API + `products/${params.id + (params.related === '' ? '' : ('/' + params.related))} `;
+const getQuestions = (params, callback) => {
+  const route = API + `qa/questions`;
   axios.get(route, {headers:
-    {Authorization: TOKEN}})
+    {Authorization: TOKEN}, params: params})
   .then((res) => {
     callback(null, res.data)
   })
@@ -28,4 +25,6 @@ const getProducts = (params, callback) => {
   })
 };
 
-module.exports = {getReviews, getProducts};
+
+
+module.exports = {getReviews, getQuestions};
