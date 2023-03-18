@@ -5,7 +5,7 @@ import ProductPreviewInformation from './ProductPreviewInformation.jsx';
 import ActionButton from './ActionButton.jsx';
 
 
-var RelatedItemCard = () => {
+var RelatedItemCard = ({item, onClick}) => {
   const divStyle = {
     position: 'relative',
     color: 'blue',
@@ -15,10 +15,10 @@ var RelatedItemCard = () => {
     borderRadius: '10%'
   };
   return (
-    <div style={divStyle} >
+    <div style={divStyle} onClick={onClick}>
       {/* <h3>RelatedItemCard</h3> */}
-      <ProductPreviewImages />
-      <ProductPreviewInformation />
+      <ProductPreviewImages item={item} />
+      <ProductPreviewInformation item={item} />
       <ActionButton />
     </div>
   );
