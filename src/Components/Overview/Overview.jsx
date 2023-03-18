@@ -16,8 +16,8 @@ useEffect(() => {
 //className="productOverviewPic"
 
   return (
-<>
-  <div className="overviewContainer">
+<> <div className="overviewContainer">
+  <div className="overviewTop">
     <OverviewMainPic/>
 
 
@@ -38,7 +38,9 @@ useEffect(() => {
 
 
   </div>
+    <div className='overviewBottom'>Insert Pithy Description || Insert Specs</div>
 
+  </div>
 
   </>)
 }

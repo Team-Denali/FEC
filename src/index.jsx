@@ -15,7 +15,7 @@ const App = () => {
       }
     })
     .then((res) => {
-      // console.log('products:',res.data)
+      console.log('products:',res.data)
       return res
     })
     .catch((err) => {
