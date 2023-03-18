@@ -24,7 +24,18 @@ const getQuestions = (params, callback) => {
     callback(err);
   })
 };
+const getProducts = (params, callback) => {
+  // console.log('params = ', params);
+  const route = API + `products/${params.id + (params.related === '' ? '' : ('/' + params.related))} `;
+  axios.get(route, {headers:
+    {Authorization: TOKEN}})
+  .then((res) => {
+    callback(null, res.data)
+  })
+  .catch((err) => {
+    callback(err);
+  })
+};
 
 
-
-module.exports = {getReviews, getQuestions};
+module.exports = {getReviews, getQuestions, getProducts};

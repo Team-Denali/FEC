@@ -17,6 +17,10 @@ app.get('/qa/questions', (req,res) => {
   //console.log("running");
   controller.getQuestions(req,res);
 })
+app.get(['/products', '/products/:id', '/products/:id/:related'], (req,res) => {
+  // console.log('get products params: ', req.params);
+  controller.getProducts(req,res);
+})
 
 
 

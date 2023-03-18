@@ -2,7 +2,7 @@ import React from 'react';// Bring React in to build a component.
 import {useState, useEffect} from 'react';
 
 
-var ProductPreviewInformation = () => {
+var ProductPreviewInformation = ({item}) => {
   const divStyle = {
     color: 'blue',
     borderStyle: 'solid',
@@ -16,9 +16,9 @@ var ProductPreviewInformation = () => {
   return (
     <div style={divStyle} >
       {/* <h4>ProductPreviewInformation</h4> */}
-      <h5 style={h5Style} >ProductCategory</h5>
-      <h5 style={h5Style} >ProductName</h5>
-      <h5 style={h5Style} >$$Price$$</h5>
+      <h5 style={h5Style} >{item.category}</h5>
+      <h5 style={h5Style} >{item.name}</h5>
+      <h5 style={h5Style} >{item.default_price}</h5>
       <h5 style={h5Style} >Rating *****</h5>
     </div>
   );
