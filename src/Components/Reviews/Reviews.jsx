@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Reviewlist from './Reviewlist.jsx';
+import Ratingbreakdown from './Ratingbreakdown.jsx';
+import Productbreakdown from './Productbreakdown.jsx';
+import css from "./style.css";
 // Bring React in to build a component.
 
 //import { createRoot } from "react-dom/client";
@@ -8,8 +11,9 @@ import Reviewlist from './Reviewlist.jsx';
 
 // Huzzah for jsx!
 const Reviews = () => { //include state variables for currently viewed product
-  const [product_id, setProduct_id] = useState("37313");
+  const [product_id, setProduct_id] = useState("37322");
   const [reviews, setReviews] = useState({});
+  const [reviewStars, setReviewStars] = useState('');
 
   const getReviews = () => {
     axios.get('/reviews', {
@@ -21,7 +25,22 @@ const Reviews = () => { //include state variables for currently viewed product
     })
     .then((res) => {
       setReviews(res.data);
-      // console.log('reviews:',res.data)
+      //console.log('reviews:',res.data)
+    })
+    .catch((err)=> {
+      console.log(err);
+    })
+  }
+
+  const getReviewsStars = () => {
+    axios.get('/reviews/meta', {
+      params: {
+        product_id
+      }
+    })
+    .then((res) => {
+      setReviewStars(res.data);
+      //console.log('averagerating:',res.data)
     })
     .catch((err)=> {
       console.log(err);
@@ -30,25 +49,20 @@ const Reviews = () => { //include state variables for currently viewed product
 
   useEffect(() => {
     getReviews();
+    getReviewsStars();
   },[]);
 
-  // return (
-  //   <h1>REVIEW LIST:</h1>
-  // <Reviewlist reviews= {reviews} product_id= {product_id}/>
-  // <div>rating breakdown</div>
-  // <div>product breakdown</div>
-  // <div>review list</div>
-  // )
+
   return (
     <div>
-    <Reviewlist reviews= {reviews} product_id= {product_id}/>
-    <div>rating breakdown</div>
-    <div>product breakdown</div>
-    <div>review list</div>
-    </div>
-
+    <h1>Ratings & reviews</h1>
+    <div className ="Reviews">
+    <Ratingbreakdown className="Ratingbreakdown" reviewStars={reviewStars}/>
+    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id}/>
+    <Productbreakdown className="Productbreakdown" reviewStars={reviewStars}/>
+      </div>
+      </div>
   )
-
 }
 
 

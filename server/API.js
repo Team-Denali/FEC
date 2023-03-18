@@ -25,6 +25,34 @@ const getQuestions = (params, callback) => {
   })
 };
 
+const updateReviewHelpful = (params, callback) => {
+  const route = API + `reviews/${params.review_id}/helpful`;
+  //console.log(route);
+  axios.put(route, null, {headers:
+    {authorization: TOKEN}, params: params})
+  .then((res) => {
+    callback(null, res.data)
+  })
+  .catch((err) => {
+    callback(err);
+  })
+};
 
+const getReviewsMeta = (params, callback) => {
+  const route = API + `reviews/meta`;
+  axios.get(route, {headers:
+    {Authorization: TOKEN}, params: params})
+  .then((res) => {
+    callback(null, res.data)
+  })
+  .catch((err) => {
+    callback(err);
+  })
+};
 
-module.exports = {getReviews, getQuestions};
+module.exports = {
+  getReviews,
+  updateReviewHelpful,
+  getReviewsMeta,
+  getQuestions
+};

@@ -1,0 +1,23 @@
+
+
+.Reviews {  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  grid-template-rows: 1fr 1fr ;
+  gap: 5px 5px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Ratingbreakdown ReviewList"
+    "Productbreakdown ReviewList";
+  }
+
+.ReviewList { grid-area: ReviewList; }
+
+.Ratingbreakdown { grid-area: Ratingbreakdown; }
+
+.Productbreakdown { grid-area: Productbreakdown; }
+
+
+.ReviewList{
+  display: flex;
+  justify-content: center;
+}

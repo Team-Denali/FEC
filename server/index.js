@@ -13,6 +13,16 @@ app.get('/reviews/', (req,res) => {
   //console.log("running");
   controller.getReviews(req,res);
 })
+
+app.put(`/review/:review_id/helpful`, (req,res) => {
+  //console.log("running");
+  controller.updateReviewHelpful(req,res);
+});
+
+app.get('/reviews/meta', (req,res) => {
+  controller.getReviewsMeta(req, res);
+})
+
 app.get('/qa/questions', (req,res) => {
   //console.log("running");
   controller.getQuestions(req,res);
