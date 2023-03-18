@@ -2,7 +2,8 @@ import React from 'react';// Bring React in to build a component.
 import {useState, useEffect} from 'react';
 
 
-var ProductPreviewImages = () => {
+var ProductPreviewImages = ({item}) => {
+
   const divStyle = {
     color: 'blue',
     borderStyle: 'solid',
