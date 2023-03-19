@@ -34,7 +34,26 @@ const getProducts = (req, res) => {
   })
 };
 
+const getStyles = (req, res) => { 
+  let params = req.query;
+
+  let id = params.product_id; //console.log(id);
+  API.getStyles(id, (err, styles) => {
+
+    if (err) {
+      res.status(500).send(err);
+    } else {
+
+      res.status(200).send(styles)
+
+    }
+  })
 
 
-module.exports = {getReviews, getQuestions, getProducts}
 
+
+
+
+}
+
+module.exports = {getReviews, getQuestions, getProducts, getStyles}
