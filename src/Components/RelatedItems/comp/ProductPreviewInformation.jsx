@@ -4,11 +4,11 @@ import {useState, useEffect} from 'react';
 
 var ProductPreviewInformation = ({item}) => {
   const divStyle = {
-    color: 'blue',
-    borderStyle: 'solid',
-    margin: '5%',
+    color: 'rgb(87 72 72)',
+    // borderStyle: 'solid',
+    // margin: '5%',
     padding: '5%',
-    borderRadius: '10%'
+    // borderRadius: '0% 0% 10% 10%'
   };
   const h5Style = {
     margin: '1% 1% 1% 1%'

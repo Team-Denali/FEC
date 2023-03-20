@@ -8,11 +8,13 @@ import ActionButton from './ActionButton.jsx';
 var RelatedItemCard = ({item, onClick}) => {
   const divStyle = {
     position: 'relative',
-    color: 'blue',
+    color: 'lightgrey',
     borderStyle: 'solid',
     margin: '5%',
-    padding: '5%',
-    borderRadius: '10%'
+    // padding: '5%',
+    borderRadius: '10%',
+    overflow: 'hidden',
+    backgroundColor: 'lightgrey'
   };
   return (
     <div style={divStyle} onClick={onClick}>

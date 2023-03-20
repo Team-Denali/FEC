@@ -5,21 +5,34 @@ import {useState, useEffect} from 'react';
 var ProductPreviewImages = ({item}) => {
 
   const divStyle = {
-    color: 'blue',
-    borderStyle: 'solid',
-    margin: '5%',
-    padding: '5%',
-    borderRadius: '10%'
+    // color: 'blue',
+    // borderStyle: 'solid',
+    // margin: '5%',
+    // padding: '5%',
+    borderRadius: '10% 10% 0% 0%',
+    height: '255px',
+    width: '255px',
+    overflow: 'hidden',
+    backgroundImage: `url(${item.styles[0].photos[0].url})`,
+    // filter: 'blur(4px)'
   };
+  // const imgBGStyle = {
+  //   backgroundImage: `url(${item.styles[0].photos[0].url})`,
+  //   filter: 'blur(4px)'
+  // }
   const imgStyle = {
     width: '200px',
     maxWidth: '100%',
-    objectFit: 'contain'
+    objectFit: 'contain',
+    position: 'relative',
+    // zIndex: 2
   }
   return (
-    <div style={divStyle} >
-      {/* <h4>ProductPreviewImages</h4> */}
-      <img style={imgStyle} src="https://cdn.shoplightspeed.com/shops/602983/files/206985/acts-ribbon-logo-t-shirt.jpg" ></img>
+    <div>
+      <div style={divStyle} >
+        {/* <h4>ProductPreviewImages</h4> */}
+        <img style={imgStyle} src={item.styles[0].photos[0].url} ></img>
+      </div>
     </div>
   );
 }
