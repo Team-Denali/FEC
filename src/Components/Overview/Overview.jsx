@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react'; import OverviewMainPic from './Overvi
 import OverviewStyles from './OverviewInfo/OverviewStyles.jsx'; import OverviewCart from './OverviewInfo/OverviewCart.jsx'; // Huzzah for jsx!
 
 var Overview = ({current}) => { //include state variables for currently viewed product
-const [itemView, setItemView] = useState({current}); const [style, setStyle] = useState({}); let url = 'http://localhost:3000' //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0); //${current.id}
+const [itemView, setItemView] = useState({current}); const [style, setStyle] = useState({}); let url = 'http://localhost:3000' //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0); 
 useEffect(() => { let paramObj = { product_id: 37313 };
   return axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { console.log(res.data); setStyle(res.data)} ).catch((err) => {console.log('axios req error:', err)})
 
