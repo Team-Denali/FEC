@@ -34,7 +34,7 @@ var YourOutfitList = ({outfit, setCurrentById, removeFromOutfit}) => {
       <h2>Your Outfit</h2>
       <div style={divStyle} >
         <ul style={ulStyle} >
-        {outfit.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} />)}
+        {outfit.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={removeFromOutfit} />)}
         </ul>
       </div>
     </div>

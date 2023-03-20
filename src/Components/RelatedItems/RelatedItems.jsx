@@ -8,14 +8,25 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   const [related, setRelated] = useState([]);
   const [outfit, setOutfit] = useState([]);
 
-  function addToOutfit(item) {
-    var newOutfit = outfit.slice();
-    newOutfit.push(item);
-    setOutfit(newOutfit);
+  function outfitIndexOf(item) {
+    return outfit.map(outfitItem => outfitItem.id).indexOf(item.id);
   }
-  function removeFromOutfit(id) {
-    var index = outfit.map(item => item.id).indexOf(id);
-    var newOutfit = outfit.splice(index, 1);
+  function toggleOutfit(item) {
+    var index = outfitIndexOf(item);
+    if (index >= 0) {
+      removeFromOutfit(item)
+    } else {
+      var newOutfit = outfit.slice();
+      newOutfit.push(item);
+      setOutfit(newOutfit);
+    }
+  }
+  function removeFromOutfit(item) {
+    // console.log('outfit', outfit)
+    var index = outfitIndexOf(item);
+    // console.log('index', index)
+    var newOutfit = outfit.slice();
+    newOutfit.splice(index, 1);
     setOutfit(newOutfit);
   }
   function getRelated() {
@@ -66,12 +77,12 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
 
   useEffect(() => {
     // console.log('change to related: ', related);
-  }, [related])
+  }, [related, outfit])
 
   return (
     <div>
       {/* <h1>RelatedItems</h1> */}
-      <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} />
+      <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} toggleOutfit={toggleOutfit} />
       <YourOutfitList outfit={outfit} setCurrentById={setCurrentById} removeFromOutfit={removeFromOutfit} />
     </div>
   );
