@@ -10,11 +10,12 @@ var RelatedItemCard = ({item, onClick}) => {
     position: 'relative',
     color: 'lightgrey',
     borderStyle: 'solid',
-    margin: '5%',
+    // margin: '5%',
     // padding: '5%',
     borderRadius: '10%',
     overflow: 'hidden',
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'lightgrey',
+    width: 'max-content'
   };
   return (
     <div style={divStyle} onClick={onClick}>

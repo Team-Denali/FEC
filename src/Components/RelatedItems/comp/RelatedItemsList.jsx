@@ -14,20 +14,24 @@ var RelatedItemsList = ({related, setCurrentById, getProducts}) => {
   };
   const divStyle = {
     overflow: 'hidden',
-    height: '1%',
-    width: '400%'
+    height: '24em',
+    width: '10000%'
   };
   const ulStyle = {
     display: 'inline-block',
     margin: '0 auto',
     padding: '0 auto',
-    listStyleType: 'none'
+    listStyleType: 'none',
+    height: '24em',
+    width: '200vmin'
   }
   const liStyle = {
     display: 'inline-block',
     color: 'white',
     textAlign: 'center',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    margin: '1%',
+    width: 'max-content'
   }
   return (
     <div style={outerDivStyle} >
