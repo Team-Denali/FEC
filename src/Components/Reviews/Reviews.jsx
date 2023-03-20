@@ -14,12 +14,13 @@ const Reviews = () => { //include state variables for currently viewed product
   const [product_id, setProduct_id] = useState("37322");
   const [reviews, setReviews] = useState({});
   const [reviewStars, setReviewStars] = useState('');
+  const [sortmethod,setSortmethod] = useState('relevant');
 
   const getReviews = () => {
     axios.get('/reviews', {
       params: {
         product_id: product_id,
-        sort: 'relevant',
+        sort: sortmethod,
         count: 1000
       }
     })
@@ -47,10 +48,20 @@ const Reviews = () => { //include state variables for currently viewed product
     })
   }
 
+  const postForm = (params) => {
+    console.log(params);
+    axios.post('/reviews/',params)
+    .then(()=>{
+      getReviews();
+    }).catch((err)=> {
+      console.log(err);
+    });
+  }
+
   useEffect(() => {
     getReviews();
     getReviewsStars();
-  },[]);
+  },[product_id, sortmethod]);
 
 
   return (
@@ -58,7 +69,7 @@ const Reviews = () => { //include state variables for currently viewed product
     <h1>Ratings & reviews</h1>
     <div className ="Reviews">
     <Ratingbreakdown className="Ratingbreakdown" reviewStars={reviewStars}/>
-    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id}/>
+    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id} postForm={postForm} setSortmethod={setSortmethod}/>
     <Productbreakdown className="Productbreakdown" reviewStars={reviewStars}/>
       </div>
       </div>

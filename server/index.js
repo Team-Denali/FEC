@@ -32,6 +32,10 @@ app.get(['/products', '/products/:id', '/products/:id/:related'], (req,res) => {
   controller.getProducts(req,res);
 })
 
+app.post('/reviews/',(req,res) => {
+  controller.postForm(req,res);
+})
+
 
 
 

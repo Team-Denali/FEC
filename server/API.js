@@ -61,9 +61,24 @@ const getReviewsMeta = (params, callback) => {
     callback(err);
   })
 };
+
+const postForm = (params, callback) => {
+  const route = API + `reviews/`;
+  axios.post(route, params, {headers:
+    {authorization: TOKEN}})
+  .then((res) => {
+    callback(null, res.data)
+  })
+  .catch((err) => {
+    callback(err);
+  })
+};
+
 module.exports = {
   getReviews,
   updateReviewHelpful,
   getReviewsMeta,
   getQuestions,
-  getProducts};
+  getProducts,
+  postForm
+};

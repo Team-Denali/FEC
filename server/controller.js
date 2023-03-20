@@ -61,6 +61,17 @@ const getReviewsMeta = (req, res) => {
   })
 };
 
+const postForm = (req, res) => {
+  const params = req.body;
+  API.postForm(params,(err, reviews)=> {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send();
+    }
+  })
+}
+
 
 
 module.exports = {
@@ -68,5 +79,6 @@ module.exports = {
   updateReviewHelpful,
   getReviewsMeta,
   getQuestions,
-  getProducts
+  getProducts,
+  postForm
 }
