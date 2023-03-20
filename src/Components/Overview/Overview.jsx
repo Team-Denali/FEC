@@ -5,12 +5,12 @@ import {useState, useEffect} from 'react'; import OverviewMainPic from './Overvi
 import OverviewStyles from './OverviewInfo/OverviewStyles.jsx'; import OverviewCart from './OverviewInfo/OverviewCart.jsx'; // Huzzah for jsx!
 
 var Overview = ({current}) => { //include state variables for currently viewed product
-const [itemView, setItemView] = useState({current}); const [style, setStyle] = useState({}); let url = 'http://localhost:3000' //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0); 
+const [itemView, setItemView] = useState({current}); const [styles, setStyles] = useState({}); let url = 'http://localhost:3000' //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
 useEffect(() => { let paramObj = { product_id: 37313 };
-  return axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { console.log(res.data); setStyle(res.data)} ).catch((err) => {console.log('axios req error:', err)})
+  return axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { console.log(res.data); setStyles(res.data); console.log('newStylesStatesss:', styles)} ).catch((err) => {console.log('axios req error:', err)})
 
 
-}, [itemView])
+}, [])
 
 
 //className="productOverviewPic"
@@ -32,7 +32,7 @@ useEffect(() => { let paramObj = { product_id: 37313 };
 
       <div>Category Filler</div>
       <div className='productName'><h1>Item Name Filler</h1></div>
-      <div className='overviewStyles'><OverviewStyles styles={style}/></div>
+      <div className='overviewStyles'><OverviewStyles styles={styles}/></div>
 
       <div className="overviewCart"><OverviewCart/></div>
     </div>

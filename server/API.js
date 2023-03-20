@@ -1,13 +1,13 @@
-const axios = require ('axios'); require("dotenv").config();
+const axios = require ('axios'); //require("dotenv").config();
 const config = require('../config/myConfig.js');
-const TOKEN = config.token;
+const TOKEN = config.TOKEN;
 
 const API = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`;
 
 const getReviews = (params, callback) => {
   const route = API + `reviews/`;
   axios.get(route, {headers:
-    {Authorization: TOKEN}, params: params})
+    {Authorization: `${TOKEN}`}, params: params})
 
   .then((res) => {
     callback(null, res.data)
@@ -20,7 +20,7 @@ const getReviews = (params, callback) => {
 const getQuestions = (params, callback) => {
   const route = API + `qa/questions`;
   axios.get(route, {headers:
-    {Authorization: TOKEN}, params: params})
+    {Authorization: `${TOKEN}`}, params: params})
   .then((res) => {
 
     callback(null, res.data)
@@ -37,7 +37,7 @@ const getProducts = (params, callback) => {
   const route = API + `products/${params.id + (params.related === '' ? '' : ('/' + params.related))} `;
   axios.get(route, {headers:
 
-    {Authorization: TOKEN}})
+    {Authorization: `${TOKEN}`}})
   .then((res) => {
     callback(null, res.data)
   })
@@ -47,9 +47,9 @@ const getProducts = (params, callback) => {
 };
 
 
-const getStyles = (id, callback) => {
+const getStyles = (id, callback) => { //console.log("IN API FUNC:", id)
 
-  let headers = { Authorization: `${process.env.API_TOKEN}` };
+  let headers = { Authorization: `${TOKEN}` };
   return axios.get(`${API}products/${id}/styles`, { headers: headers })
   .then((res) => { //console.log(res.data)
 
