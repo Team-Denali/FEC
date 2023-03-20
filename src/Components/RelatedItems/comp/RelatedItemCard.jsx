@@ -6,6 +6,10 @@ import ActionButton from './ActionButton.jsx';
 
 
 var RelatedItemCard = ({item, onClick}) => {
+  function handleClick(event) {
+    event.stopPropagation();
+    onClick();
+  }
   const divStyle = {
     position: 'relative',
     color: 'lightgrey',
@@ -17,13 +21,21 @@ var RelatedItemCard = ({item, onClick}) => {
     backgroundColor: 'lightgrey',
     width: 'max-content'
   };
+  const liStyle = {
+    display: 'inline-block',
+    color: 'white',
+    textAlign: 'center',
+    textDecoration: 'none'
+  }
   return (
-    <div style={divStyle} onClick={onClick}>
-      {/* <h3>RelatedItemCard</h3> */}
-      <ProductPreviewImages item={item} />
-      <ProductPreviewInformation item={item} />
-      <ActionButton />
-    </div>
+    <li style={liStyle} >
+      <div style={divStyle} onClick={handleClick}>
+        {/* <h3>RelatedItemCard</h3> */}
+        <ProductPreviewImages item={item} />
+        <ProductPreviewInformation item={item} />
+        <ActionButton />
+      </div>
+    </li>
   );
 }
 

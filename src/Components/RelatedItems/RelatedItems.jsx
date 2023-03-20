@@ -6,7 +6,18 @@ import _ from 'lodash';
 
 var RelatedItems = ({current, setCurrentById, getProducts}) => {
   const [related, setRelated] = useState([]);
+  const [outfit, setOutfit] = useState([]);
 
+  function addToOutfit(item) {
+    var newOutfit = outfit.slice();
+    newOutfit.push(item);
+    setOutfit(newOutfit);
+  }
+  function removeFromOutfit(id) {
+    var index = outfit.map(item => item.id).indexOf(id);
+    var newOutfit = outfit.splice(index, 1);
+    setOutfit(newOutfit);
+  }
   function getRelated() {
     let rel;
     if(!current.id) {
@@ -61,7 +72,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     <div>
       {/* <h1>RelatedItems</h1> */}
       <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} />
-      <YourOutfitList />
+      <YourOutfitList outfit={outfit} setCurrentById={setCurrentById} removeFromOutfit={removeFromOutfit} />
     </div>
   );
 }

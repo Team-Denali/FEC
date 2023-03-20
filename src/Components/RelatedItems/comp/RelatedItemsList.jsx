@@ -38,13 +38,7 @@ var RelatedItemsList = ({related, setCurrentById, getProducts}) => {
       <h2>Related Items</h2>
       <div style={divStyle} >
         <ul style={ulStyle} >
-          {related.map(item => <li key={item.id} style={liStyle} ><RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} /></li>)}
-          {/* <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li> */}
+          {related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} />)}
         </ul>
       </div>
     </div>

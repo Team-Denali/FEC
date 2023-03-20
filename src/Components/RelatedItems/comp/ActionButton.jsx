@@ -10,9 +10,9 @@ var ActionButton = () => {
     right: '10px'
   };
   return (
-    <div style={buttonStyle} >
-      <button>X/*</button>
-    </div>
+    // <div style={buttonStyle} >
+      <button style={buttonStyle} >X/*</button>
+    // </div>
   );
 }
 
