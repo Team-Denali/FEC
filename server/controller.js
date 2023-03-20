@@ -36,5 +36,49 @@ const getProducts = (req, res) => {
 
 
 
-module.exports = {getReviews, getQuestions, getProducts}
 
+
+const updateReviewHelpful = (req, res) => {
+  const params = req.body.params;
+  //console.log('running')
+  API.updateReviewHelpful(params, (err, reviews) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(204).send();
+    }
+  })
+}
+
+const getReviewsMeta = (req, res) => {
+  const params = req.query;
+  API.getReviewsMeta(params, (err, reviews) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(reviews);
+    }
+  })
+};
+
+const postForm = (req, res) => {
+  const params = req.body;
+  API.postForm(params,(err, reviews)=> {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send();
+    }
+  })
+}
+
+
+
+module.exports = {
+  getReviews,
+  updateReviewHelpful,
+  getReviewsMeta,
+  getQuestions,
+  getProducts,
+  postForm
+}

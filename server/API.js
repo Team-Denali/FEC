@@ -37,5 +37,48 @@ const getProducts = (params, callback) => {
   })
 };
 
+const updateReviewHelpful = (params, callback) => {
+  const route = API + `reviews/${params.review_id}/helpful`;
+  //console.log(route);
+  axios.put(route, null, {headers:
+    {authorization: TOKEN}, params: params})
+  .then((res) => {
+    callback(null, res.data)
+  })
+  .catch((err) => {
+    callback(err);
+  })
+};
 
-module.exports = {getReviews, getQuestions, getProducts};
+const getReviewsMeta = (params, callback) => {
+  const route = API + `reviews/meta`;
+  axios.get(route, {headers:
+    {Authorization: TOKEN}, params: params})
+  .then((res) => {
+    callback(null, res.data)
+  })
+  .catch((err) => {
+    callback(err);
+  })
+};
+
+const postForm = (params, callback) => {
+  const route = API + `reviews/`;
+  axios.post(route, params, {headers:
+    {authorization: TOKEN}})
+  .then((res) => {
+    callback(null, res.data)
+  })
+  .catch((err) => {
+    callback(err);
+  })
+};
+
+module.exports = {
+  getReviews,
+  updateReviewHelpful,
+  getReviewsMeta,
+  getQuestions,
+  getProducts,
+  postForm
+};
