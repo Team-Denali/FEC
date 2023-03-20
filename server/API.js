@@ -1,4 +1,4 @@
-const axios = require ('axios'); //require("dotenv").config();
+const axios = require ('axios'); // .require("dotenv").config(); .env config
 const config = require('../config/myConfig.js');
 const TOKEN = config.TOKEN;
 

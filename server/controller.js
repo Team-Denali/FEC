@@ -34,7 +34,7 @@ const getProducts = (req, res) => { //console.log('in getProducts')
   })
 };
 
-const getStyles = (req, res) => { //console.log('IN CONTROLLER:', req.query)
+const getStyles = (req, res) => { //console.log('IN CONTROLLERS:', req.query)
   let params = req.query;
 
   let id = params.product_id; //console.log(id);

@@ -24,7 +24,7 @@ app.get(['/products', '/products/:id', '/products/:id/:related'], (req,res) => {
 })
 
 app.get('/styles', (req, res) => { //console.log('overview req got here!');
-  //console.log(req.query)
+  //console.log('query params', req.query)
 
   controller.getStyles(req, res)
 
