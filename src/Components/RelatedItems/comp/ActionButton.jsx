@@ -12,7 +12,10 @@ var ActionButton = ({item, onButton}) => {
     position: 'absolute',
     zIndex: 3,
     top: '10px',
-    right: '10px'
+    right: '10px',
+    borderRadius: '50%',
+    backgroundColor: '#d3d3d399',
+    color: 'rgb(87 72 72)',
   };
   return (
     // <div style={buttonStyle} >

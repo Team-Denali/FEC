@@ -23,7 +23,7 @@ var RelatedItemsList = ({related, setCurrentById, getProducts, toggleOutfit}) =>
     padding: '0 auto',
     listStyleType: 'none',
     height: '24em',
-    width: '200vmin'
+    // width: '200vmin'
   }
   const liStyle = {
     display: 'inline-block',
