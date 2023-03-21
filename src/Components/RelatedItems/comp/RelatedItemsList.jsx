@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import RelatedItemCard from './RelatedItemCard.jsx';
 
 
-var RelatedItemsList = ({related, setCurrentById, getProducts, toggleOutfit}) => {
+var RelatedItemsList = ({related, setCurrentById, getProducts, toggleOutfit, openComparisonModal}) => {
   const outerDivStyle = {
     color: 'blue',
     borderStyle: 'solid',
@@ -38,7 +38,7 @@ var RelatedItemsList = ({related, setCurrentById, getProducts, toggleOutfit}) =>
       <h2>Related Items</h2>
       <div style={divStyle} >
         <ul style={ulStyle} >
-          {related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={toggleOutfit} />)}
+          {related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} />)}
         </ul>
       </div>
     </div>
