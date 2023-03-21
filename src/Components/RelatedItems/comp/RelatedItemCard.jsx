@@ -21,6 +21,7 @@ var RelatedItemCard = ({item, onClick, onButton}) => {
     backgroundColor: 'lightgrey',
     width: 'max-content'
   };
+
   const liStyle = {
     display: 'inline-block',
     color: 'white',

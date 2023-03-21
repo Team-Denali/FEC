@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react';
 var ActionButton = ({item, onButton}) => {
   function handleButton(event) {
     event.stopPropagation();
-    console.log('action!', onButton)
+    // console.log('action!', onButton)
     onButton(item);
   }
   const buttonStyle = {
