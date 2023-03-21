@@ -1,0 +1,55 @@
+.overviewContainer {
+
+width: 95vw; height: 95vh; display: flex; flex-direction: column; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: 15;
+
+
+
+}
+.overviewTop {
+
+  width: 80%; height: 75%; display: flex; flex-direction: row;
+
+}
+
+.productOverviewPic {
+  width: 70%; height: auto; display: flex; flex-direction: column; justify-content: space-around; -ms-flex-align: center;
+}
+
+.overviewProductInfo {
+  display: flex; flex-direction: column; justify-content: space-around; align-items: center;
+}
+.productName { text-align: center;}
+
+.overviewStylesContainer { display: flex; flex-direction: column; justify-content: space-between; flex-wrap: wrap;}
+.styleSelectorArea {
+
+display: flex; flex-direction: row; justify-content: space-between;
+
+
+
+
+}
+
+.individualStylePic {
+    /* height: 35px;
+    width: 40px; */
+
+    /* background-color: #bbb; */
+
+    border-radius: 50%;
+    /* display: inline-block; */
+
+
+}
+
+
+
+
+
+
+
+
+
+.overviewBottom {
+  display: flex; justify-content: space-around; align-items: center;
+}

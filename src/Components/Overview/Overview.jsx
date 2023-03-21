@@ -4,21 +4,35 @@ import {useState, useEffect} from 'react'; import OverviewMainPic from './Overvi
 
 import OverviewStyles from './OverviewInfo/OverviewStyles.jsx'; import OverviewCart from './OverviewInfo/OverviewCart.jsx'; // Huzzah for jsx!
 
-var Overview = ({current}) => { //include state variables for currently viewed product
-const [itemView, setItemView] = useState({current}); const [styles, setStyles] = useState({}); let url = 'http://localhost:3000' //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
-useEffect(() => { let paramObj = { product_id: 37313 };
-  return axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { console.log(res.data); setStyles(res.data); console.log('newStylesStatesss:', styles)} ).catch((err) => {console.log('axios req error:', err)})
+var Overview = ({current}) => { console.log(current, 'current prop')//include state variables for currently viewed product
+const [itemView, setItemView] = useState({}); const [styles, setStyles] = useState({}); const [loading, setLoading] = useState(true); let url = 'http://localhost:3000'; //console.log('the ID:', current.id) //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
+// useEffect(() => { let id = current.id; console.log('THE ID:', id); let paramObj = { product_id: current.id };
+//   return axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { console.log(res.data); setStyles(res.data); console.log('newStylesStatesss:', styles)} ).catch((err) => {console.log('axios req error:', err)})
 
 
-}, [])
+// }, [])
+const styleFinder = (currentId) => { let styleId = currentId; console.log('THE ID:', styleId); let paramObj = { product_id: styleId };
+  axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { console.log( 'the data:', res.data); setStyles(res.data.results); } ).catch((err) => {console.log('axios req error:', err)})
 
 
-//className="productOverviewPic"
+}
+useEffect(() => {styleFinder(current.id); }, [current])
 
-  return (
+console.log('THE STYLES:', styles);//className="productOverviewPic"
+// if (loading) {
+
+
+
+// return (<div>STILL LOADING...</div>) }
+
+
+return (// }
+
 <> <div className="overviewContainer">
+
   <div className="overviewTop">
-    <OverviewMainPic/>
+
+    <OverviewMainPic currentStyle={styles}/>
 
 
 
@@ -27,23 +41,26 @@ useEffect(() => { let paramObj = { product_id: 37313 };
 
 
     <div className="overviewProductInfo">
-
       <div>Review Stuff Goes Here</div>
 
-      <div>Category Filler</div>
-      <div className='productName'><h1>Item Name Filler</h1></div>
-      <div className='overviewStyles'><OverviewStyles styles={styles}/></div>
+      <div>{current.category}</div>
+      <div className='productName'><h1>{current.name}</h1></div>
 
+      <div className='overviewStyles'><OverviewStyles overviewStyles={styles}/></div>
       <div className="overviewCart"><OverviewCart/></div>
-    </div>
 
+    </div>
   </div>
-    <div className='overviewBottom'>Insert Pithy Description || Insert Specs</div>
+    <div className='overviewBottom'>
+
+      <div>{current.description}</div>
+      <div>||</div>
+      <div>Insert Specs</div>
+    </div>
 
   </div>
 
   </>)
 }
-
 
 export default Overview
