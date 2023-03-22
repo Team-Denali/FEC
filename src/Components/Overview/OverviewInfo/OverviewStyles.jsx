@@ -8,14 +8,14 @@ var OverviewStyles = ({
   overviewStyles,
   mainPic,
   picHandler,
-  item,
-  setItem,
+
+  styleView,
+  setStyleView,
 }) => {
   console.log("overviewstyles:", overviewStyles);
   let style1 = overviewStyles[0];
-  console.log(style1, "STYLE1");
 
-  const [currentStyle, setCurrentStyle] = useState(style1); //setCurrentStyle(style1)
+  console.log(style1, "STYLE1");
   if (!overviewStyles.length || !Object.keys(overviewStyles).length) {
     return;
   }
@@ -36,27 +36,35 @@ var OverviewStyles = ({
 
             <div
               key={i.toString()}
+
               value={"thing"}
               style={{
+
                 height: "35px",
                 width: "20px",
                 backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`,
                 backgroundSize: "cover",
                 borderRadius: "50%",
+
               }}
               onClick={(e) => {
-                e.preventDefault();
+
+                e.preventDefault(); setStyleView(overviewStyle);
               }}
             ></div>
+
           ))}
         </div>
       </div>
     </>
+
   );
+
 };
 
-export default OverviewStyles;
 
+
+export default OverviewStyles;
 {
   /* <div>{styles.results.map((oneStyle) => (<div><img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
 /></div></div>))} */
