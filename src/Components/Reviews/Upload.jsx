@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from '@mui/material/Button';
 
 // const Upload = (props) => {
 
@@ -114,13 +115,14 @@ const Upload = (props) => {
   };
 
   return (
-    <div>
+    <div >
       <br />
       {[...Array(5)].map((_, index) =>
         photoArray[index] ? (
           <img src={photoArray[index]} key={index} className="ansPhotos" style={{height:50, width:50}} />
         ) : (
-          <button key={index} onClick={upload}>upload</button>
+          <Button variant="outlined" key={index} onClick={upload}>upload</Button>
+
         )
       )}
     </div>
