@@ -5,3 +5,4 @@ config/myConfig.js
 .env
 
 # hi
+**/.DS_Store
