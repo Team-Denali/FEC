@@ -101,7 +101,7 @@ var Overview = ({ current }) => {
               />
             </div>
             <div className="overviewCart">
-              <OverviewCart />
+              <OverviewCart styleView={styleView} />
             </div>
           </div>
         </div>

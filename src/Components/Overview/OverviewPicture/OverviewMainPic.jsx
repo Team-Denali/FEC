@@ -19,7 +19,7 @@ return (
 
     <div className='productOverviewPic' style={{backgroundImage: `url(${pic})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
 
-    {styleView.photos.map((photo, i) => <div className="overviewMiniPics" style={{backgroundImage: `url(${photo.thumbnail_url})`, width: '40px', height: '40px', backgroundSize: 'cover' }} onClick={(e) => {e.preventDefault(); setPic(photo.thumbnail_url); }}></div>)}
+    <div className='overviewSidePanel'>{styleView.photos.map((photo, i) => <div className="overviewMiniPic" style={{backgroundImage: `url(${photo.thumbnail_url})`, width: '40px', height: '40px', backgroundSize: 'cover' }} onClick={(e) => {e.preventDefault(); setPic(photo.thumbnail_url); }}></div>)}</div>
 
     </div>
     )
