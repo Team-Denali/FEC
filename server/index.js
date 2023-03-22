@@ -24,7 +24,6 @@ app.get('/reviews/meta', (req,res) => {
 })
 
 app.get('/qa/questions', (req,res) => {
-  //console.log("running");
   controller.getQuestions(req,res);
 })
 app.get(['/products', '/products/:id', '/products/:id/:related'], (req,res) => {
