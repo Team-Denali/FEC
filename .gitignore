@@ -1,4 +1,9 @@
 node_modules
 public/bundle.js
 config/myConfig.js
+
+.env
+
+# hi
 **/.DS_Store
+#edit
