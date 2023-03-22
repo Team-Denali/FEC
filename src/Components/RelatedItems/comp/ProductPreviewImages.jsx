@@ -34,7 +34,7 @@ var ProductPreviewImages = ({item}) => {
   const imgStyle = {
     height: '100%',
     maxHeight: '100%',
-    maxWidth: '120%',
+    maxWidth: '100%',
     objectFit: 'contain',
     position: 'relative',
     zIndex: 2,

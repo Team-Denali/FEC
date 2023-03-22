@@ -22,7 +22,14 @@ var AddToOutfitCard = ({item, onClick}) => {
     width: 'max-content'
   };
   const pStyle = {
-    color: 'rgb(87 72 72)'
+    color: 'rgb(87 72 72)',
+    height: '25vw',
+    maxHeight: '20vh',
+    width: '25vw',
+    maxWidth: '25vh',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column'
   };
   const liStyle = {
     display: 'inline-block',
@@ -33,7 +40,12 @@ var AddToOutfitCard = ({item, onClick}) => {
   return (
     // <li style={liStyle} >
     // </li>
-      <div style={divStyle} onClick={handleClick}><p style={pStyle}>+ Add To Outfit</p>
+      <div style={divStyle} onClick={handleClick}>
+        <h1 style={pStyle}>
+          {
+          `+`
+          }
+        </h1>
         {/* <h3>RelatedItemCard</h3> */}
         {/* <ProductPreviewImages item={item} /> */}
         <ProductPreviewInformation item={item} />
