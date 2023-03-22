@@ -1,9 +1,10 @@
 import React from 'react';// Bring React in to build a component.
 import {useState, useEffect} from 'react';
 import RelatedItemCard from './RelatedItemCard.jsx';
+import Carousel from './Carousel.jsx';
 
 
-var RelatedItemsList = ({related, setCurrentById, getProducts, toggleOutfit, openComparisonModal}) => {
+var RelatedItemsList = ({related, setCurrentById, getProducts, openComparisonModal}) => {
   const outerDivStyle = {
     color: 'blue',
     borderStyle: 'solid',
@@ -35,12 +36,15 @@ var RelatedItemsList = ({related, setCurrentById, getProducts, toggleOutfit, ope
   }
   return (
     <div style={outerDivStyle} >
+            <h1>{'>'}</h1>
       <h2>Related Items</h2>
       <div style={divStyle} >
-        <ul style={ulStyle} >
+        <Carousel items={related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} />)} />
+        {/* <ul style={ulStyle} >
           {related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} />)}
-        </ul>
+        </ul> */}
       </div>
+      <h1>{'>'}</h1>
     </div>
   );
 }

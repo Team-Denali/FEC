@@ -13,8 +13,10 @@ var ProductPreviewImages = ({item}) => {
     // margin: '5%',
     // padding: '5%',
     borderRadius: '10% 10% 0% 0%',
-    height: '255px',
-    width: '255px',
+    height: '25vw',
+    maxHeight: '25vh',
+    width: '25vw',
+    maxWidth: '25vh',
     overflow: 'hidden',
     // backgroundImage: `url(${item.styles[0].photos[0].url})`,
     // position: 'absolute'

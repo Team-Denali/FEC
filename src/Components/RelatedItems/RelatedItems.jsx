@@ -10,6 +10,9 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
 var RelatedItemsModal = ({open, setOpen, comparison}) => {
+  var gridStyle = {
+    textAlign: 'center'
+  }
   var comparisonGrid = comparison.map(feature => (
     <Grid container spacing={1} columns={12}>
         <Grid item xs={4} sm={4} md={4}>
@@ -24,7 +27,7 @@ var RelatedItemsModal = ({open, setOpen, comparison}) => {
     </Grid>
     ))
   var grid = (
-  <Grid container spacing={2} columns={12}>
+  <Grid style={gridStyle} container spacing={2} columns={12}>
     {comparisonGrid}
   </Grid>
   );
@@ -47,19 +50,28 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   const [outfit, setOutfit] = useState([]);
   const [open, setOpen] = useState(false);
   const [comparison, setComparison] = useState([]);
+  const [currentStyles, setCurrentStyles] = useState([]);
 
 
   function compareToCurrent(item) {
     //NAME    CHAR    NAME
     //VAL     CHAR    VAL
-    var comparison = [[current.name, 'Name', item.name], [current.default_price, 'Price', item.default_price]]
+    var comparison = [[current.name, '', item.name], [current.default_price, 'Price', item.default_price]]
     //= {[name1, name2],[price1, price2],...[]};
-    // var currentKeys = Object.keys(current.features);
-    // var comparatorKeys = Object.keys(item.features);
-    // var combinedKeys = _.uniq(currentKeys.concat(comparatorKeys)).sort();
-    // for (var i = 0; i < combinedKeys.length; i++) {
-    //   comparison.push([current[combinedKeys[i]], combinedKeys[i], item[combinedKeys[i]]])
-    // }
+    //[item.features , item.features[i], ]
+    var mapFeatures = (features) => {
+      var featureObj = {};
+      features.forEach(feature => featureObj[feature.feature] = feature.value);
+      return featureObj;
+    }
+    var currentFeatures = mapFeatures(current.features);
+    var comparatorFeatures = mapFeatures(item.features);
+    var currentKeys = Object.keys(currentFeatures);
+    var comparatorKeys = Object.keys(comparatorFeatures);
+    var combinedKeys = _.uniq(currentKeys.concat(comparatorKeys)).sort();
+    for (var i = 0; i < combinedKeys.length; i++) {
+      comparison.push([currentFeatures[combinedKeys[i]], combinedKeys[i], comparatorFeatures[combinedKeys[i]]])
+    }
 
     setComparison(comparison);
   }
@@ -70,20 +82,31 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   function outfitIndexOf(item) {
     return outfit.map(outfitItem => outfitItem.id).indexOf(item.id);
   }
-  function toggleOutfit(item) {
-    var index = outfitIndexOf(item);
-    if (index >= 0) {
-      removeFromOutfit(item)
-    } else {
-      var newOutfit = outfit.slice();
-      newOutfit.push(item);
-      setOutfit(newOutfit);
+  function addToOutfit() {
+    if(outfitIndexOf(current) >= 0) {
+      return;
     }
+    var newOutfit = outfit.slice();
+    getProducts(`${current.id}/styles`)
+    .then(results => {
+      console.log('styles: ', results)
+      results = results.data.results
+      console.log('styles: ', results)
+      return results;
+    })
+    .then(styles => {
+      // console.log(rel)
+      var currentWithStyles = {};
+      currentWithStyles = Object.assign(currentWithStyles, current);
+        currentWithStyles.styles = styles;
+      console.log('current, with style property', currentWithStyles)
+      newOutfit.push(currentWithStyles);
+      setOutfit(newOutfit);
+    })
+    .catch(err => console.log(err))
   }
   function removeFromOutfit(item) {
-    // console.log('outfit', outfit)
     var index = outfitIndexOf(item);
-    // console.log('index', index)
     var newOutfit = outfit.slice();
     newOutfit.splice(index, 1);
     setOutfit(newOutfit);
@@ -91,12 +114,12 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   function getRelated() {
     let rel;
     if(!current.id) {
-      console.log('nothing in current yet, returning')
+      // console.log('nothing in current yet, returning')
       return;
     }
     return getProducts(`${current.id}/related`)
       .then(res => {
-        console.log('related product ids: ', res.data);
+        // console.log('related product ids: ', res.data);
         let relatedIds = _.uniq(res.data);
         relatedIds = relatedIds.map(id => getProducts(id));
         return Promise.all(relatedIds)
@@ -114,7 +137,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
         results = results.map(result => {
           return result.data.results;
         })
-        console.log('styles: ', results)
+        // console.log('styles: ', results)
         return results;
       })
       .then(styles => {
@@ -124,7 +147,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
         for (var i = 0; i < relatedWithStyles.length; i++) {
           relatedWithStyles[i].styles = styles[i];
         }
-        console.log('Related Items, with style property', relatedWithStyles)
+        // console.log('Related Items, with style property', relatedWithStyles)
         setRelated(relatedWithStyles);
       })
       .catch(err => console.log(err))
@@ -141,8 +164,8 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   return (
     <div>
       <RelatedItemsModal open={open} setOpen={setOpen} comparison={comparison} />
-      <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} toggleOutfit={toggleOutfit} openComparisonModal={openComparisonModal} />
-      <YourOutfitList outfit={outfit} setCurrentById={setCurrentById} removeFromOutfit={removeFromOutfit} />
+      <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} openComparisonModal={openComparisonModal} />
+      <YourOutfitList current={current} outfit={outfit} setCurrentById={setCurrentById} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} />
     </div>
   );
 }
