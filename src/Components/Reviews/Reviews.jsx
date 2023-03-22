@@ -50,7 +50,7 @@ const Reviews = () => { //include state variables for currently viewed product
 
   const postForm = (params) => {
     console.log(params);
-    axios.post('/reviews/',params)
+    axios.post('/reviews',params)
     .then(()=>{
       getReviews();
     }).catch((err)=> {
@@ -66,11 +66,13 @@ const Reviews = () => { //include state variables for currently viewed product
 
   return (
     <div>
-    <h1>Ratings & reviews</h1>
+    <div className="reviewtitle">Ratings & reviews</div>
     <div className ="Reviews">
+      <div>
     <Ratingbreakdown className="Ratingbreakdown" reviewStars={reviewStars}/>
-    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id} postForm={postForm} setSortmethod={setSortmethod}/>
     <Productbreakdown className="Productbreakdown" reviewStars={reviewStars}/>
+      </div>
+    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id} postForm={postForm} setSortmethod={setSortmethod} reviewStars={reviewStars}/>
       </div>
       </div>
   )
