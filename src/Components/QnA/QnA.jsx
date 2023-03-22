@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import QuestionList from "./QuestionList.jsx";
+import Qmodal from "./QuestionModal.jsx";
 import axios from "axios";
 import "./QnA.css";
 
@@ -21,15 +22,31 @@ const QuestionsAnswers = ({ current }) => {
         console.log(err);
       });
   };
+  //get questions on initial render
   useEffect(() => {
     getQuestions();
   }, []);
+  //control the hiding of the more questions button
+  useEffect(() => {
+    if(filteredData.length < 3){
+      setHideButton(false)
+    }
+else if (result > sortedArray.length)
+      {setHideButton(false)
+    } else {setHideButton(true)}
+  }, sortedArray);
+
+
   //master variable that holds all the QA info
   const [qaData, setQaData] = useState([]);
   //used to incrementally add more questions
   const [result, setResult] = useState(2);
   //holds the search item in state to filter questions
   const [searchItem, setSearchItem] = useState("");
+  //hide and show Modal depending on boolean
+  const [modal, setModal] = useState(false);
+  //handle more questions show/hide
+  const [hideButton, setHideButton] = useState(true);
 
   //filter the questions based on what is entered into the search bar
   const filteredData = qaData.filter((question) => {
@@ -61,6 +78,7 @@ const QuestionsAnswers = ({ current }) => {
   //onclick reveals more questions
   function clickHandler(amount) {
     setResult((currentResult) => {
+      console.log(currentResult)
       return currentResult + amount;
     });
   }
@@ -73,7 +91,10 @@ const QuestionsAnswers = ({ current }) => {
     }
   }
 
-
+  function formHandler(event) {
+    event.preventDefault();
+    setModal(false);
+  }
   return (
     <>
       <div className="qaMainContainer">
@@ -94,11 +115,17 @@ const QuestionsAnswers = ({ current }) => {
           </div>
         </div>
         <div className="qaButtonContainer">
-          <button className="buttonStyle" onClick={() => clickHandler(2)}>
+          {hideButton && <button className="buttonStyle" onClick={() => clickHandler(2)}>
             MORE ANSWERED QUESTIONS
-          </button>
+          </button>}
+          {result > sortedArray.length && <button className="buttonStyle" onClick={() => setResult(2)}>
+              COLLAPSE QUESTIONS
+          </button>}
 
-          <button className="buttonStyle">ADD A QUESTION +</button>
+          <button className="buttonStyle" onClick={() => setModal(true)}>
+            ADD A QUESTION +
+          </button>
+          <Qmodal open={modal} onClose={formHandler} />
         </div>
       </div>
     </>
