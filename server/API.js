@@ -63,17 +63,7 @@ const updateReviewHelpful = (params, callback) => {
   })
 };
 
-const getReviewsMeta = (params, callback) => {
-  const route = API + `reviews/meta`;
-  axios.get(route, {headers:
-    {Authorization: TOKEN}, params: params})
-  .then((res) => {
-    callback(null, res.data)
-  })
-  .catch((err) => {
-    callback(err);
-  })
-};
+
 
 const getStyles = (id, callback) => { //console.log("IN API FUNC:", id)
 
@@ -95,18 +85,7 @@ const getStyles = (id, callback) => { //console.log("IN API FUNC:", id)
 
 
 
-const updateReviewHelpful = (params, callback) => {
-  const route = API + `reviews/${params.review_id}/helpful`;
-  //console.log(route);
-  axios.put(route, null, {headers:
-    {authorization: TOKEN}, params: params})
-  .then((res) => {
-    callback(null, res.data)
-  })
-  .catch((err) => {
-    callback(err);
-  })
-};
+
 
 const getReviewsMeta = (params, callback) => {
   const route = API + `reviews/meta`;
@@ -138,5 +117,6 @@ module.exports = {
   getReviewsMeta,
   getQuestions,
   getProducts,
-  postForm
+  postForm,
+  getStyles
 };

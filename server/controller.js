@@ -49,7 +49,7 @@ const getStyles = (req, res) => { //console.log('IN CONTROLLERS:', req.query)
     }
   })
 
-
+}
 
 
 
@@ -91,11 +91,11 @@ const postForm = (req, res) => {
 
 
 
-}
 
-module.exports = {getReviews, getQuestions, getProducts, getStyles}
 
-}
+
+
+
 
 
 
