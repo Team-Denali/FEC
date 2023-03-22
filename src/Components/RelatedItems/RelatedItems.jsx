@@ -89,9 +89,9 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     var newOutfit = outfit.slice();
     getProducts(`${current.id}/styles`)
     .then(results => {
-      console.log('styles: ', results)
+      // console.log('styles: ', results)
       results = results.data.results
-      console.log('styles: ', results)
+      // console.log('styles: ', results)
       return results;
     })
     .then(styles => {
@@ -141,7 +141,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
         return results;
       })
       .then(styles => {
-        console.log(rel)
+        // console.log(rel)
         var relatedWithStyles = [];
         relatedWithStyles = Object.assign(relatedWithStyles, rel);
         for (var i = 0; i < relatedWithStyles.length; i++) {

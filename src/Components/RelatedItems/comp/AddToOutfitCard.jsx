@@ -21,7 +21,9 @@ var AddToOutfitCard = ({item, onClick}) => {
     backgroundColor: 'lightgrey',
     width: 'max-content'
   };
-
+  const pStyle = {
+    color: 'rgb(87 72 72)'
+  };
   const liStyle = {
     display: 'inline-block',
     color: 'white',
@@ -30,7 +32,7 @@ var AddToOutfitCard = ({item, onClick}) => {
   }
   return (
     <li style={liStyle} >
-      <div style={divStyle} onClick={handleClick}>
+      <div style={divStyle} onClick={handleClick}><p style={pStyle}>+ Add To Outfit</p>
         {/* <h3>RelatedItemCard</h3> */}
         {/* <ProductPreviewImages item={item} /> */}
         <ProductPreviewInformation item={item} />
