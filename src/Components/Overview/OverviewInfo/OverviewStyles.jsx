@@ -30,11 +30,11 @@ var OverviewStyles = ({
 
       <div className="overviewStylesContainer">
 
-        <div>STYLE → {overviewStyles[0].name}</div>
+        <div>STYLE → {styleView.name}</div>
         <div className="styleSelectorArea">
           {overviewStyles.map((overviewStyle, i) => (
 
-            <div
+            <div className="overviewStyleIcon"
               key={i.toString()}
 
               value={"thing"}
@@ -42,7 +42,7 @@ var OverviewStyles = ({
 
                 height: "35px",
                 width: "20px",
-                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`,
+                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '1 2 20',
                 backgroundSize: "cover",
                 borderRadius: "50%",
 

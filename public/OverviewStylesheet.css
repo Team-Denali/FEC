@@ -20,23 +20,21 @@ width: 95vw; height: 95vh; display: flex; flex-direction: column; font-family: '
 }
 .productName { text-align: center;}
 
-.overviewStylesContainer { display: flex; flex-direction: column; justify-content: space-between; flex-wrap: wrap;}
+.overviewStylesContainer { display: flex; flex-direction: column; justify-content: space-between; }
 .styleSelectorArea {
 
-display: flex; flex-direction: row; justify-content: space-between;
-
-
-
-
+display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap;
 }
+
+
+
+
 
 .individualStylePic {
     /* height: 35px;
     width: 40px; */
 
     /* background-color: #bbb; */
-
-    border-radius: 50%;
     /* display: inline-block; */
 
 
