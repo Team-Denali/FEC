@@ -31,13 +31,13 @@ var AddToOutfitCard = ({item, onClick}) => {
     textDecoration: 'none'
   }
   return (
-    <li style={liStyle} >
+    // <li style={liStyle} >
+    // </li>
       <div style={divStyle} onClick={handleClick}><p style={pStyle}>+ Add To Outfit</p>
         {/* <h3>RelatedItemCard</h3> */}
         {/* <ProductPreviewImages item={item} /> */}
         <ProductPreviewInformation item={item} />
       </div>
-    </li>
   );
 }
 

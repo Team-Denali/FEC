@@ -43,13 +43,13 @@ var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromO
   return (
     <div style={outerDivStyle} >
       <h2>Your Outfit</h2>
-      <div style={divStyle} >
-        <Carousel items={outfitList} />
-        {/* <ul style={ulStyle} >
+      <Carousel items={outfitList} />
+      {/* <div style={divStyle} >
+        <ul style={ulStyle} >
           <AddToOutfitCard item={current} onClick={addToOutfit} />
           {outfit.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={removeFromOutfit} />)}
-        </ul> */}
-      </div>
+        </ul>
+      </div> */}
     </div>
   );
 }

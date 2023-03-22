@@ -29,14 +29,14 @@ var RelatedItemCard = ({item, onClick, onButton}) => {
     textDecoration: 'none'
   }
   return (
-    <li style={liStyle} >
+    // <li style={liStyle} >
+    // </li>
       <div style={divStyle} onClick={handleClick}>
         {/* <h3>RelatedItemCard</h3> */}
         <ProductPreviewImages item={item} />
         <ProductPreviewInformation item={item} />
         <ActionButton item={item} onButton={onButton} />
       </div>
-    </li>
   );
 }
 
