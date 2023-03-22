@@ -7,12 +7,12 @@ width: 95vw; height: 95vh; display: flex; flex-direction: column; font-family: '
 }
 .overviewTop {
 
-  width: 80%; height: 75%; display: flex; flex-direction: row;
+  width: 80%; height: 75%; display: flex; flex-direction: row; object-fit: cover;
 
 }
 
 .productOverviewPic {
-  width: 70%; height: auto; display: flex; flex-direction: column; justify-content: space-around; -ms-flex-align: center;
+  width: 70vw; height: auto; display: flex; flex-direction: column; justify-content: flex-start;
 }
 
 .overviewProductInfo {
