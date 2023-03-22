@@ -1,6 +1,6 @@
 const API = require('./API.js');
 
-const getReviews = (req, res) => {
+const getReviews = (req, res) => { //console.log('in getReviews')
   const params = req.query;
   API.getReviews(params, (err, reviews) => {
     if (err) {
@@ -10,7 +10,7 @@ const getReviews = (req, res) => {
     }
   })
 };
-const getQuestions = (req, res) => {
+const getQuestions = (req, res) => { //console.log('in getQuestions')
   const params = req.query;
   API.getQuestions(params, (err, reviews) => {
     if (err) {
@@ -20,7 +20,7 @@ const getQuestions = (req, res) => {
     }
   })
 };
-const getProducts = (req, res) => {
+const getProducts = (req, res) => { //console.log('in getProducts')
   const params = req.params;
   params.id = params.id === undefined ? '' : req.params.id;
   params.related = params.related === undefined ? '' : req.params.related;
@@ -33,6 +33,22 @@ const getProducts = (req, res) => {
     }
   })
 };
+
+const getStyles = (req, res) => { //console.log('IN CONTROLLERS:', req.query)
+  let params = req.query;
+
+  let id = params.product_id; //console.log(id);
+  API.getStyles(id, (err, styles) => {
+
+    if (err) {
+      res.status(500).send(err);
+    } else {
+
+      res.status(200).send(styles)
+
+    }
+  })
+
 
 
 
@@ -75,11 +91,20 @@ const postForm = (req, res) => {
 
 
 
+}
+
+module.exports = {getReviews, getQuestions, getProducts, getStyles}
+
+}
+
+
+
 module.exports = {
   getReviews,
   updateReviewHelpful,
   getReviewsMeta,
   getQuestions,
   getProducts,
+  getStyles,
   postForm
 }

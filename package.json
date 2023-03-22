@@ -35,6 +35,8 @@
     "babel-loader": "^9.1.2",
     "cloudinary": "^1.35.0",
     "css-loader": "^6.7.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "date-fns": "^2.29.3",
     "install": "^0.13.0",
     "nodemon": "^2.0.21",

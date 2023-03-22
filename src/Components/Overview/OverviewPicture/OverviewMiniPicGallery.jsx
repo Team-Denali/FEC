@@ -5,7 +5,7 @@ import React from 'react';// Bring React in to build a component.
 
 // Huzzah for jsx!
 var OverviewMiniPics = () => { //include state variables for currently viewed product
-  return <h1>Overview</h1>
+  return <h1>Overview j</h1>
 }
 
 

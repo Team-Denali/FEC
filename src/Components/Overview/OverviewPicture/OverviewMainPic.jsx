@@ -1,15 +1,25 @@
 import React from 'react';// Bring React in to build a component.
 
-var arr = [1, 2, 3];//import { createRoot } from "react-dom/client";
+import {useState, useEffect} from 'react'; //var arr = [1, 2, 3];//import { createRoot } from "react-dom/client";
 
 // Huzzah for jsx!
 
-var OverviewMainPic = () => { //include state variables for currently viewed product
-  return (
+var OverviewMainPic = ({current, currentStyles, item, setItem, mainPic, picHandler}) => { let obj = currentStyles[0]; console.log('in main pic component:', currentStyles[0]); //const [pic, setPic] = useState(currentStyle[0].photos[0].thumbnail_url) //include state variables for currently viewed product
 
-    <div className='productOverviewPic' style={{backgroundImage: `url(${'https://images.unsplash.com/photo-1492447105260-2e947425b5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+if (!currentStyles.length || (!(Object.keys(currentStyles)).length)) {
 
-    {arr.map((num) => <div>{num}</div>)}
+  return;
+}
+
+
+console.log('THE current PROPS:', current, 'THE currentstyles PROPS:', currentStyles, 'the item prop:', item)
+//const [pic, setPic] = useState(item.photos[0].thumbnail_url)
+
+return (
+
+    <div className='productOverviewPic' style={{backgroundImage: `url(${currentStyles[0].photos[0].thumbnail_url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+
+    {currentStyles[0].photos.map((photo, i) => <div className="overviewMiniPics" style={{backgroundImage: `url(${photo.thumbnail_url})`, width: '40px', height: '40px', backgroundSize: 'cover' }} onClick={(e) => {e.preventDefault(); picHandler(photo.thumbnail_url); }}></div>)}
 
     </div>
     )
