@@ -35,10 +35,12 @@ var Carousel = ({items}) => {
   const divStyle = {
     overflow: 'hidden',
     height: '1%',
-    width: '400%'
+    width: `${Math.max(25 * items.length, 100)}%`,
+    maxHeight: `40vh`
   };
   const ulStyle = {
-    display: 'inline-block',
+    display: 'flex',
+    flexDirection: 'row',
     margin: '0 auto',
     padding: '0 auto',
     listStyleType: 'none',
@@ -50,7 +52,7 @@ var Carousel = ({items}) => {
     color: 'white',
     textAlign: 'center',
     textDecoration: 'none',
-    width: '20vw',
+    width: '25%',
     margin: '0.1vw'
   }
   const rightArrowStyle = {
