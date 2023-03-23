@@ -34,7 +34,7 @@ return ( <>
         </div>
         <div className='overviewCartQuantity'>
 
-        <select id='selectQuantity' name="quantitySelector" form="quantityForm">
+        <select className='overviewCartQuantity' id='selectQuantity' name="quantitySelector" form="quantityForm">
           <OverviewInventory num={num}/>
 
         </select> </div>
