@@ -63,7 +63,7 @@ const getReviewsMeta = (req, res) => {
 
 const postForm = (req, res) => {
   const params = req.body;
-  console.log('params:',params)
+  //console.log('params:',params)
   API.postForm(params,(err, reviews)=> {
     if (err) {
       res.status(500).send(err);

@@ -15,6 +15,7 @@ const Reviews = () => { //include state variables for currently viewed product
   const [reviews, setReviews] = useState({});
   const [reviewStars, setReviewStars] = useState('');
   const [sortmethod,setSortmethod] = useState('relevant');
+  const [filter, setFilter] = useState(0);
 
   const getReviews = () => {
     axios.get('/reviews', {
@@ -50,7 +51,7 @@ const Reviews = () => { //include state variables for currently viewed product
 
   const postForm = (params) => {
     console.log(params);
-    axios.post('/reviews',params)
+    axios.post('/reviews/',params)
     .then(()=>{
       getReviews();
     }).catch((err)=> {
@@ -69,10 +70,10 @@ const Reviews = () => { //include state variables for currently viewed product
     <div className="reviewtitle">Ratings & reviews</div>
     <div className ="Reviews">
       <div>
-    <Ratingbreakdown className="Ratingbreakdown" reviewStars={reviewStars}/>
+    <Ratingbreakdown className="Ratingbreakdown" reviewStars={reviewStars} setFilter={setFilter}/>
     <Productbreakdown className="Productbreakdown" reviewStars={reviewStars}/>
       </div>
-    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id} postForm={postForm} setSortmethod={setSortmethod} reviewStars={reviewStars}/>
+    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id} postForm={postForm} setSortmethod={setSortmethod} reviewStars={reviewStars} filter={filter}/>
       </div>
       </div>
   )

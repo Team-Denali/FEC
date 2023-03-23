@@ -63,7 +63,7 @@ const getReviewsMeta = (params, callback) => {
 };
 
 const postForm = (params, callback) => {
-  const route = API + `reviews`;
+  const route = API + `reviews/`;
   axios.post(route, params, {headers:
     {Authorization: TOKEN}})
   .then((res) => {

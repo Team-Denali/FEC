@@ -29,6 +29,7 @@ const Modal = (props) => {
       props.setRecommend(true);
     };
     props.setForm(true);
+    props.closeModal();
     alert("Submission Successful!");
   }
 
@@ -56,8 +57,8 @@ const Modal = (props) => {
   }
 
   return (
-    <div className="modal" style={{ display: props.show ? 'block' : 'none' }}>
-    <div className="overlay" onClick={props.closeModal}>      <IconButton aria-label="delete">
+    <div className="reviewmodal" style={{ display: props.show ? 'block' : 'none' }}>
+    <div className="reviewoverlay" onClick={props.closeModal}>      <IconButton aria-label="delete">
         <AcUnitIcon />
       </IconButton></div>
     <div className="modalContent">
@@ -74,8 +75,52 @@ const Modal = (props) => {
       {value !== null && (
         <Box sx={{ ml: 2 }}>{rlabels[hover !== -1 ? hover : value]}</Box>
       )}</div>
-
       </div>
+
+      <div className="startrating">
+          {/* <label>
+            Name:
+            <input
+            onChange={(e)=>{setModalUsername(e.target.value); props.setUsername(e.target.value);}}
+            type="text"
+            maxLength="60"
+            placeholder="Your Name"
+            value={modalUsername}
+            required
+            />
+          </label> */}
+
+          <TextField
+          id="outlined-required"
+          label="Name"
+          placeholder="Your Name"
+          sx={{width: '200px'}}
+          onChange={(e)=>{setModalUsername(e.target.value); props.setUsername(e.target.value);}}
+          value={modalUsername}
+          required
+        />
+        </div>
+
+        <div className="startrating">
+          {/* <label>
+            Email:
+            <input
+            onChange={(e)=>{setModalEmail(e.target.value); props.setEmail(e.target.value);}}
+            type="email"
+            placeholder="Your Email"
+            value={modalEmail}
+            />
+          </label> */}
+          <TextField
+          id="outlined-required"
+          label="Email"
+          placeholder="Your Email"
+          sx={{width: '200px'}}
+          onChange={(e)=>{setModalEmail(e.target.value); props.setEmail(e.target.value);}}
+          value={modalEmail}
+          required
+        />
+        </div>
 
       <div>
           <label>
@@ -155,60 +200,20 @@ const Modal = (props) => {
 
 
 
-        <div className="startrating">Upload Photos:</div>
-          <Upload photos={modalPhoto} upload={uploadphoto} />
-
-        <div className="startrating">
-          {/* <label>
-            Name:
-            <input
-            onChange={(e)=>{setModalUsername(e.target.value); props.setUsername(e.target.value);}}
-            type="text"
-            maxLength="60"
-            placeholder="Your Name"
-            value={modalUsername}
-            required
-            />
-          </label> */}
-
-          <TextField
-          id="outlined-required"
-          label="Name"
-          placeholder="Your Name"
-          sx={{width: '200px'}}
-          onChange={(e)=>{setModalUsername(e.target.value); props.setUsername(e.target.value);}}
-          value={modalUsername}
-          required
-        />
+        <div className="startrating">Upload Photos:
+        <Upload photos={modalPhoto} upload={uploadphoto} />
         </div>
 
-        <div className="startrating">
-          {/* <label>
-            Email:
-            <input
-            onChange={(e)=>{setModalEmail(e.target.value); props.setEmail(e.target.value);}}
-            type="email"
-            placeholder="Your Email"
-            value={modalEmail}
-            />
-          </label> */}
-          <TextField
-          id="outlined-required"
-          label="Email"
-          placeholder="Your Email"
-          sx={{width: '200px'}}
-          onChange={(e)=>{setModalEmail(e.target.value); props.setEmail(e.target.value);}}
-          value={modalEmail}
-          required
-        />
-        </div>
+      <div className="submitreview">
+      <IconButton type="submit" size="small">Submit</IconButton>
+      </div>
 
-        <input
+        {/* <input
               className="modalBar modalSubmit"
               type="submit"
               value="Submit"
               messsage='Submission Sucessful'
-            />
+            /> */}
       </form>
       {/* <button title="Close" className="closeModal" onClick={props.closeModal} >close</button> */}
     </div>

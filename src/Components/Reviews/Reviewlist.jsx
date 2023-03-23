@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 
-const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars}) => {
+const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars, filter}) => {
   //console.log(reviews)
   const [reviewnumber, setReviewnumber] = useState(2);
   const [showModal, setshowModal] = useState(false);
@@ -24,10 +24,22 @@ const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars})
   const[characteristics, setCharacteristics] = useState({});
   const [form, setForm] = useState(false);
   const [sort, setSort] = useState('relevant');
+  const [button, setButton] = useState(true);
+
+  useEffect(()=>{
+    if (reviewnumber && rl) {
+      if (reviewnumber <= rl.length) {
+        setButton(true);
+      }
+    }
+  })
 
   const addReview = () => {
     var r = reviewnumber;
     setReviewnumber(r + 2);
+    if (r + 2 >= rl.length) {
+      setButton(false);
+    }
   }
 
   const createReview = () => {
@@ -40,24 +52,66 @@ const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars})
   }
 
   var rl = reviews||[];
+  //console.log(filter);
+  // console.log(rl);
   //get reviews from api for specific product id
-  var rl = rl.slice(0, reviewnumber);
-  var rlist = rl.map((r)=>{
+  rl = rl.filter((r)=>{
+    if (filter === 0) {
+      return true;
+    }
+    if (filter === 5) {
+      //console.log(r)
+      if (r.rating === 5) {
+        return true;
+      }
+      return false;
+    }
+    if (filter === 4) {
+      //console.log(r)
+      if (r.rating === 4) {
+        return true;
+      }
+      return false;
+    }
+    if (filter === 3) {
+      //console.log(r)
+      if (r.rating === 3) {
+        return true;
+      }
+      return false;
+    }
+    if (filter === 2) {
+      //console.log(r)
+      if (r.rating === 2) {
+        return true;
+      }
+      return false;
+    }
+    if (filter === 1) {
+      //console.log(r)
+      if (r.rating === 1) {
+        return true;
+      }
+      return false;
+    }
+  })
+  var rli = rl.slice(0, reviewnumber);
+  var rlist = rli.map((r)=>{
     return <ReviewItem key = {r.review_id} product_id={product_id} review={r}/>;
   });
   //console.log(rl);
 
   if (form === true) {
     postForm({
-      "product_id": product_id,
-      "rating": Number(rating),
-      "summary": summary,
-      "body": body,
-      "recommend": recommend,
-      "name": username,
-      "email": email,
-      "photos": photos,
-      "characteristics": characteristics
+      product_id: Number(product_id),
+      rating: Number(rating),
+      summary: summary,
+      body: body,
+      recommend: recommend,
+      name: username,
+      email: email,
+      photos: photos,
+      characteristics: characteristics
     });
     setForm(false);
   };
@@ -87,7 +141,7 @@ const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars})
           {rlist}
       </div>
       <div className = 'buttons'>
-        <Button variant="outlined" onClick={addReview}>more reviews</Button>
+      {button ? <Button variant="outlined" onClick={addReview}>more reviews</Button>: null}
         <Button variant="outlined" onClick={createReview}>write a review +</Button></div>
       <div>
       <Modal
@@ -110,7 +164,12 @@ const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars})
     </div>
     )
   } else {
-    return <div>No comment now. Be the first one to comment?</div>
+    return <div>
+      No comment now. Be the first one to comment?
+      <div className='SortContainer'>
+      <Button variant="outlined" onClick={createReview}>write a review +</Button>
+      </div>
+          </div>
   }
 
 

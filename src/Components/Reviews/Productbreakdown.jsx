@@ -71,7 +71,7 @@ const Productbreakdown = (props) => {
   ];
   if (comfortv!==0 && fitv!==0 && lengthv!==0 && qualityv!==0) {
     return (
-      <div className="Size&Comfort">
+      <div className="SizeComfort">
       <div  className="characteristic">comfort:
       <Slider defaultValue={comfortv} step={0.1} marks={markcomfort} min={1} max={5} track={false} size={'small'} disabled />
       </div>
