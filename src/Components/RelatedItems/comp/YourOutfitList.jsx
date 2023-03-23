@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import RelatedItemCard from './RelatedItemCard.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 import Carousel from './Carousel.jsx';
-
+import CloseIcon from '@mui/icons-material/Close';
 
 var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromOutfit}) => {
   const [outfitList, setOutfitList] = useState([]);
@@ -35,7 +35,7 @@ var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromO
   }
 
   useEffect(() => {
-    var list = outfit.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={removeFromOutfit} />);
+    var list = outfit.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={removeFromOutfit} icon={<CloseIcon />} />);
     list.unshift(<AddToOutfitCard key={'current'} item={current} onClick={addToOutfit} />)
     setOutfitList(list);
   }, [current, outfit])
@@ -44,12 +44,6 @@ var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromO
     <div style={outerDivStyle} >
       <h2>Your Outfit</h2>
       <Carousel items={outfitList} />
-      {/* <div style={divStyle} >
-        <ul style={ulStyle} >
-          <AddToOutfitCard item={current} onClick={addToOutfit} />
-          {outfit.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={removeFromOutfit} />)}
-        </ul>
-      </div> */}
     </div>
   );
 }

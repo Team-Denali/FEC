@@ -5,7 +5,7 @@ import ProductPreviewInformation from './ProductPreviewInformation.jsx';
 import ActionButton from './ActionButton.jsx';
 
 
-var RelatedItemCard = ({item, onClick, onButton}) => {
+var RelatedItemCard = ({item, onClick, onButton, icon}) => {
   function handleClick(event) {
     event.stopPropagation();
     onClick();
@@ -29,13 +29,10 @@ var RelatedItemCard = ({item, onClick, onButton}) => {
     textDecoration: 'none'
   }
   return (
-    // <li style={liStyle} >
-    // </li>
       <div style={divStyle} onClick={handleClick}>
-        {/* <h3>RelatedItemCard</h3> */}
         <ProductPreviewImages item={item} />
         <ProductPreviewInformation item={item} />
-        <ActionButton item={item} onButton={onButton} />
+        <ActionButton item={item} onButton={onButton} icon={icon} />
       </div>
   );
 }
