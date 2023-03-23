@@ -9,8 +9,8 @@ import OverviewCart from "./OverviewInfo/OverviewCart.jsx"; // Huzzah for jsx!
 
 var Overview = ({ current }) => {
 
-  console.log(current, "current prop"); //include state variables for currently viewed product
-  const [itemView, setItemView] = useState({});
+  //console.log(current, "current prop"); //include state variables for currently viewed product
+  const [price, setPrice] = useState('');
   const [styles, setStyles] = useState({});
   const [styleView, setStyleView] = useState({});
   let url = "http://localhost:3000"; //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
@@ -27,7 +27,7 @@ var Overview = ({ current }) => {
   const styleFinder = (currentId) => {
 
     let styleId = currentId;
-    console.log("THE ID:", styleId);
+    //console.log("THE ID:", styleId);
     let paramObj = { product_id: styleId };
 
     axios
@@ -49,11 +49,11 @@ var Overview = ({ current }) => {
     styleFinder(current.id);
   }, [current]);
 
-  //changeStyle(styles[0]);
-  //console.log('THE STYLEviewS:', styleView);//className="productOverviewPic
-  // setMainPic(styles[0]);
+  // if (!styles) {
+  //   return;
+  // }
 
-  //console.log('current itemview:', itemView)
+
   return (
     // }
     <>

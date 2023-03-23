@@ -12,16 +12,16 @@ var OverviewStyles = ({
   styleView,
   setStyleView,
 }) => {
-  console.log("overviewstyles:", overviewStyles);
-  let style1 = overviewStyles[0];
+  //console.log("overviewstyles:", overviewStyles);
+  //let style1 = overviewStyles[0];
 
-  console.log(style1, "STYLE1");
+  //console.log(style1, "STYLE1");
   if (!overviewStyles.length || !Object.keys(overviewStyles).length) {
     return;
   }
   // setCurrentStyle(overviewStyles[0]);
-  // useEffect(() => {
-  //   console.log("the currentstyle state:", currentStyle);
+  //const iconStyle = {styleView === overViewStyle ? 'HI' : 'null'};// useEffect(() => {
+    //U+000A9 -> &#xA9; U+1F5F9 -> ;  //   console.log("the currentstyle state:", currentStyle);
 
   // }, [currentStyle]); //setDisplay(overviewStyles[i])
   return (
@@ -38,7 +38,7 @@ var OverviewStyles = ({
               key={i.toString()}
 
               value={"thing"}
-              style={{
+              style={{display: 'flex', flexDirection: 'row-reverse',
 
                 height: "35px",
                 width: "20px",
@@ -51,7 +51,7 @@ var OverviewStyles = ({
 
                 e.preventDefault(); setStyleView(overviewStyle);
               }}
-            ></div>
+            ><div></div></div>
 
           ))}
         </div>

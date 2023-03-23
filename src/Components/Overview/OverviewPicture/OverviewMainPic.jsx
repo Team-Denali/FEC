@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'; //var arr = [1, 2, 3];//import { crea
 
 // Huzzah for jsx!
 
-var OverviewMainPic = ({current, currentStyles, styleView, setStyleView, mainPic, picHandler}) => { let obj = currentStyles[0]; console.log('in main pic component:', currentStyles[0]); //const [pic, setPic] = useState(currentStyle[0].photos[0].thumbnail_url) //include state variables for currently viewed product
+var OverviewMainPic = ({current, currentStyles, styleView, setStyleView, mainPic, picHandler}) => { //let obj = currentStyles[0]; console.log('in main pic component:', currentStyles[0]); //const [pic, setPic] = useState(currentStyle[0].photos[0].thumbnail_url) //include state variables for currently viewed product
 
 if (!currentStyles.length || (!(Object.keys(currentStyles)).length)) {
 
@@ -12,7 +12,7 @@ if (!currentStyles.length || (!(Object.keys(currentStyles)).length)) {
 }
 
 
-console.log('THE current PROPS:', current, 'THE currentstyles PROPS:', currentStyles, 'the item prop:', styleView)
+//console.log('THE current PROPS:', current, 'THE currentstyles PROPS:', currentStyles, 'the item prop:', styleView)
 const [pic, setPic] = useState(styleView.photos[0].thumbnail_url); useEffect(() => {setPic(styleView.photos[0].thumbnail_url)}, [styleView])
 
 return (
