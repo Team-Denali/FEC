@@ -4,13 +4,13 @@ import {useState, useEffect} from 'react'; import OverviewInventory from './Over
 
 // Huzzah for jsx!
 
-var OverviewCart = ({styleView}) => { const [num, setNum] = useState(0); const [quantArr, setQuantArr] = useState([])//include state variables for currently viewed product
+var OverviewCart = ({styleView, itemName}) => { const [num, setNum] = useState(0); const [quantArr, setQuantArr] = useState([]); //const [selection, setSelection] = useState({name: '' , style: , size: '', quantity: '', price: ''});//include state variables for currently viewed product
   if (!(Object.keys(styleView).length)) {
     return;
   }
 
 // let num = 0;
-console.log('the SKUS:', styleView.skus); var arr = [1,2,3];// if (sku.quantity > 0) { console.log(sku, sku.quantity, "*****");  }}<OverviewInventory quantity={size}/></select>
+console.log('the SKUS:', styleView);// if (sku.quantity > 0) { console.log(sku, sku.quantity, "*****");  }}<OverviewInventory quantity={size}/></select>
 
 //return <OverviewInventory itemtorender={styleView.skus[key]}/> setSize(e.target.value); let iventoryValue = styleView.skus.setQuantArr(() => _.range())
 
