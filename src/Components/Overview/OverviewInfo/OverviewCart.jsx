@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'; import OverviewInventory from './Over
 
 // Huzzah for jsx!
 
-var OverviewCart = ({styleView}) => { const [num, setNum] = useState(0); const [quantArr, setQuantArr] = useState([])//include state variables for currently viewed product
+var OverviewCart = ({styleView, itemName}) => { const [num, setNum] = useState(0); const [quantArr, setQuantArr] = useState([])//include state variables for currently viewed product
   if (!(Object.keys(styleView).length)) {
     return;
   }
