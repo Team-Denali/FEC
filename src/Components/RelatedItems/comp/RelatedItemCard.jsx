@@ -19,7 +19,8 @@ var RelatedItemCard = ({item, onClick, onButton, icon}) => {
     borderRadius: '10%',
     overflow: 'hidden',
     backgroundColor: 'lightgrey',
-    width: 'max-content'
+    width: 'min-content',
+    maxWidth: '100%'
   };
 
   const liStyle = {

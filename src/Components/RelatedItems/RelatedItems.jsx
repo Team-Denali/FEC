@@ -13,6 +13,11 @@ var RelatedItemsModal = ({open, setOpen, comparison}) => {
   var gridStyle = {
     textAlign: 'center'
   }
+  const modalStyle = {
+    fontFamily: 'Verdana, sans-serif',
+    color: 'rgb(87 72 72)',
+    backgroundColor: 'rgb(240, 240, 240)'
+  }
   var comparisonGrid = comparison.map(feature => (
     <Grid container spacing={1} columns={12}>
         <Grid item xs={4} sm={4} md={4}>
@@ -37,8 +42,11 @@ var RelatedItemsModal = ({open, setOpen, comparison}) => {
         open={open}
         onClose={() => setOpen(false)}
       >
-        <DialogContent>
-          {grid}
+        <DialogContent style={modalStyle} >
+          <div>Comparing:</div>
+        </DialogContent>
+        <DialogContent style={modalStyle} >
+          <div>{grid}</div>
         </DialogContent>
       </Dialog>
     </div>
@@ -52,6 +60,11 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   const [comparison, setComparison] = useState([]);
   const [currentStyles, setCurrentStyles] = useState([]);
 
+  const componentStyle = {
+    fontFamily: 'Verdana, sans-serif',
+    color: 'rgb(87 72 72)',
+    backgroundColor: 'rgb(240, 240, 240)'
+  }
 
   function compareToCurrent(item) {
     //NAME    CHAR    NAME
@@ -114,12 +127,10 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   function getRelated() {
     let rel;
     if(!current.id) {
-      // console.log('nothing in current yet, returning')
       return;
     }
     return getProducts(`${current.id}/related`)
       .then(res => {
-        // console.log('related product ids: ', res.data);
         let relatedIds = _.uniq(res.data);
         relatedIds = relatedIds.map(id => getProducts(id));
         return Promise.all(relatedIds)
@@ -127,7 +138,6 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
       .then(results => {
         results = results.map(result => result.data);
         rel = results;
-        // setRelated(results);
         return results;
       })
       .then(results => {
@@ -137,17 +147,14 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
         results = results.map(result => {
           return result.data.results;
         })
-        // console.log('styles: ', results)
         return results;
       })
       .then(styles => {
-        // console.log(rel)
         var relatedWithStyles = [];
         relatedWithStyles = Object.assign(relatedWithStyles, rel);
         for (var i = 0; i < relatedWithStyles.length; i++) {
           relatedWithStyles[i].styles = styles[i];
         }
-        // console.log('Related Items, with style property', relatedWithStyles)
         setRelated(relatedWithStyles);
       })
       .catch(err => console.log(err))
@@ -157,12 +164,8 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     getRelated()
   }, [current])
 
-  useEffect(() => {
-    // console.log('change to related: ', related);
-  }, [related, outfit])
-
   return (
-    <div>
+    <div style={componentStyle} >
       <RelatedItemsModal open={open} setOpen={setOpen} comparison={comparison} />
       <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} openComparisonModal={openComparisonModal} />
       <YourOutfitList current={current} outfit={outfit} setCurrentById={setCurrentById} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} />

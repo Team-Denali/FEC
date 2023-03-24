@@ -34,9 +34,11 @@ var ProductStars = ({id, size}) => {
   const [rating, setRating] = useState(5);
 
   useEffect(() => {
-    getAverageRating(id)
-      .then(avg => setRating(avg))
-  }, []);
+    if (id) {
+      getAverageRating(id)
+        .then(avg => setRating(avg))
+    }
+  }, [id]);
 
   return (
     <Rating name="qtr-rating-read" defaultValue={2.5} value={rating} precision={0.25} readOnly size={size} />

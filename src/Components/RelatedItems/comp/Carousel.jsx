@@ -35,8 +35,9 @@ var Carousel = ({items}) => {
   const divStyle = {
     overflow: 'hidden',
     height: '1%',
-    width: `${Math.max(25 * items.length, 100)}%`,
-    maxHeight: `40vh`
+    // width: `${Math.max(25 * items.length, 100)}%`,
+    width: `100%`,
+    maxHeight: `42vh`
   };
   const ulStyle = {
     display: 'flex',
@@ -45,7 +46,8 @@ var Carousel = ({items}) => {
     padding: '0 auto',
     listStyleType: 'none',
     position: 'relative',
-    left: `${scroll}vw`
+    // left: `${scroll}vw`
+    left: `${scroll}%`
   }
   const liStyle = {
     display: 'inline-block',
@@ -57,27 +59,29 @@ var Carousel = ({items}) => {
   }
   const rightArrowStyle = {
     position: 'absolute',
-    zIndex: 4,
+    zIndex: 6,
+    color: 'rgb(87 72 72)',
     top: '0%',
     right: '-3%',
     display: 'flex',
     justifyContent: 'center',
-    height: '99%',
+    height: '100%',
     width: '15%',
     alignItems: 'center',
-    background: 'linear-gradient(to right, #0000, #eee 100%)'
+    background: 'linear-gradient(to right, #0000, #f0f0f0 50%)'
   }
   const leftArrowStyle = {
     position: 'absolute',
-    zIndex: 4,
+    zIndex: 6,
+    color: 'rgb(87 72 72)',
     top: '0%',
     left: '-3%',
     display: 'flex',
     justifyContent: 'center',
-    height: '99%',
+    height: '100%',
     width: '15%',
     alignItems: 'center',
-    background: 'linear-gradient(to left, #0000, #eee 100%)'
+    background: 'linear-gradient(to left, #0000, #f0f0f0 50%)'
   }
   const containerStyle = {
     position: 'relative'
@@ -95,11 +99,13 @@ var Carousel = ({items}) => {
     setRenderFwd(checkRenderFwd());
     setRenderBack(checkRenderBack());
   }, [scroll, items])
-  var handleClickForward = () => {
+  var handleClickForward = (e) => {
+    e.stopPropagation();
     console.log('clicked arrow');
     setScroll(scroll - 25);
   }
-  var handleClickBack= () => {
+  var handleClickBack= (e) => {
+    e.stopPropagation();
     console.log('clicked arrow');
     setScroll(scroll + 25);
   }

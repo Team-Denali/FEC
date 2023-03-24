@@ -6,8 +6,8 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 var RelatedItemsList = ({related, setCurrentById, getProducts, openComparisonModal}) => {
   const outerDivStyle = {
-    color: 'blue',
-    borderStyle: 'solid',
+    // color: 'blue',
+    // borderStyle: 'solid',
     margin: '2%',
     padding: '2%',
     borderRadius: '10%',
