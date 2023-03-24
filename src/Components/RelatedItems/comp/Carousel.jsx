@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react';
 var Carousel = ({items}) => {
 
   var checkRenderFwd = () => {
-    console.log('scroll and length: ', scroll, items.length)
+    // console.log('scroll and length: ', scroll, items.length)
     if (items.length > 4 && ((items.length - 4) * -25) < scroll) {
       return true
     } else {
@@ -101,12 +101,12 @@ var Carousel = ({items}) => {
   }, [scroll, items])
   var handleClickForward = (e) => {
     e.stopPropagation();
-    console.log('clicked arrow');
+    // console.log('clicked arrow');
     setScroll(scroll - 25);
   }
   var handleClickBack= (e) => {
     e.stopPropagation();
-    console.log('clicked arrow');
+    // console.log('clicked arrow');
     setScroll(scroll + 25);
   }
 
@@ -117,7 +117,7 @@ var Carousel = ({items}) => {
       </div>) : ''}
       <div style={divStyle} >
           <ul style={ulStyle} >
-            {items.map(item => <li style={liStyle} >{item}</li>)}
+            {items.map((item, index) => <li key={index} style={liStyle} >{item}</li>)}
           </ul>
       </div>
       {renderBack ? (<div style={leftArrowStyle} onClick={handleClickBack} >

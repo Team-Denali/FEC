@@ -121,19 +121,19 @@ var ProductPreviewImages = ({item}) => {
 
 
   var handleMouseOver = (e) => {
-    console.log('mouse over', item.id);
+    // console.log('mouse over', item.id);
     setShowImages(true);
   }
   var handleMouseLeave = (e) => {
-    console.log('mouse leave', item.id);
+    // console.log('mouse leave', item.id);
     setShowImages(false);
   }
 
   useEffect(() => {
-    console.log('item effect')
+    // console.log('item effect')
     var images = item.styles.map(style => style.photos);
     images = images.flat();
-    console.log('images', images)
+    // console.log('images', images)
     setImages(images.map(image => <Thumbnail image={image} setImage={setImage} />));
   }, [item])
 

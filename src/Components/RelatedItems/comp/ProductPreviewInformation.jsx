@@ -44,6 +44,24 @@ var ProductPreviewInformation = ({item}) => {
     textAlign: 'right',
     fontStyle: 'italic'
   }
+  const salePriceStyle = {
+    color: 'red',
+    margin: '1%',
+    fontSize: 'large',
+    fontWeight: 200,
+    fontVariantCaps: 'all-small-caps',
+    textAlign: 'right',
+    fontStyle: 'italic'
+  }
+  const strikethroughStyle = {
+    textDecoration: 'line-through',
+    margin: '1%',
+    fontSize: 'large',
+    fontWeight: 200,
+    fontVariantCaps: 'all-small-caps',
+    textAlign: 'right',
+    fontStyle: 'italic'
+  }
   const starStyle = {
     margin: '1% 1% 1% 1%'
   }

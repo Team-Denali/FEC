@@ -1,13 +1,28 @@
 const express = require("express"); require("dotenv").config();
 const path = require("path"); const bodyParser = require('body-parser');
 const controller = require("./controller.js");
+const sessions = require("./sessions.js");
+var session = require('express-session');
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+let count = 0;
+const genId = () => count++;
+
 app.use(express.static(path.join(__dirname,'../public'))); app.use(express.json());
  //app.get('/', (req, res) => {console.log('in root url get req!!!'); res.end})
+app.use(session({
+  // genid: genId,
+  secret: 'keyboard cat'
+}))
+app.use((req, res, next) => {
+  console.log('\n-----------------------------')
+  console.log('serving request: ', req.method, req.path);
+  console.log('sessionID: ', req.sessionID);
+  next();
+})
 
 app.get('/reviews/', (req,res) => {
   //console.log("running");
@@ -40,10 +55,26 @@ app.post('/reviews',(req,res) => {
   controller.postForm(req,res);
 })
 
-app.get('/styles', (req, res) => { 
+app.get('/styles', (req, res) => {
 
   controller.getStyles(req, res)
 
+})
+
+app.post('/outfit', (req, res) => {
+  sessions.setOutfit(req.sessionID, req.body);
+})
+
+app.get('/outfit', (req, res) => {
+  var outfit = sessions.getOutfit(req.sessionID);
+  outfit = outfit === undefined ? [] : outfit;
+  res.status(200).send(outfit);
+})
+
+app.get('/null', (req, res) => {
+  // console.log('get null req: ', req.sessionStore)
+  console.log('GET /null req: WHY IS THIS HERE?')
+  res.sendStatus(200)
 })
 
 app.listen(PORT, () => {console.log(`Server is listening at http://localhost:${PORT}`);});
