@@ -10,15 +10,11 @@ const getReviews = (req, res) => { //console.log('in getReviews')
     }
   })
 };
-<<<<<<< HEAD
 
 
 
 //**********************Question and Answers ****************************/
 const getQuestions = (req, res) => {
-=======
-const getQuestions = (req, res) => { //console.log('in getQuestions')
->>>>>>> f480afdf806ac90fd4cb0f963f58c5b4a6d25556
   const params = req.query;
   API.getQuestions(params, (err, questions) => {
     if (err) {
@@ -28,7 +24,6 @@ const getQuestions = (req, res) => { //console.log('in getQuestions')
     }
   })
 };
-<<<<<<< HEAD
 const updateQuestionHelpful = (req, res) => {
   const params = req.params;
   API.updateQuestionHelpful(params, (err, result) => {
@@ -101,9 +96,6 @@ const submitQuestion = (req, res) => {
 
 
 const getProducts = (req, res) => {
-=======
-const getProducts = (req, res) => { //console.log('in getProducts')
->>>>>>> f480afdf806ac90fd4cb0f963f58c5b4a6d25556
   const params = req.params;
   params.id = params.id === undefined ? '' : req.params.id;
   params.related = params.related === undefined ? '' : req.params.related;
@@ -116,8 +108,6 @@ const getProducts = (req, res) => { //console.log('in getProducts')
     }
   })
 };
-<<<<<<< HEAD
-=======
 
 const getStyles = (req, res) => { //console.log('IN CONTROLLERS:', req.query)
   let params = req.query;
@@ -139,7 +129,6 @@ const getStyles = (req, res) => { //console.log('IN CONTROLLERS:', req.query)
 
 
 
->>>>>>> f480afdf806ac90fd4cb0f963f58c5b4a6d25556
 const updateReviewHelpful = (req, res) => {
   const params = req.body.params;
   //console.log('running')
@@ -189,16 +178,13 @@ module.exports = {
   getReviewsMeta,
   getQuestions,
   getProducts,
-<<<<<<< HEAD
   postForm,
   updateQuestionHelpful,
   updateQuestionReport,
   updateAnswerHelpful,
   updateAnswerReport,
   submitAnswer,
-  submitQuestion
-=======
+  submitQuestion,
   getStyles,
-  postForm
->>>>>>> f480afdf806ac90fd4cb0f963f58c5b4a6d25556
+
 }
