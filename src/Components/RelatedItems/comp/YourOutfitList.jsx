@@ -1,9 +1,13 @@
 import React from 'react';// Bring React in to build a component.
 import {useState, useEffect} from 'react';
 import RelatedItemCard from './RelatedItemCard.jsx';
+import AddToOutfitCard from './AddToOutfitCard.jsx';
+import Carousel from './Carousel.jsx';
 
 
-var YourOutfitList = () => {
+var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromOutfit}) => {
+  const [outfitList, setOutfitList] = useState([]);
+
   const outerDivStyle = {
     color: 'blue',
     borderStyle: 'solid',
@@ -29,18 +33,22 @@ var YourOutfitList = () => {
     textAlign: 'center',
     textDecoration: 'none'
   }
+
+  useEffect(() => {
+    var list = outfit.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={removeFromOutfit} />);
+    list.unshift(<AddToOutfitCard key={'current'} item={current} onClick={addToOutfit} />)
+    setOutfitList(list);
+  }, [current, outfit])
+
   return (
     <div style={outerDivStyle} >
       <h2>Your Outfit</h2>
       <div style={divStyle} >
-        <ul style={ulStyle} >
-          {/* <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li>
-          <li style={liStyle} ><RelatedItemCard /></li> */}
-        </ul>
+        <Carousel items={outfitList} />
+        {/* <ul style={ulStyle} >
+          <AddToOutfitCard item={current} onClick={addToOutfit} />
+          {outfit.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={removeFromOutfit} />)}
+        </ul> */}
       </div>
     </div>
   );

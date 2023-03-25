@@ -5,7 +5,7 @@ import ProductPreviewInformation from './ProductPreviewInformation.jsx';
 import ActionButton from './ActionButton.jsx';
 
 
-var RelatedItemCard = ({item, onClick, onButton}) => {
+var AddToOutfitCard = ({item, onClick}) => {
   function handleClick(event) {
     event.stopPropagation();
     onClick();
@@ -21,7 +21,9 @@ var RelatedItemCard = ({item, onClick, onButton}) => {
     backgroundColor: 'lightgrey',
     width: 'max-content'
   };
-
+  const pStyle = {
+    color: 'rgb(87 72 72)'
+  };
   const liStyle = {
     display: 'inline-block',
     color: 'white',
@@ -30,14 +32,13 @@ var RelatedItemCard = ({item, onClick, onButton}) => {
   }
   return (
     <li style={liStyle} >
-      <div style={divStyle} onClick={handleClick}>
+      <div style={divStyle} onClick={handleClick}><p style={pStyle}>+ Add To Outfit</p>
         {/* <h3>RelatedItemCard</h3> */}
-        <ProductPreviewImages item={item} />
+        {/* <ProductPreviewImages item={item} /> */}
         <ProductPreviewInformation item={item} />
-        <ActionButton item={item} onButton={onButton} />
       </div>
     </li>
   );
 }
 
-export default RelatedItemCard
+export default AddToOutfitCard

@@ -1,25 +1,50 @@
-const axios = require ('axios');
+const axios = require ('axios'); // .require("dotenv").config(); .env config
 const config = require('../config/myConfig.js');
-const TOKEN = config.token;
+const TOKEN = config.TOKEN;
+
 const API = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f480afdf806ac90fd4cb0f963f58c5b4a6d25556
 const getReviews = (params, callback) => {
   const route = API + `reviews/`;
   axios.get(route, {headers:
-    {Authorization: TOKEN}, params: params})
+    {Authorization: `${TOKEN}`}, params: params})
+
   .then((res) => {
     callback(null, res.data)
   })
   .catch((err) => {
     callback(err);
+
   })
 };
+<<<<<<< HEAD
 
+=======
+const getQuestions = (params, callback) => {
+  const route = API + `qa/questions`;
+  axios.get(route, {headers:
+    {Authorization: TOKEN}, params: params})
+  .then((res) => {
+
+    callback(null, res.data)
+  })
+
+  .catch((err) => {
+
+    callback(err);
+
+  })
+};
+>>>>>>> f480afdf806ac90fd4cb0f963f58c5b4a6d25556
 const getProducts = (params, callback) => {
-  // console.log('params = ', params);
+
   const route = API + `products/${params.id + (params.related === '' ? '' : ('/' + params.related))} `;
   axios.get(route, {headers:
+
     {Authorization: TOKEN}})
   .then((res) => {
     callback(null, res.data)
@@ -35,12 +60,40 @@ const updateReviewHelpful = (params, callback) => {
   axios.put(route, null, {headers:
     {authorization: TOKEN}, params: params})
   .then((res) => {
+
     callback(null, res.data)
   })
+
   .catch((err) => {
+
     callback(err);
+
   })
 };
+
+
+
+const getStyles = (id, callback) => { //console.log("IN API FUNC:", id)
+
+  let headers = { Authorization: `${TOKEN}` };
+  return axios.get(`${API}products/${id}/styles`, { headers: headers })
+  .then((res) => { //console.log(res.data)
+
+    callback(null, res.data);
+  })
+
+  .catch((err) => { callback(err); })
+
+};
+
+
+
+
+
+
+
+
+
 
 const getReviewsMeta = (params, callback) => {
   const route = API + `reviews/meta`;
@@ -55,15 +108,16 @@ const getReviewsMeta = (params, callback) => {
 };
 
 const postForm = (params, callback) => {
-  const route = API + `reviews/`;
+  const route = API + `reviews`;
   axios.post(route, params, {headers:
-    {authorization: TOKEN}})
+    {Authorization: TOKEN}})
   .then((res) => {
     callback(null, res.data)
   })
   .catch((err) => {
     callback(err);
   })
+<<<<<<< HEAD
 };
 //**********************Question and Answers ****************************/
 const getQuestions = (params, callback) => {
@@ -148,6 +202,9 @@ const submitQuestion = (body, callback) => {
 };
 
 
+=======
+, getStyles};
+>>>>>>> f480afdf806ac90fd4cb0f963f58c5b4a6d25556
 
 module.exports = {
   getReviews,
@@ -156,10 +213,14 @@ module.exports = {
   getQuestions,
   getProducts,
   postForm,
+<<<<<<< HEAD
   updateQuestionHelpful,
   updateQuestionReport,
   updateAnswerHelpful,
   updateAnswerReport,
   submitAnswer,
   submitQuestion
+=======
+  getStyles
+>>>>>>> f480afdf806ac90fd4cb0f963f58c5b4a6d25556
 };

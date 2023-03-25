@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Rating from '@mui/material/Rating';
+import LinearProgressWithLabel from '@mui/material/LinearProgress';
 
 const Ratingbreakdown = (props) => {
   var star = props.reviewStars.ratings;
@@ -51,22 +53,34 @@ const Ratingbreakdown = (props) => {
   var width = average * 20;
   return(
     <div>
-    <div>{average}</div>
-    <div>{rec?Math.round((Number(rec.true)/(Number(rec.true)+Number(rec.false)))*100): 0}% of reviews recommend this product</div>
+     <div className="RatingText">{average}
+     <Rating name="read-only" value={average}  precision={0.1} size={'small'} readOnly />
+</div>
+    <div className="RecommendText">{rec?Math.round((Number(rec.true)/(Number(rec.true)+Number(rec.false)))*100): 0}% of reviews recommend this product</div>
     <div className='5star'>
-      5star:{fivestar}%
+      <div className="BarTitle"> Five Star: {fivestar}%
+      <LinearProgressWithLabel variant="determinate" value={fivestar}/>
+      </div>
     </div>
     <div className='4star'>
-      4star:{fourstar}%
+      <div className="BarTitle"> Four Star: {fourstar}%
+      <LinearProgressWithLabel variant="determinate" value={fourstar}/>
+    </div>
     </div>
     <div className='3star'>
-      3star:{threestar}%
+      <div className="BarTitle"> Three Star: {threestar}%
+      <LinearProgressWithLabel variant="determinate" value={threestar}/>
+      </div>
     </div>
     <div className='2star'>
-      2star:{twostar}%
+      <div className="BarTitle"> Two Star: {twostar}%
+      <LinearProgressWithLabel variant="determinate" value={twostar}/>
+      </div>
     </div>
     <div className='1star'>
-      1star:{onestar}%
+       <div className="BarTitle"> Two Star: {onestar}%
+       <LinearProgressWithLabel variant="determinate" value={onestar}/>
+       </div>
     </div>
     </div>
   )
