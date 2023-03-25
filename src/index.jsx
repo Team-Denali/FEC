@@ -30,8 +30,10 @@ const App = () => {
 
   useEffect(() => {
     if(!current.id) {
-      getProducts('37311')
+      getProducts('37345')
         .then(res => setCurrent(res.data))
+      // getProducts('37311')
+      //   .then(res => setCurrent(res.data))
     }
   }, [])
   // console.log(current, 'the current')

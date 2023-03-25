@@ -72,13 +72,13 @@ else if (result > sortedArray.length)
 
   //used for dev purposes no needed in final product
   useEffect(() => {
-    console.log("USE EFFECT QA DATA LOGGER", qaData);
+    // console.log("USE EFFECT QA DATA LOGGER", qaData);
   }, [qaData]);
 
   //onclick reveals more questions
   function clickHandler(amount) {
     setResult((currentResult) => {
-      console.log(currentResult)
+      // console.log(currentResult)
       return currentResult + amount;
     });
   }

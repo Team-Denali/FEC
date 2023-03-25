@@ -58,19 +58,21 @@ var RelatedItemsModal = ({open, setOpen, comparison}) => {
     //case 3: only one has that feature =>
   var comparisonGrid = comparison.slice(2).map(feature => {
     var left, center, right;
-    if (feature[0] === feature[2] && feature[0] !== undefined) {
-      left = <CheckIcon />;
-      right = <CheckIcon />;
-      center = `${feature[1]}: ${feature[0]}`
+    if (feature[0] === null || feature[2] === null) {
+      left = feature[0] === null ? <CheckIcon /> : '';
+      right = feature[2] === null ? <CheckIcon /> : '';
+      center = `${feature[1]}`
     } else if (feature[0] !== feature [2] && feature[0] !== undefined && feature[2] !== undefined) {
       left = feature[0];
       right = feature[2];
       center = feature[1];
-    } else if (feature[0] !== feature [2] && (feature[0] !== undefined || feature[2] !== undefined)) {
-      left = feature[0] ? <CheckIcon /> : '';
-      right = feature[2] ? <CheckIcon /> : '';
-      center = `${feature[1]}: ${feature[0] ? feature[0] : feature[2]}`
-    } else {
+    }
+    else if (feature[0] !== feature [2] && (feature[0] !== undefined || feature[2] !== undefined)) {
+      left = feature[0] ? feature[0]: '';
+      right = feature[2] ? feature[2] : '';
+      center = `${feature[1]}`
+    }
+    else {
       left = '???';
       right = '???';
       center = 'WHAT';
@@ -86,6 +88,9 @@ var RelatedItemsModal = ({open, setOpen, comparison}) => {
         </Grid>
         <Grid item xs={3} sm={3} md={3}>
           <div>{right}</div>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12}>
+          <Divider></Divider>
         </Grid>
     </Grid>
     )})
@@ -138,7 +143,9 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     var comparatorKeys = Object.keys(comparatorFeatures);
     var combinedKeys = _.uniq(currentKeys.concat(comparatorKeys)).sort();
     for (var i = 0; i < combinedKeys.length; i++) {
-      comparison.push([currentFeatures[combinedKeys[i]], combinedKeys[i], comparatorFeatures[combinedKeys[i]]])
+      // if (currentFeatures[combinedKeys[i]] || comparatorFeatures[combinedKeys[i]]) {
+        comparison.push([currentFeatures[combinedKeys[i]], combinedKeys[i], comparatorFeatures[combinedKeys[i]]])
+      // }
     }
 
     setComparison(comparison);

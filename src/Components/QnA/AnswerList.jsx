@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 
 var AnswerList = ({ answer }) => {
-  console.log(answer.photos)
+  // console.log(answer.photos)
   const monthNames = [
     "January",
     "February",
@@ -34,11 +34,11 @@ var AnswerList = ({ answer }) => {
 
   function voteHandler(event) {
     event.currentTarget.classList.toggle("voted");
-    console.log(answer);
+    // console.log(answer);
     axios
       .put(`/qa/answers/:${answer.id}/helpful`)
       .then((res) => {
-        console.log("response to put for answers", res);
+        // console.log("response to put for answers", res);
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +50,7 @@ var AnswerList = ({ answer }) => {
     axios
       .put(`/qa/answers/:${answer.id}/helpful`)
       .then((res) => {
-        console.log("response to put for questions", res);
+        // console.log("response to put for questions", res);
       })
       .catch((err) => {
         console.log(err);

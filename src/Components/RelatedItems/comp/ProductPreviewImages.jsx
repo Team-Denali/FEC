@@ -13,8 +13,8 @@ var Thumbnail = ({image, setImage}) => {
     // margin: '5%',
     // padding: '5%',
     borderRadius: '50%',
-    height: '64px',
-    width: '64px',
+    // height: '64px',
+    // width: '64px',
     display: 'flex',
     flexDirection: 'row',
     overflow: 'hidden',
@@ -24,7 +24,7 @@ var Thumbnail = ({image, setImage}) => {
     // height: '100%',
     // maxHeight: '2vh',
     // width: '100%',
-    zIndex: 4,
+    // zIndex: 4,
     // maxWidth: '2vh',
     // overflow: 'hidden',
     // backgroundImage: `url(${item.styles[0].photos[0].url})`,
@@ -62,7 +62,7 @@ var Thumbnail = ({image, setImage}) => {
     <div style={outerDivStyle} >
       <div style={divStyle} onClick={e => {e.stopPropagation(); setImage(image);}} >
         <img style={imgStyle} src={image.thumbnail_url} ></img>
-        <img style={imgBGStyle} src={image.url} ></img>
+        {/* <img style={imgBGStyle} src={image.url} ></img> */}
       </div>
     </div>
   )
