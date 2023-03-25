@@ -11,9 +11,9 @@ var OverviewStyles = ({
   item,
   setItem,
 }) => {
-  console.log("overviewstyles:", overviewStyles);
+  // console.log("overviewstyles:", overviewStyles);
   let style1 = overviewStyles[0];
-  console.log(style1, "STYLE1");
+  // console.log(style1, "STYLE1");
 
   const [currentStyle, setCurrentStyle] = useState(style1); //setCurrentStyle(style1)
   if (!overviewStyles.length || !Object.keys(overviewStyles).length) {

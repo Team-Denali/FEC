@@ -4,21 +4,21 @@ import {useState, useEffect} from 'react'; import OverviewMainPic from './Overvi
 
 import OverviewStyles from './OverviewInfo/OverviewStyles.jsx'; import OverviewCart from './OverviewInfo/OverviewCart.jsx'; // Huzzah for jsx!
 
-var Overview = ({current}) => { console.log(current, 'current prop')//include state variables for currently viewed product
+var Overview = ({current}) => { //console.log(current, 'current prop')//include state variables for currently viewed product
 const [itemView, setItemView] = useState({}); const [styles, setStyles] = useState({}); const [styleView, setStyleView] = useState({}); let url = 'http://localhost:3000'; //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
 const [mainPic, setMainPic] = useState(null)
 var changePic = (pic_url) => {setMainPic(pic_url)}
 
 var changeStyle = (style) => {setStyleView(style)};
 
-const styleFinder = (currentId) => { let styleId = currentId; console.log('THE ID:', styleId); let paramObj = { product_id: styleId };
-  axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { console.log( 'the data:', res.data); setStyles(res.data.results); console.log('STYLES 0:', styles); } ).catch((err) => {console.log('axios req error:', err)})
+const styleFinder = (currentId) => { let styleId = currentId; /*console.log('THE ID:', styleId);*/ let paramObj = { product_id: styleId };
+  axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { /*console.log( 'the data:', res.data);*/ setStyles(res.data.results); /*console.log('STYLES 0:', styles);*/ } ).catch((err) => {/*console.log('axios req error:', err)*/})
 
 
 }
 useEffect(() => {styleFinder(current.id); }, [current])
 //changeStyle(styles[0]);
-console.log('THE STYLES:', styles);//className="productOverviewPic
+//console.log('THE STYLES:', styles);//className="productOverviewPic
 // setMainPic(styles[0]);
 //console.log('current itemview:', itemView)
 
