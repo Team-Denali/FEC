@@ -1,22 +1,22 @@
 .overviewContainer {
 
-width: 95vw; height: 95vh; display: flex; flex-direction: column; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: 15;
+width: 95vh; height: 95vh; display: flex; flex-direction: column; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: 15;
 
 
 
 }
 .overviewTop {
 
-  width: 80%; height: 75%; display: flex; flex-direction: row; object-fit: cover;
+  width: 90%; height: 90%; display: flex; flex-direction: row; justify-content: space-between; object-fit: cover;
 
 }
 
 .productOverviewPic {
-  width: 70vw; height: auto; display: flex; flex-direction: column; justify-content: flex-start;
+  width: 75%; height: auto; display: flex; flex-direction: column; justify-content: flex-start;
 }
 
 .overviewProductInfo {
-  display: flex; flex-direction: column; justify-content: space-around; align-items: center;
+  display: flex; flex-direction: column; align-items: flex-start; flex-shrink: 2; justify-content: center; padding-left: 20px;
 }
 .productName { text-align: center;}
 
@@ -28,7 +28,7 @@ display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wr
 
 .overviewSidePanel {display: flex; justify-content: space-evenly; flex-direction: column;}
 
-
+.info {padding-bottom: 20px;}
 
 .individualStylePic {
     /* height: 35px;
@@ -40,6 +40,23 @@ display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wr
 
 }
 
+.productOverviewPic.
+.cartTopRow {display: flex; flex-direction: row; justify-content: space-between;}
+
+.cartBottomRow { padding: 15px;}
+
+
+
+/* .overviewBottom {
+
+} */
+.cartSelector {
+padding-left: 10px;
+
+padding-right: 10px;
+}
+
+.cartAddButton {
 
 
 
@@ -47,7 +64,4 @@ display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wr
 
 
 
-
-.overviewBottom {
-  display: flex; justify-content: space-around; align-items: center;
 }

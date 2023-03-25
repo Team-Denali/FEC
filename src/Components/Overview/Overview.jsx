@@ -4,15 +4,15 @@ import { useState, useEffect } from "react";
 
 import OverviewMainPic from "./OverviewPicture/OverviewMainPic.jsx";
 
-import OverviewStyles from "./OverviewInfo/OverviewStyles.jsx";
+import OverviewStyles from "./OverviewInfo/OverviewStyles.jsx"; import OverviewPrice from './OverviewInfo/OverviewPrice.jsx'
 import OverviewCart from "./OverviewInfo/OverviewCart.jsx"; // Huzzah for jsx!
 
 var Overview = ({ current }) => {
 
-  console.log(current, "current prop"); //include state variables for currently viewed product
+  //console.log(current, "current prop"); //include state variables for currently viewed product
   const [itemView, setItemView] = useState({});
   const [styles, setStyles] = useState({});
-  const [styleView, setStyleView] = useState({});
+  const [styleView, setStyleView] = useState({}); const [defaultPrice, setDefaultPrice] = useState(''); const [salePrice, setSalePrice] = useState(0);
   let url = "http://localhost:3000"; //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
 
   const [mainPic, setMainPic] = useState(null);
@@ -27,17 +27,17 @@ var Overview = ({ current }) => {
   const styleFinder = (currentId) => {
 
     let styleId = currentId;
-    console.log("THE ID:", styleId);
+
     let paramObj = { product_id: styleId };
 
     axios
       .get(`${url}/styles`, { params: paramObj })
       .then((res) => {
 
-        console.log("the data:", res.data);
+        //console.log("the data:", res.data);
         setStyles(res.data.results);
 
-        setStyleView(res.data.results[0]);
+        setStyleView(res.data.results[0]); setDefaultPrice(current.default_price)
       })
 
       .catch((err) => {
@@ -49,7 +49,7 @@ var Overview = ({ current }) => {
     styleFinder(current.id);
   }, [current]);
 
-  //changeStyle(styles[0]);
+  //console.log('THE CURRENT PRICE:', current.default_price)//changeStyle(styles[0]);
   //console.log('THE STYLEviewS:', styleView);//className="productOverviewPic
   // setMainPic(styles[0]);
 
@@ -60,7 +60,7 @@ var Overview = ({ current }) => {
 
       {" "}
 
-      <div className="overviewContainer">
+      <div className="overviewContainer"style={{}}>
 
 
 
@@ -78,18 +78,18 @@ var Overview = ({ current }) => {
           />
 
           <div className="overviewProductInfo">
-            <div>Review Stuff Goes Here</div>
-            <div>{current.category}</div>
-            <div className="productName">
-              <h1>{current.name}</h1>
+            <div className="info">Ratings Info</div>
+            <div className="info">{current.category}</div>
+            <div className="productName ">
+              <h3>{current.name}</h3>
 
 
 
             </div>
-            <div>
-              <h3>{current.default_price}</h3>
-            </div>
-            <div className="overviewStyles">
+            <div className='overviewPricing'>
+              <div><OverviewPrice defaultPrice={defaultPrice} salePrice={styleView.sale_price}/></div>
+            </div><div style={{fontSize: 'small', flexShrink: '3'}}>{current.description}</div>
+            <div className="overviewStyles info">
               <OverviewStyles
                 overviewStyles={styles}
                 mainPic={mainPic}
@@ -97,18 +97,18 @@ var Overview = ({ current }) => {
                 picHandler={changePic}
 
                 styleView={styleView}
-                setStyleView={setStyleView}
+                setStyleView={setStyleView}defaultPrice={defaultPrice} setDefaultPrice={setDefaultPrice}
               />
             </div>
-            <div className="overviewCart">
-              <OverviewCart styleView={styleView} itemName={current.name}/>
+            <div className="overviewCart info">
+              <OverviewCart current={current} styleView={styleView} itemName={current.name}/>
             </div>
           </div>
         </div>
-        <div className="overviewBottom">
-          <div>{current.description}</div>
-          <div>||</div>
-          <div>Insert Specs</div>
+        <div className="overviewBottom" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', fontSize: 'small'}}>
+          {/* <div style={{}}>{current.description}</div> */}
+
+
         </div>
       </div>
     </>

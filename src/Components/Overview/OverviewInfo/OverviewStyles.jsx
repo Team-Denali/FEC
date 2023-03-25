@@ -10,12 +10,12 @@ var OverviewStyles = ({
   picHandler,
 
   styleView,
-  setStyleView,
+  setStyleView, defaultPrice, setDefaultPrice
 }) => {
-  console.log("overviewstyles:", overviewStyles);
-  let style1 = overviewStyles[0];
+  // console.log("overviewstyles:", overviewStyles);
+  //let style1 = overviewStyles[0];
 
-  console.log(style1, "STYLE1");
+  //console.log(style1, "STYLE1");
   if (!overviewStyles.length || !Object.keys(overviewStyles).length) {
     return;
   }
@@ -30,23 +30,23 @@ var OverviewStyles = ({
 
       <div className="overviewStylesContainer">
 
-        <div>STYLE → {styleView.name}</div>
+        <div>STYLE ▶ {styleView.name}</div>
         <div className="styleSelectorArea">
           {overviewStyles.map((overviewStyle, i) => (
 
             <div className="overviewStyleIcon"
-              key={i.toString()}
+              key={overviewStyle.style_id}
 
               value={"thing"}
               style={{
 
                 height: "35px",
                 width: "20px",
-                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '1 2 20',
-                backgroundSize: "cover",
+                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '1 1 30',
+                backgroundSize: "cover", backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
                 borderRadius: "50%",
 
-              }}
+              border: '3px solid lightcoral', }}
               onClick={(e) => {
 
                 e.preventDefault(); setStyleView(overviewStyle);
