@@ -8,20 +8,20 @@ var OverviewStyles = ({
   overviewStyles,
   mainPic,
   picHandler,
-  item,
-  setItem,
-}) => {
-  console.log("overviewstyles:", overviewStyles);
-  let style1 = overviewStyles[0];
-  console.log(style1, "STYLE1");
 
-  const [currentStyle, setCurrentStyle] = useState(style1); //setCurrentStyle(style1)
+  styleView,
+  setStyleView, defaultPrice, setDefaultPrice
+}) => {
+  // console.log("overviewstyles:", overviewStyles);
+  //let style1 = overviewStyles[0];
+
+  //console.log(style1, "STYLE1");
   if (!overviewStyles.length || !Object.keys(overviewStyles).length) {
     return;
   }
   // setCurrentStyle(overviewStyles[0]);
-  // useEffect(() => {
-  //   console.log("the currentstyle state:", currentStyle);
+  //const iconStyle = {styleView === overViewStyle ? 'HI' : 'null'};// useEffect(() => {
+    //U+000A9 -> &#xA9; U+1F5F9 -> ;  //   console.log("the currentstyle state:", currentStyle);
 
   // }, [currentStyle]); //setDisplay(overviewStyles[i])
   return (
@@ -30,33 +30,41 @@ var OverviewStyles = ({
 
       <div className="overviewStylesContainer">
 
-        <div>STYLE → {overviewStyles[0].name}</div>
+        <div>STYLE ▶ {styleView.name}</div>
         <div className="styleSelectorArea">
           {overviewStyles.map((overviewStyle, i) => (
 
-            <div
-              key={i.toString()}
+            <div className="overviewStyleIcon"
+              key={overviewStyle.style_id}
+
               value={"thing"}
-              style={{
+              style={{display: 'flex', flexDirection: 'row-reverse',
+
                 height: "35px",
                 width: "20px",
-                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`,
-                backgroundSize: "cover",
+                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '1 1 30',
+                backgroundSize: "cover", backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
                 borderRadius: "50%",
-              }}
+
+              border: '3px solid lightcoral', }}
               onClick={(e) => {
-                e.preventDefault();
+
+                e.preventDefault(); setStyleView(overviewStyle);
               }}
-            ></div>
+            ><div></div></div>
+
           ))}
         </div>
       </div>
     </>
+
   );
+
 };
 
-export default OverviewStyles;
 
+
+export default OverviewStyles;
 {
   /* <div>{styles.results.map((oneStyle) => (<div><img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
 /></div></div>))} */

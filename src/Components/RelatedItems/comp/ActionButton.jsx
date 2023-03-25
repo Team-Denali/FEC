@@ -2,7 +2,7 @@ import React from 'react';// Bring React in to build a component.
 import {useState, useEffect} from 'react';
 
 
-var ActionButton = ({item, onButton}) => {
+var ActionButton = ({item, onButton, icon}) => {
   function handleButton(event) {
     event.stopPropagation();
     // console.log('action!', onButton)
@@ -18,9 +18,7 @@ var ActionButton = ({item, onButton}) => {
     color: 'rgb(87 72 72)',
   };
   return (
-    // <div style={buttonStyle} >
-      <button style={buttonStyle} onClick={handleButton} >X/*</button>
-    // </div>
+      <button style={buttonStyle} onClick={handleButton} >{icon}</button>
   );
 }
 

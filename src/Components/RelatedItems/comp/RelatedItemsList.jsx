@@ -2,12 +2,12 @@ import React from 'react';// Bring React in to build a component.
 import {useState, useEffect} from 'react';
 import RelatedItemCard from './RelatedItemCard.jsx';
 import Carousel from './Carousel.jsx';
-
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 var RelatedItemsList = ({related, setCurrentById, getProducts, openComparisonModal}) => {
   const outerDivStyle = {
-    color: 'blue',
-    borderStyle: 'solid',
+    // color: 'blue',
+    // borderStyle: 'solid',
     margin: '2%',
     padding: '2%',
     borderRadius: '10%',
@@ -36,15 +36,8 @@ var RelatedItemsList = ({related, setCurrentById, getProducts, openComparisonMod
   }
   return (
     <div style={outerDivStyle} >
-            {/* <h1>{'>'}</h1> */}
       <h2>Related Items</h2>
-      <div style={divStyle} >
-        <Carousel items={related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} />)} />
-        {/* <ul style={ulStyle} >
-          {related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} />)}
-        </ul> */}
-      </div>
-      {/* <h1>{'>'}</h1> */}
+        <Carousel items={related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} icon={<StarBorderIcon />} />)} />
     </div>
   );
 }

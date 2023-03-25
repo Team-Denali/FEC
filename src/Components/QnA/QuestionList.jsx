@@ -14,33 +14,34 @@ const QuestionList = ({ question }) => {
   const [result, setResult] = useState(2);
   const [modal, setModal] = useState(false);
 
-  var answerArray = [];
+  //formats our answers to make it able to slice
   function format(answers) {
+    let answerArray = [];
     for (var key in answers) {
       answerArray.push(answers[key]);
     }
+    return answerArray;
   }
-  format(answers);
+  let array = format(answers);
   //set seller to #1 result
-  const sortedArray = answerArray.sort((a, b) =>
+  const sortedArray = array.sort((a, b) =>
     a.helpfulness < b.helpfulness ? 1 : -1
   );
-
+  //slices the data to show more answers on request
   function clickHandler(amount) {
     setResult((currentResult) => {
       return currentResult + amount;
     });
   }
-  function formHandler(event) {
-    event.preventDefault();
-    setModal(false);
-  }
   // vote handler for question helpfulness
   function voteHandler(event) {
     event.currentTarget.classList.toggle("voted");
-    console.log(question.question_id);
     axios
-      .put(`/qa/questions/:${question.question_id}/helpful`)
+      .put(`/qa/questions/${question.question_id}/helpful`, {
+        params: {
+          question_id: question.question_id,
+        },
+      })
       .then((res) => {
         console.log("response to put for questions", res);
       })
@@ -48,10 +49,15 @@ const QuestionList = ({ question }) => {
         console.log(err);
       });
   }
+  //reports questions for violations
   function reportHandler(event) {
-    event.target.innerText = "ReportED";
+    event.target.innerText = "ReportEDdddd";
     axios
-      .put(`/qa/answers/:${question.question_id}/helpful`)
+      .put(`/qa/questions/${question.question_id}/report`, {
+        params: {
+          question_id: question.question_id,
+        },
+      })
       .then((res) => {
         console.log("response to put for questions", res);
       })
@@ -59,6 +65,11 @@ const QuestionList = ({ question }) => {
         console.log(err);
       });
   }
+  //keeps the questions list updated
+  useEffect(() => {
+    setAnswers(question.answers)
+  }, [question]);
+
   return (
     <>
       <div className="qQuestionCard">
@@ -68,24 +79,28 @@ const QuestionList = ({ question }) => {
           </div>
           <br></br>
 
-          {answerArray.slice(0, result).map((answer, i) => (
+          {array.slice(0, result).map((answer, i) => (
             <AnswerList answer={answer} key={i} />
           ))}
 
-        {result < answerArray.length && <button
-            className="buttonStyle"
-            style={{ height: "1rem" }}
-            onClick={() => clickHandler(answerArray.length)}
-          >
-            Load More Answers <MdOutlineExpandCircleDown />
-          </button>}
-        {(answerArray.length > 2 && result > answerArray.length ) && <button
-            className="buttonStyle"
-            style={{ height: "1rem" }}
-            onClick={() => setResult(2)}
-          >
-            Collapse Answers <MdOutlineExpandCircleDown />
-          </button>}
+          {result < array.length && (
+            <button
+              className="buttonStyle"
+              style={{ height: "1rem" }}
+              onClick={() => clickHandler(array.length)}
+            >
+              Load More Answers <MdOutlineExpandCircleDown />
+            </button>
+          )}
+          {array.length > 2 && result > array.length && (
+            <button
+              className="buttonStyle"
+              style={{ height: "1rem" }}
+              onClick={() => setResult(2)}
+            >
+              Collapse Answers <MdOutlineExpandCircleDown />
+            </button>
+          )}
         </div>
         <div>
           <BsFillArrowUpSquareFill className="vote" onClick={voteHandler} />(
@@ -100,7 +115,11 @@ const QuestionList = ({ question }) => {
             Report
           </a>
         </div>
-        <Amodal open={modal} onClose={formHandler} />
+        <Amodal
+          open={modal}
+          onClose={setModal}
+          question={question.question_id}
+        />
       </div>
     </>
   );

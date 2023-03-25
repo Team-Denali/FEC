@@ -8,7 +8,6 @@ import {
 import axios from "axios";
 
 var AnswerList = ({ answer }) => {
-  console.log(answer.photos)
   const monthNames = [
     "January",
     "February",
@@ -34,11 +33,15 @@ var AnswerList = ({ answer }) => {
 
   function voteHandler(event) {
     event.currentTarget.classList.toggle("voted");
-    console.log(answer);
+    // console.log(answer);
     axios
-      .put(`/qa/answers/:${answer.id}/helpful`)
+      .put(`/qa/answers/${answer.id}/helpful`, {
+        params: {
+          answer_id: answer.id,
+        },
+      })
       .then((res) => {
-        console.log("response to put for answers", res);
+        // console.log("response to put for answers", res);
       })
       .catch((err) => {
         console.log(err);
@@ -48,9 +51,9 @@ var AnswerList = ({ answer }) => {
   function reportHandler(event) {
     event.target.innerText = "ReportED";
     axios
-      .put(`/qa/answers/:${answer.id}/helpful`)
+      .put(`/qa/answers/${answer.id}/report`)
       .then((res) => {
-        console.log("response to put for questions", res);
+        // console.log("response to put for questions", res);
       })
       .catch((err) => {
         console.log(err);
@@ -58,32 +61,36 @@ var AnswerList = ({ answer }) => {
   }
   return (
     <>
-      <div className = 'qAnswerCard'>
+      <div className="qAnswerCard">
         <div>
+          <b>A:</b> {answer.body}
+        </div>
+        <div className="qAnswerInfo">
           <div>
-            <b>A:</b> {answer.body}
+            by <b>{answer.answerer_name}</b>,<time>{formatDate}</time>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <div>
-              by <b>{answer.answerer_name}</b>, <time>{formatDate}</time>{" "}
-              Upvote!
-              <BsFillArrowUpSquareFill onClick={voteHandler} className="vote" />
-              ({answer.helpfulness})
-              <a className="q.report" onClick={reportHandler} value="Report">
-                Report
-              </a>
-            </div>
-            <div className = 'qModalContent'>
-              {answer.photos.map((photo, index) => {
-                return(<div key ={index}> <img style= {{padding: '.25rem'}}className = 'image' src = {photo} /> </div>)
-              })}
+          <div>
+            <span>Upvote!</span>
+            <BsFillArrowUpSquareFill onClick={voteHandler} className="vote" />(
+            {answer.helpfulness})
+            <span className="q.report" onClick={reportHandler} value="Report">
+              Report
+            </span>
+          </div>
+        </div>
+        <div className="qModalContent">
+          {answer.photos.map((photo, index) => {
+            return (
+              <div key={index}>
+                {" "}
+                <img
+                  style={{ padding: ".25rem" }}
+                  className="image"
+                  src={photo}
+                />{" "}
               </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </>
