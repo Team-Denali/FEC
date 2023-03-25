@@ -15,7 +15,7 @@ const App = () => {
       }
     })
     .then((res) => {
-      // console.log('products:',res.data)
+      //console.log('products:',res.data)
       return res
     })
     .catch((err) => {
@@ -36,7 +36,7 @@ const App = () => {
       //   .then(res => setCurrent(res.data))
     }
   }, [])
-  // console.log(current, 'the current')
+  //console.log(current, 'the current')
   return ( <>
   <h1>Hello World</h1>
     <Overview current={current} />
