@@ -15,7 +15,7 @@ const App = () => {
       }
     })
     .then((res) => {
-      console.log('products:',res.data)
+      // console.log('products:',res.data)
       return res
     })
     .catch((err) => {
@@ -30,11 +30,13 @@ const App = () => {
 
   useEffect(() => {
     if(!current.id) {
-      getProducts('37311')
+      getProducts('37345')
         .then(res => setCurrent(res.data))
+      // getProducts('37311')
+      //   .then(res => setCurrent(res.data))
     }
   }, [])
-  console.log(current, 'the current')
+  // console.log(current, 'the current')
   return ( <>
   <h1>Hello World</h1>
     <Overview current={current} />
