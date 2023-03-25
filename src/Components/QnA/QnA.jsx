@@ -5,11 +5,16 @@ import axios from "axios";
 import "./QnA.css";
 
 const QuestionsAnswers = ({ current }) => {
+  let product = current.id
+  ;
+  console.log(product);
   const getQuestions = () => {
     axios
       .get("/qa/questions", {
         params: {
-          product_id: randomId,
+          product_id: product, //no questions
+          // product_id: 37323, //alot of questions
+          // product_id: product //default
           page: 1,
           count: 40,
         },
@@ -22,20 +27,16 @@ const QuestionsAnswers = ({ current }) => {
         console.log(err);
       });
   };
-  //get questions on initial render
-  useEffect(() => {
-    getQuestions();
-  }, []);
-  //control the hiding of the more questions button
-  useEffect(() => {
-    if(filteredData.length < 3){
-      setHideButton(false)
-    }
-else if (result > sortedArray.length)
-      {setHideButton(false)
-    } else {setHideButton(true)}
-  }, sortedArray);
 
+  useEffect(() => {
+    if (filteredData.length < 3) {
+      setHideButton(false);
+    } else if (result === sortedArray.length) {
+      setHideButton(false);
+    } else {
+      setHideButton(true);
+    }
+  }, sortedArray);
 
   //master variable that holds all the QA info
   const [qaData, setQaData] = useState([]);
@@ -54,31 +55,25 @@ else if (result > sortedArray.length)
       .toLowerCase()
       .includes(searchItem.toLowerCase());
   });
+  // get questions on initial render
+  useEffect(() => {
+    getQuestions()
+    setResult(2);
+  }, [product]);
 
   //sort an array of objects based no helpfulnes using the searched input as a first check
   const sortedArray = filteredData.sort((a, b) =>
     a.question_helpfulness < b.question_helpfulness ? 1 : -1
   );
 
-  //random product ID generator
-  const sampleID = (start, stop, step) =>
-    Array.from(
-      { length: (stop - start) / step + 1 },
-      (value, index) => start + index * step
-    );
-  let productSampleIds = sampleID(37311, 37337, 1);
-  let randomId =
-    productSampleIds[Math.floor(Math.random() * productSampleIds.length)];
-
-  //used for dev purposes no needed in final product
-  useEffect(() => {
-    console.log("USE EFFECT QA DATA LOGGER", qaData);
-  }, [qaData]);
+  // //used for dev purposes no needed in final product
+  // useEffect(() => {
+  //   console.log("USE EFFECT QA DATA LOGGER", qaData);
+  // }, [qaData]);
 
   //onclick reveals more questions
   function clickHandler(amount) {
     setResult((currentResult) => {
-      console.log(currentResult)
       return currentResult + amount;
     });
   }
@@ -97,37 +92,51 @@ else if (result > sortedArray.length)
   }
   return (
     <>
-      <div className="qaMainContainer">
-        QUESTIONSssss & ANSsssssWERS
-        <div className="qaSearchContainer">
-          <input
-            onChange={changeHandler}
-            className="qaSearchStyle"
-            type="text"
-            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
-          ></input>
+      <h1>Q & A</h1>
+      {qaData.length === 0 ? (
+        <div className = 'qaMainContainer'>
+          <h2>no questions</h2>
+          <button className="buttonStyle" onClick={() => setModal(true)}>
+              ADD A QUESTION +
+            </button>
+            <Qmodal current={product} open={modal} onClose={setModal} />
         </div>
-        <div className="qaListContainer">
-          <div>
-            {sortedArray.slice(0, result).map((question, i) => (
-              <QuestionList question={question} key={i} />
-            ))}
+      ) : (
+        <div className="qaMainContainer">
+          <div className="qaSearchContainer">
+            <input
+              onChange={changeHandler}
+              className="qaSearchStyle"
+              type="text"
+              placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+            ></input>
+          </div>
+          <div className="qaListContainer">
+            <div>
+              {sortedArray.slice(0, result).map((question, i) => (
+                <QuestionList question={question} key={i} />
+              ))}
+            </div>
+          </div>
+          <div className="qaButtonContainer">
+            {hideButton && (
+              <button className="buttonStyle" onClick={() => clickHandler(2)}>
+                MORE ANSWERED QUESTIONS
+              </button>
+            )}
+            {result === sortedArray.length && (
+              <button className="buttonStyle" onClick={() => setResult(2)}>
+                COLLAPSE QUESTIONS
+              </button>
+            )}
+
+            <button className="buttonStyle" onClick={() => setModal(true)}>
+              ADD A QUESTION +
+            </button>
+            <Qmodal current={product} open={modal} onClose={setModal} />
           </div>
         </div>
-        <div className="qaButtonContainer">
-          {hideButton && <button className="buttonStyle" onClick={() => clickHandler(2)}>
-            MORE ANSWERED QUESTIONS
-          </button>}
-          {result > sortedArray.length && <button className="buttonStyle" onClick={() => setResult(2)}>
-              COLLAPSE QUESTIONS
-          </button>}
-
-          <button className="buttonStyle" onClick={() => setModal(true)}>
-            ADD A QUESTION +
-          </button>
-          <Qmodal open={modal} onClose={formHandler} />
-        </div>
-      </div>
+      )}
     </>
   );
 };

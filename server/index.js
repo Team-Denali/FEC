@@ -23,9 +23,31 @@ app.get('/reviews/meta', (req,res) => {
   controller.getReviewsMeta(req, res);
 })
 
+//**********************Question and Answers ****************************/
 app.get('/qa/questions', (req,res) => {
   controller.getQuestions(req,res);
 })
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  controller.updateQuestionHelpful(req, res);
+})
+app.put('/qa/questions/:question_id/report', (req, res) => {
+  controller.updateQuestionReport(req, res);
+})
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  controller.updateAnswerHelpful(req, res);
+})
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  controller.updateAnswerReport(req, res);
+})
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  controller.submitAnswer(req, res);
+})
+app.post('/qa/questions', (req, res) => {
+  controller.submitQuestion(req, res);
+})
+
+
+
 app.get(['/products', '/products/:id', '/products/:id/:related'], (req,res) => {
   // console.log('get products params: ', req.params);
   controller.getProducts(req,res);
