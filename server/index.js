@@ -20,7 +20,7 @@ app.use(session({
 app.use((req, res, next) => {
   console.log('\n-----------------------------')
   console.log('serving request: ', req.method, req.path);
-  console.log('sessionID: ', req.sessionID);
+  // console.log('sessionID: ', req.sessionID);
   next();
 })
 
@@ -73,7 +73,7 @@ app.get('/outfit', (req, res) => {
 
 app.get('/null', (req, res) => {
   // console.log('get null req: ', req.sessionStore)
-  console.log('GET /null req: WHY IS THIS HERE?')
+  // console.log('GET /null req: WHY IS THIS HERE?')
   res.sendStatus(200)
 })
 
