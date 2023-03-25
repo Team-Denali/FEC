@@ -45,13 +45,16 @@ var Overview = ({ current }) => {
       });
   };
   useEffect(() => {
+var Overview = ({current}) => { //console.log(current, 'current prop')//include state variables for currently viewed product
+const [itemView, setItemView] = useState({}); const [styles, setStyles] = useState({}); const [styleView, setStyleView] = useState({}); let url = 'http://localhost:3000'; //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
+const [mainPic, setMainPic] = useState(null)
+var changePic = (pic_url) => {setMainPic(pic_url)}
 
     styleFinder(current.id);
   }, [current]);
 
-  // if (!styles) {
-  //   return;
-  // }
+const styleFinder = (currentId) => { let styleId = currentId; /*console.log('THE ID:', styleId);*/ let paramObj = { product_id: styleId };
+  axios.get(`${url}/styles`, { params: paramObj } ).then((res) => { /*console.log( 'the data:', res.data);*/ setStyles(res.data.results); /*console.log('STYLES 0:', styles);*/ } ).catch((err) => {/*console.log('axios req error:', err)*/})
 
 
   return (

@@ -12,8 +12,8 @@ if (!currentStyles.length || (!(Object.keys(currentStyles)).length)) {
 }
 
 
-//console.log('THE current PROPS:', current, 'THE currentstyles PROPS:', currentStyles, 'the item prop:', styleView)
-const [pic, setPic] = useState(styleView.photos[0].thumbnail_url); useEffect(() => {setPic(styleView.photos[0].thumbnail_url)}, [styleView])
+// console.log('THE current PROPS:', current, 'THE currentstyles PROPS:', currentStyles, 'the item prop:', item)
+//const [pic, setPic] = useState(item.photos[0].thumbnail_url)
 
 return (
 
