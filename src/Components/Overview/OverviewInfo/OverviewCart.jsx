@@ -70,7 +70,7 @@ var OverviewCart = ({ current, styleView, itemName }) => {
                 if (styleView.skus[sku].quantity > 0) {
                   return (
 
-                    <option title={sku} value={sku}>
+                    <option key={sku} value={sku}>
                       {styleView.skus[sku].size}
                     </option>
                   );

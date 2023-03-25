@@ -17,11 +17,11 @@ const [pic, setPic] = useState(styleView.photos[0].url); useEffect(() => {setPic
 
 return (
 
-    <div className='productOverviewPic' style={{backgroundImage: `url(${pic})`, maxWidth: '100%', maxHeight: 'auto', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', display: 'flex', justifyContent: 'space-around' }} onClick={(e) => {e.preventDefault(); ExpandedView(pic)}}>
+    <div className='productOverviewPic' style={{backgroundImage: `url(${pic})`, maxWidth: '100%', maxHeight: 'auto', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', display: 'flex', justifyContent: 'space-around' }} onClick={(e) => {e.preventDefault(); ExpandedView(pic, styleView)}}>
 
-    <div className='overviewSidePanel' style={{position: 'relative', width: '100%', height: 'auto', display: 'flex', justifyContent: 'space-between' }} >{styleView.photos.map((photo, i) => <><div className="overviewMiniPic" style={{backgroundImage: `url(${photo.thumbnail_url})`, width: '40px', height: '40px', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', border: '3px solid black'}} onClick={(e) => {e.preventDefault(); setPic(photo.thumbnail_url); }}></div><br></br></>)}</div>
+    <div className='overviewSidePanel' style={{position: 'relative', width: '100%', height: 'auto', display: 'flex', justifyContent: 'space-between' }} >{styleView.photos.map((photo, i) => <><div key={i} className="overviewMiniPic" style={{backgroundImage: `url(${photo.thumbnail_url})`, width: '40px', height: '40px', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', border: '3px solid black'}} onClick={(e) => {e.preventDefault(); setPic(photo.thumbnail_url); e.stopPropagation() }}></div><br></br></>)}</div>
 
-    {/* <div id="ExpandedViewModal" style={{visibility: 'hidden'}}>
+    <div id="ExpandedViewModal" style={{visibility: 'hidden'}}>
 
     <div id='imageView'>
       <img src=''></img>
@@ -30,7 +30,7 @@ return (
 
       </div>
 
-    </div> */}
+    </div>
 
     </div>
 
