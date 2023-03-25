@@ -22,7 +22,7 @@ var RelatedItemsModal = ({open, setOpen, comparison}) => {
     backgroundColor: 'rgb(240, 240, 240)'
   }
   var nameGrid = comparison.slice(0, 1).map(feature => (
-    <Grid container spacing={1} columns={12}>
+    <Grid key={feature[1]} container spacing={1} columns={12}>
         <Grid item xs={3} sm={3} md={3}>
           <h4>{feature[0]}</h4>
         </Grid>
@@ -35,7 +35,7 @@ var RelatedItemsModal = ({open, setOpen, comparison}) => {
     </Grid>
   ))
   var priceGrid = comparison.slice(1, 2).map(feature => (
-    <Grid container spacing={1} columns={12}>
+    <Grid key={feature[1]} container spacing={1} columns={12}>
         <Grid item xs={12} sm={12} md={12}>
           <Divider></Divider>
         </Grid>
@@ -79,7 +79,7 @@ var RelatedItemsModal = ({open, setOpen, comparison}) => {
     }
 
     return (
-    <Grid container spacing={1} columns={12}>
+    <Grid key={center} container spacing={1} columns={12}>
         <Grid item xs={3} sm={3} md={3}>
           <div>{left}</div>
         </Grid>
