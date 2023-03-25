@@ -5,8 +5,7 @@ import axios from "axios";
 import "./QnA.css";
 
 const QuestionsAnswers = ({ current }) => {
-  let product = current.id
-  ;
+  const [product, setProduct] = useState(current.id)
   console.log(product);
   const getQuestions = () => {
     axios
