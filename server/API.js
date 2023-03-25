@@ -3,7 +3,6 @@ const config = require('../config/myConfig.js');
 const TOKEN = config.token;
 
 const API = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`;
-console.log('token',TOKEN)
 const getReviews = (params, callback) => {
   const route = API + `reviews/`;
   axios.get(route, {headers:
