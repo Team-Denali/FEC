@@ -18,8 +18,8 @@ app.use(session({
   secret: 'keyboard cat'
 }))
 app.use((req, res, next) => {
-  console.log('\n-----------------------------')
-  console.log('serving request: ', req.method, req.path);
+  console.log('-----------------------------')
+  console.log('serving request: ', req.method, req.path, req.query);
   // console.log('sessionID: ', req.sessionID);
   next();
 })
