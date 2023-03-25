@@ -6,7 +6,6 @@ import "./QnA.css";
 
 const QuestionsAnswers = ({ current }) => {
   let product =current.id
-    console.log(product);
   const getQuestions = () => {
     axios
       .get("/qa/questions", {

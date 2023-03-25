@@ -4,7 +4,6 @@ import "./QnA.css";
 
 var Qmodal = ({ open, onClose, current }) => {
   if (!open) return null;
-console.log(current)
   const [question, setQuestion] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
