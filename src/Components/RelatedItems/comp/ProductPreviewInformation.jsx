@@ -76,22 +76,22 @@ var ProductPreviewInformation = ({item}) => {
   const [price, setPrice] = useState(<h5 style={priceStyle} >${item.default_price}</h5>);
 
   useEffect(() => {
-    console.log('rendering info for ', item)
+    // console.log('rendering info for ', item)
     if (Array.isArray(item.styles)) {
       item.styles.forEach(style => {
         if (style['default?']) {
-          console.log('default style: ', style);
+          // console.log('default style: ', style);
           if (style.sale_price === null) {
-            console.log('NULL SALE PRICE SETTING OG', item.name);
+            // console.log('NULL SALE PRICE SETTING OG', item.name);
             setPrice(<h5 style={priceStyle} >${style.original_price}</h5>);
           } else {
-            console.log('!!!SALE PRICE!!!', item.name);
+            // console.log('!!!SALE PRICE!!!', item.name);
             setPrice(<div style={saleDivStyle} ><h5 style={salePriceStyle} >${style.sale_price}</h5><h5 style={strikethroughStyle} >${style.original_price}</h5></div>);
           }
         }
       })
     } else {
-      console.log('how did YOU get here', item);
+      // console.log('how did YOU get here', item);
       setPrice(<h5 style={priceStyle} >${item.default_price}</h5>)
     }
   }, [item])

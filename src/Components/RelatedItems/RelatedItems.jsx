@@ -174,7 +174,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
       var currentWithStyles = {};
       currentWithStyles = Object.assign(currentWithStyles, current);
         currentWithStyles.styles = styles;
-      console.log('current, with style property', currentWithStyles)
+      // console.log('current, with style property', currentWithStyles)
       newOutfit.push(currentWithStyles);
       setOutfit(newOutfit);
     })
