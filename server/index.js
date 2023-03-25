@@ -66,9 +66,6 @@ app.post("/reviews", (req, res) => {
   controller.postForm(req, res);
 });
 
-app.post("/reviews", (req, res) => {
-  controller.postForm(req, res);
-});
 
 app.get('/styles', (req, res) => {
 
@@ -76,7 +73,7 @@ app.get('/styles', (req, res) => {
 
 })
 
-app.post('/outfit', (req, res) => {
+app.post('/outfit/', (req, res) => {
   sessions.setOutfit(req.sessionID, req.body);
 })
 
