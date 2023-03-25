@@ -9,6 +9,11 @@ const Ratingbreakdown = (props) => {
   const [togglefilter3, setTogglefilter3]= useState(true);
   const [togglefilter2, setTogglefilter2]= useState(true);
   const [togglefilter1, setTogglefilter1]= useState(true);
+  const [count5starclick, setCount5starclick] = useState([]);
+  const [count4starclick, setCount4starclick] = useState([]);
+  const [count3starclick, setCount3starclick] = useState([]);
+  const [count2starclick, setCount2starclick] = useState([]);
+  const [count1starclick, setCount1starclick] = useState([]);
 
   var star = props.reviewStars.ratings;
  //console.log('star',star)
@@ -120,6 +125,7 @@ const Ratingbreakdown = (props) => {
   var threestar = Math.round((obj['3']/total)*100);
   var twostar = Math.round((obj['2']/total)*100);
   var onestar = Math.round((obj['1']/total)*100);
+  //console.log('fivestar', fivestar)
 
   var average = averagerating(star);
   var width = average * 20;
@@ -132,7 +138,13 @@ const Ratingbreakdown = (props) => {
     <div className='5star'>
       <div className="BarTitle">
         <div>
-        <span><Button size="small" onClick={() => { setTogglefilter5(!togglefilter5); filterfivestar();}}> Five Star: {fivestar}%</Button></span>
+        <span><Button size="small" onClick={() => {
+          setTogglefilter5(!togglefilter5);
+          filterfivestar();
+          var temp = count5starclick;
+          temp.push(Date.now());
+          setCount5starclick(temp);
+          }}> Five Star: {fivestar}%</Button></span>
         </div>
       <LinearProgressWithLabel variant="determinate" value={fivestar}/>
       </div>
@@ -140,7 +152,13 @@ const Ratingbreakdown = (props) => {
     <div className='4star'>
       <div className="BarTitle">
         <div>
-        <span><Button size="small" onClick={() => { setTogglefilter4(!togglefilter4); filterfourstar();}}> Four Star: {fourstar}%</Button></span>
+        <span><Button size="small" onClick={() => {
+          setTogglefilter4(!togglefilter4);
+          filterfourstar();
+          var temp = count4starclick;
+          temp.push(Date.now());
+          setCount4starclick(temp);
+          }}> Four Star: {fourstar}%</Button></span>
         </div>
       <LinearProgressWithLabel variant="determinate" value={fourstar}/>
     </div>
@@ -148,7 +166,13 @@ const Ratingbreakdown = (props) => {
     <div className='3star'>
       <div className="BarTitle">
       <div>
-        <span><Button size="small" onClick={() => { setTogglefilter3(!togglefilter3); filterthreestar();}}> Three Star: {threestar}%</Button></span>
+        <span><Button size="small" onClick={() => {
+          setTogglefilter3(!togglefilter3);
+          filterthreestar();
+          var temp = count3starclick;
+          temp.push(Date.now());
+          setCount3starclick(temp);
+          }}> Three Star: {threestar}%</Button></span>
         </div>
       <LinearProgressWithLabel variant="determinate" value={threestar}/>
       </div>
@@ -156,7 +180,13 @@ const Ratingbreakdown = (props) => {
     <div className='2star'>
       <div className="BarTitle">
       <div>
-        <span><Button size="small" onClick={() => { setTogglefilter2(!togglefilter2); filtertwostar();}}> Two Star: {twostar}%</Button></span>
+        <span><Button size="small" onClick={() => {
+          setTogglefilter2(!togglefilter2);
+          filtertwostar();
+          var temp = count2starclick;
+          temp.push(Date.now());
+          setCount2starclick(temp);
+          }}> Two Star: {twostar}%</Button></span>
         </div>
       <LinearProgressWithLabel variant="determinate" value={twostar}/>
       </div>
@@ -164,7 +194,12 @@ const Ratingbreakdown = (props) => {
     <div className='1star'>
        <div className="BarTitle">
        <div>
-        <span><Button size="small" onClick={() => { setTogglefilter1(!togglefilter1); filteronestar();}}> One Star: {onestar}%</Button></span>
+        <span><Button size="small" onClick={() => { setTogglefilter1(!togglefilter1);
+          filteronestar();
+          var temp = count1starclick;
+          temp.push(Date.now());
+          setCount1starclick(temp);
+          }}> One Star: {onestar}%</Button></span>
         </div>
        <LinearProgressWithLabel variant="determinate" value={onestar}/>
        </div>

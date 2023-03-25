@@ -243,9 +243,20 @@
 }
 
 .buttons {
+  width: 650px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 5px;
+}
+
+.review-search {
+  display: flex;
+  border: solid;
+  border-color: gray;
+  padding: 10px;
+  margin: 10px;
+  width: 600px;
+  justify-content: flex-start;
 }
 
 .reviewmodal {
@@ -312,6 +323,10 @@
 .submitreview {
   display: flex;
   margin: 20px;
+}
+
+.Button {
+  color: gray;
 }
 /* .modal.off {
   opacity: 0;

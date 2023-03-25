@@ -7,6 +7,8 @@ const root = createRoot(document.getElementById("root"));
 // Huzzah for jsx!
 const App = () => {
   const [current, setCurrent] = useState({}); //current product
+  const [rating, setRating] = useState(null);
+  console.log('rating:',rating)
   function getProducts(id) {
     // console.log(`/products${id === undefined ? '' : '/' + id}`)
     return axios.get(`/products${id === undefined ? '' : '/' + id}`, {
@@ -37,11 +39,11 @@ const App = () => {
   console.log(current, 'the current')
   return ( <>
   <h1>Hello World</h1>
-    <Overview current={current} />
+    <Overview current={current}/>
 
     <QuestionsAnswers current={current} />
-    <Reviews current={current} />
-    <RelatedItems current={current} setCurrentById={setCurrentById} getProducts={getProducts} />
+    <Reviews current={current}/>
+    <RelatedItems current={current} setCurrentById={setCurrentById} getProducts={getProducts}/>
   </>)
 }
 

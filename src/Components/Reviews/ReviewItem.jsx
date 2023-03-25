@@ -5,9 +5,38 @@ import DoneIcon from '@mui/icons-material/Done';
 import Button from '@mui/material/Button';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import { format } from "date-fns";
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
 
 const ReviewItem = (props) => {
   const [helpful, setHelpful] = useState(props.review.helpfulness);
+  const [helpfulclick, setHelpfulclick] = useState(false);
+  const [counthelpfulclick, setCounthelpfulclick] = useState([]);
+  const [countreportclick, setCountreportclick] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [currentpic, setCurrentpic] = useState(0);
+  const [showbody, setShowbody] = useState(false);
+
+  const handleOpen = (index) => {
+    setOpen(true);
+    setCurrentpic(index)
+  }
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    height: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   var rating = props.review.rating;
   // var stars = [];
@@ -44,16 +73,22 @@ const ReviewItem = (props) => {
     date.getFullYear();
 
   const updateHelpful = () => {
-    var review_id = props.review.review_id;
-    //console.log(review_id);
-    axios.put(`review/:review_id/helpful`, { params: {review_id: review_id}})
-      .then(()=> {
-        setHelpful(helpful + 1);
-      })
-      .catch((err)=> {
-        console.log(err);
-      })
+    if (helpfulclick === false) {
+      var review_id = props.review.review_id;
+      //console.log(review_id);
+      axios.put(`review/:review_id/helpful`, { params: {review_id: review_id}})
+        .then(()=> {
+          setHelpful(helpful + 1);
+        })
+        .catch((err)=> {
+          console.log(err);
+        })
+      setHelpfulclick(true);
+    }
   }
+
+  const body = props.review.body.slice(0,80);
+  const left = props.review.body.slice(80);
 
   return (
     <div className="Reviewitem">
@@ -68,7 +103,10 @@ const ReviewItem = (props) => {
         {props.review.summary}
       </div>
       <div className='body'>
-        {props.review.body}
+        {props.review.body.length>80 ? (body):props.review.body}
+        {props.review.body.length>80 && !showbody ? <span onClick={() => {
+          setShowbody(true)
+      }}>...show more</span> :left}
       </div>
       <div className='recom' style={{ display: props.review.recommend ? 'flex' : 'none' }}>
         {props.review.recommend ? (<DoneIcon>DoneIcon</DoneIcon>): null}
@@ -78,10 +116,20 @@ const ReviewItem = (props) => {
       <div className="reviewphoto">
       {photographs.map((_, index) =>
         photographs[index] ? (
-          <img src={photographs[index]['url']} key={index} className="ansPhotos" style={{height:80, width:80}} />
+          <img src={photographs[index]['url']} key={index} onClick={() => {handleOpen(index)}} className="ansPhotos" style={{height:80, width:80}} />
         ) : null
       )}
     </div>
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          {photographs[currentpic] ?(<img src={photographs[currentpic]['url']} key={currentpic} className="ansPhotos" style={{height:500, width:500}} />):null}
+        </Box>
+      </Modal>
       </div>
       <div className='reviewresponse' style={{ display: props.review.response ? 'flex' : 'none' }}>
         <div className="responsetitle">{props.review.response ? 'Response' : null}</div>
@@ -90,7 +138,21 @@ const ReviewItem = (props) => {
        </div>
       </div>
       <div className='helpful'>
-      <span> Helpful? <Button size="small" onClick={updateHelpful}>Yes[{helpful}]</Button></span>
+      <span> Helpful?
+        <Button size="small" onClick={() => {
+        updateHelpful();
+        var temp = counthelpfulclick;
+        temp.push(Date.now());
+        setCounthelpfulclick(temp);
+        //console.log(counthelpfulclick)
+      }}>Yes[{helpful}]</Button>
+          <Button size="small" onClick={() => {
+        var temp = countreportclick;
+        temp.push(Date.now());
+        setCountreportclick(temp);
+        //console.log(countreportclick)
+      }}>Report</Button>
+      </span>
       <span className='reviewdate'> <time>{formatDate}</time></span>
 </div>
 <div className='borderline'></div>
