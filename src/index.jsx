@@ -1,53 +1,56 @@
-import React from 'react';// Bring React in to build a component.
-import { useState, useEffect } from 'react';
-import { createRoot } from "react-dom/client"; import Overview from './Components/Overview/Overview.jsx'; import QuestionsAnswers from './Components/QnA/QnA.jsx'; import RelatedItems from './Components/RelatedItems/RelatedItems.jsx'; import Reviews from './Components/Reviews/Reviews.jsx';
+import React from 'react';
+import { useState, useEffect, createContext } from 'react';
+import { createRoot } from "react-dom/client";
 import axios from 'axios';
+
+import Overview from './Components/Overview/Overview.jsx';
+import QuestionsAnswers from './Components/QnA/QnA.jsx';
+import Reviews from './Components/Reviews/Reviews.jsx';
+import RelatedItems from './Components/RelatedItems/RelatedItems.jsx';
+import ModuleContext from './ModuleContext.js';
+
 const root = createRoot(document.getElementById("root"));
 
 // Huzzah for jsx!
 const App = () => {
   const [current, setCurrent] = useState({}); //current product
   const [rating, setRating] = useState(null);
-  console.log('rating:',rating)
+
   function getProducts(id) {
-    // console.log(`/products${id === undefined ? '' : '/' + id}`)
     return axios.get(`/products${id === undefined ? '' : '/' + id}`, {
       params: {
         product_id: id
       }
     })
     .then((res) => {
-      //console.log('products:',res.data)
       return res
     })
     .catch((err) => {
       console.log(err);
     })
-  }
-
+  };
   function setCurrentById(id) {
     getProducts(id)
         .then(res => setCurrent(res.data))
-  }
-
+  };
   useEffect(() => {
     if(!current.id) {
       getProducts('37345')
         .then(res => setCurrent(res.data))
-      // getProducts('37311')
-      //   .then(res => setCurrent(res.data))
     }
-  }, [])
-  //console.log(current, 'the current')
-  return ( <>
-  <h1>Hello World</h1>
-    <Overview current={current}/>
+  }, []);
 
-    <QuestionsAnswers current={current} />
-    <Reviews current={current}/>
-    <RelatedItems current={current} setCurrentById={setCurrentById} getProducts={getProducts}/>
-  </>)
+  return (
+    <>
+      <h1>Hello World</h1>
+      <Overview current={current}/>
+      <QuestionsAnswers current={current} />
+      <Reviews current={current}/>
+      <ModuleContext.Provider value='related-items-module'>
+        <RelatedItems current={current} setCurrentById={setCurrentById} getProducts={getProducts}/>
+      </ModuleContext.Provider>
+    </>
+  )
 }
-
 
 root.render(<App />);

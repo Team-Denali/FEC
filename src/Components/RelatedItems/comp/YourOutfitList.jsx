@@ -38,12 +38,13 @@ var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromO
     var list = outfit.map(item => (
       <RelatedItemCard
         key={item.id}
+        id={item.id}
         item={item}
         onClick={() => setCurrentById(item.id)}
         onButton={removeFromOutfit} icon={<CloseIcon />}
       />
     ));
-    list.unshift(<AddToOutfitCard key={'current'} item={current} onClick={addToOutfit} />)
+    list.unshift(<AddToOutfitCard key={'current'} id={'current'} item={current} onClick={addToOutfit} />)
     setOutfitList(list);
   }, [current, outfit])
 

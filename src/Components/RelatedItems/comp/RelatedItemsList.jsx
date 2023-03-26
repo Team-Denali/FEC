@@ -37,7 +37,7 @@ var RelatedItemsList = ({related, setCurrentById, getProducts, openComparisonMod
   return (
     <div style={outerDivStyle} >
       <h2>Related Items</h2>
-        <Carousel items={related.map(item => <RelatedItemCard key={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} icon={<StarBorderIcon />} />)} />
+        <Carousel items={related.map(item => <RelatedItemCard key={item.id} id={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} icon={<StarBorderIcon />} />)} />
     </div>
   );
 }

@@ -96,7 +96,7 @@ var ProductPreviewImages = ({item}) => {
     top: '-12.5%',
     left: '-12.5%',
     position: 'absolute',
-    backgroundImage: `url(${image.url})`,
+    // backgroundImage: `url(${image.url})`,
     filter: 'blur(4px)'
   }
   const imgStyle = {

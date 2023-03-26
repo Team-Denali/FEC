@@ -1,13 +1,19 @@
 import React from 'react';// Bring React in to build a component.
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import ProductPreviewImages from './ProductPreviewImages.jsx';
 import ProductPreviewInformation from './ProductPreviewInformation.jsx';
 import ActionButton from './ActionButton.jsx';
+import ModuleContext from './../../../ModuleContext.js';
+import ElementContext from './../../../ElementContext.js';
+import ClickTracker from '../../../ClickTracker.jsx';
 
 
-var RelatedItemCard = ({item, onClick, onButton, icon}) => {
+var RelatedItemCard = ({id, item, onClick, onButton, icon}) => {
+  // const module = useContext(ModuleContext);
+  // const element = useContext(ElementContext);
   function handleClick(event) {
-    event.stopPropagation();
+    // console.log(module, element, id);
+    // event.stopPropagation();
     onClick();
   }
   const divStyle = {
@@ -22,7 +28,6 @@ var RelatedItemCard = ({item, onClick, onButton, icon}) => {
     width: 'min-content',
     maxWidth: '100%'
   };
-
   const liStyle = {
     display: 'inline-block',
     color: 'white',
@@ -30,11 +35,13 @@ var RelatedItemCard = ({item, onClick, onButton, icon}) => {
     textDecoration: 'none'
   }
   return (
+    <ClickTracker selector={`ri-card-${id}`} WrappedComponent={(
       <div style={divStyle} onClick={handleClick}>
         <ProductPreviewImages item={item} />
         <ProductPreviewInformation item={item} />
         <ActionButton item={item} onButton={onButton} icon={icon} />
       </div>
+    )}/>
   );
 }
 
