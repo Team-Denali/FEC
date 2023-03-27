@@ -18,19 +18,11 @@ var ClickTracker = ({selector, WrappedComponent}) => {
     console.log('Interaction:\n', newInteraction);
     axios.post('/interactions', newInteraction)
       .catch(err => console.log(err));
-    // setInteraction(newInteraction);
   }
-  // useEffect(() => {
-  //   if(interaction === undefined) {
-  //     console.log('interaction intitialized to: ', interaction);
-  //   } else {
-  //     console.log('Interaction in useEffect:\n', interaction);
-  //   }
-  // }, [interaction])
   const style = {
     // padding: '50px',
     // borderRadius: '50%',
-    overflow: 'hidden'
+    // overflow: 'hidden'
   }
   return (
     // <ElementContext.Provider value={selector}>

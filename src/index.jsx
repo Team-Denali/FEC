@@ -45,6 +45,14 @@ const App = () => {
     }
   }, []);
 
+  function scrollTo(selector) {
+    var div = document.getElementsByClassName(selector);
+    div[0].scrollIntoView();
+  }
+  useEffect(() => {
+    scrollTo('overviewContainer')
+  }, [current]);
+
   return (
     <>
       <CurrentContext.Provider value={current.id}>
