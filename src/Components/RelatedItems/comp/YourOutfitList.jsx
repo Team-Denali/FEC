@@ -1,11 +1,15 @@
 import React from 'react';// Bring React in to build a component.
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import RelatedItemCard from './RelatedItemCard.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 import Carousel from './Carousel.jsx';
 import CloseIcon from '@mui/icons-material/Close';
 
+import ElementContext from './../../../ElementContext.js';
+import ClickTracker from '../../../ClickTracker.jsx';
+
 var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromOutfit}) => {
+  const element = useContext(ElementContext);
   const [outfitList, setOutfitList] = useState([]);
 
   const outerDivStyle = {
@@ -49,10 +53,12 @@ var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromO
   }, [current, outfit])
 
   return (
-    <div style={outerDivStyle} >
-      <h2>Your Outfit</h2>
-      <Carousel items={outfitList} />
-    </div>
+    <ClickTracker selector={`${element}`} WrappedComponent={(
+      <div style={outerDivStyle} >
+        <h2>Your Outfit</h2>
+        <Carousel items={outfitList} />
+      </div>
+    )}/>
   );
 }
 

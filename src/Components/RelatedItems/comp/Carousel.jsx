@@ -1,10 +1,12 @@
 import React from 'react';// Bring React in to build a component.
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import ClickTracker from '../../../ClickTracker.jsx';
-
+import ElementContext from './../../../ElementContext.js';
+import CurrentContext from './../../../CurrentContext.js';
 
 var Carousel = ({items}) => {
-
+  const element = useContext(ElementContext);
+  const current = useContext(CurrentContext);
   var checkRenderFwd = () => {
     // console.log('scroll and length: ', scroll, items.length)
     if (items.length > 4 && ((items.length - 4) * -25) < scroll) {
@@ -58,7 +60,7 @@ var Carousel = ({items}) => {
     width: '25%',
     margin: '0.1vw'
   }
-  const rightArrowStyle = {
+  const fwdArrowStyle = {
     position: 'absolute',
     zIndex: 6,
     color: 'rgb(87 72 72)',
@@ -71,7 +73,7 @@ var Carousel = ({items}) => {
     alignItems: 'center',
     background: 'linear-gradient(to right, #0000, #f0f0f0 50%)'
   }
-  const leftArrowStyle = {
+  const backArrowStyle = {
     position: 'absolute',
     zIndex: 6,
     color: 'rgb(87 72 72)',
@@ -94,36 +96,51 @@ var Carousel = ({items}) => {
   //  if scroll > 0
   //    render forward
 
-  useEffect(() => {setScroll(0)}, [items])
+  useEffect(() => {
+    // console.log('rendering carousel OR change to current item; resetting scroll\n', current)
+    setScroll(0)
+  }, [current])
 
   useEffect(() => {
     setRenderFwd(checkRenderFwd());
     setRenderBack(checkRenderBack());
   }, [scroll, items])
   var handleClickForward = (e) => {
-    e.stopPropagation();
+    e.preventDefault();
+    // e.stopPropagation();
     // console.log('clicked arrow');
     setScroll(scroll - 25);
   }
   var handleClickBack= (e) => {
-    e.stopPropagation();
+    e.preventDefault();
+    // e.stopPropagation();
     // console.log('clicked arrow');
     setScroll(scroll + 25);
   }
+  var fwdArrow = (
+    <ClickTracker selector={`${element}-fwd-arrow`} WrappedComponent={(
+      <div style={fwdArrowStyle} onClick={handleClickForward} >
+        <h1>{'>'}</h1>
+      </div>
+    )}/>
+  );
+  var backArrow = (
+    <ClickTracker selector={`${element}-back-arrow`} WrappedComponent={(
+      <div style={backArrowStyle} onClick={handleClickBack} >
+        <h1>{'<'}</h1>
+      </div>
+    )}/>
+  );
 
   return (
     <div style={containerStyle} >
-      {renderFwd ? (<div style={rightArrowStyle} onClick={handleClickForward} >
-        <h1>{'>'}</h1>
-      </div>) : ''}
+      {renderFwd ? fwdArrow : ''}
       <div style={divStyle} >
           <ul style={ulStyle} >
             {items.map((item, index) => <li key={index} style={liStyle} >{item}</li>)}
           </ul>
       </div>
-      {renderBack ? (<div style={leftArrowStyle} onClick={handleClickBack} >
-        <h1>{'<'}</h1>
-      </div>) : ''}
+      {renderBack ? backArrow : ''}
     </div>
   );
 }

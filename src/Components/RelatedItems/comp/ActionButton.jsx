@@ -1,10 +1,14 @@
 import React from 'react';// Bring React in to build a component.
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
+import ElementContext from './../../../ElementContext.js';
+import ClickTracker from '../../../ClickTracker.jsx';
 
 
 var ActionButton = ({item, onButton, icon}) => {
+  const element = useContext(ElementContext);
   function handleButton(event) {
-    event.stopPropagation();
+    event.preventDefault();
+    // event.stopPropagation();
     // console.log('action!', onButton)
     onButton(item);
   }
@@ -18,7 +22,9 @@ var ActionButton = ({item, onButton, icon}) => {
     color: 'rgb(87 72 72)',
   };
   return (
+    <ClickTracker selector={`${element}-action-button-${item.id}`} WrappedComponent={(
       <button style={buttonStyle} onClick={handleButton} >{icon}</button>
+    )}/>
   );
 }
 

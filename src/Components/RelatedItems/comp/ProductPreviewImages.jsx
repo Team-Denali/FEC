@@ -1,8 +1,12 @@
 import React from 'react';// Bring React in to build a component.
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import Carousel from './Carousel.jsx';
 
+import ElementContext from './../../../ElementContext.js';
+import ClickTracker from '../../../ClickTracker.jsx';
+
 var Thumbnail = ({image, setImage}) => {
+  const element = useContext(ElementContext);
 
   const outerDivStyle = {
     contain: 'content',
@@ -59,12 +63,14 @@ var Thumbnail = ({image, setImage}) => {
   }
 
   return (
-    <div style={outerDivStyle} >
-      <div style={divStyle} onClick={e => {e.stopPropagation(); setImage(image);}} >
-        <img style={imgStyle} src={image.thumbnail_url} ></img>
-        {/* <img style={imgBGStyle} src={image.url} ></img> */}
+    <ClickTracker selector={`${element}-thumbnail-${image.index}`} WrappedComponent={(
+      <div style={outerDivStyle} >
+        <div style={divStyle} onClick={e => {setImage(image);}} >
+          <img style={imgStyle} src={image.thumbnail_url} ></img>
+          {/* <img style={imgBGStyle} src={image.url} ></img> */}
+        </div>
       </div>
-    </div>
+    )}/>
   )
 }
 
@@ -130,8 +136,8 @@ var ProductPreviewImages = ({item}) => {
   }
 
   useEffect(() => {
-    // console.log('item effect')
-    var images = item.styles.map(style => style.photos);
+    // console.log('item effect: styles: ', item.styles);
+    var images = item.styles.map((style, styleIndex) => style.photos.map((photo, photoIndex) => Object.assign(photo, {index: `style-${styleIndex}-photo-${photoIndex}`})));
     images = images.flat();
     // console.log('images', images)
     setImages(images.map(image => <Thumbnail image={image} setImage={setImage} />));

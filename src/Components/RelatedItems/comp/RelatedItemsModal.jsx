@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
@@ -8,7 +8,11 @@ import Grid from '@mui/material/Grid';
 import CheckIcon from '@mui/icons-material/Check';
 import Divider from '@mui/material/Divider';
 
+import ElementContext from './../../../ElementContext.js';
+import ClickTracker from '../../../ClickTracker.jsx';
+
 const RelatedItemsModal = ({open, setOpen, comparison}) => {
+  const element = useContext(ElementContext);
   const gridStyle = {
     textAlign: 'center'
   };
@@ -60,10 +64,15 @@ const RelatedItemsModal = ({open, setOpen, comparison}) => {
       right = feature[2];
       center = feature[1];
     }
+    else if (feature[0] === feature [2] && feature[0] !== undefined && feature[2] !== undefined) {
+      left = <CheckIcon />;
+      right = <CheckIcon />;
+      center = `${feature[1]}: ${feature[0]}`;
+    }
     else if (feature[0] !== feature [2] && (feature[0] !== undefined || feature[2] !== undefined)) {
       left = feature[0] ? feature[0]: '';
       right = feature[2] ? feature[2] : '';
-      center = `${feature[1]}`
+      center = feature[1]
     }
     else {
       left = '???';
@@ -93,20 +102,22 @@ const RelatedItemsModal = ({open, setOpen, comparison}) => {
     </Grid>
   );
   return (
-    <div className='related-item-comparison-modal' >
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <DialogContent style={modalStyle} >
-          <h3>Comparing:</h3>
-        </DialogContent>
-        <DialogContent style={modalStyle} >
-          <div>{grid}</div>
-        </DialogContent>
-      </Dialog>
-    </div>
-  )
+    <ClickTracker selector={`${element}-comparison-modal`} WrappedComponent={(
+      <div className='related-item-comparison-modal' >
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+        >
+          <DialogContent style={modalStyle} >
+            <h3>Comparing:</h3>
+          </DialogContent>
+          <DialogContent style={modalStyle} >
+            <div>{grid}</div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    )}/>
+  );
 }
 
 export default RelatedItemsModal

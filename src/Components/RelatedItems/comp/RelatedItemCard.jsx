@@ -9,8 +9,8 @@ import ClickTracker from '../../../ClickTracker.jsx';
 
 
 var RelatedItemCard = ({id, item, onClick, onButton, icon}) => {
-  // const module = useContext(ModuleContext);
-  // const element = useContext(ElementContext);
+  const module = useContext(ModuleContext);
+  const element = useContext(ElementContext);
   function handleClick(event) {
     // console.log(module, element, id);
     // event.stopPropagation();
@@ -35,13 +35,15 @@ var RelatedItemCard = ({id, item, onClick, onButton, icon}) => {
     textDecoration: 'none'
   }
   return (
-    <ClickTracker selector={`ri-card-${id}`} WrappedComponent={(
-      <div style={divStyle} onClick={handleClick}>
-        <ProductPreviewImages item={item} />
-        <ProductPreviewInformation item={item} />
-        <ActionButton item={item} onButton={onButton} icon={icon} />
-      </div>
-    )}/>
+    <ElementContext.Provider value={`${element}-card-${id}`}>
+      <ClickTracker selector={`${element}-card-${id}`} WrappedComponent={(
+        <div style={divStyle} onClick={handleClick}>
+          <ProductPreviewImages item={item} />
+          <ProductPreviewInformation item={item} />
+          <ActionButton item={item} onButton={onButton} icon={icon} />
+        </div>
+      )}/>
+    </ElementContext.Provider>
   );
 }
 
