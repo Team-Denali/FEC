@@ -1,25 +1,25 @@
 import React from "react";
 import axios from "axios"; // Bring React in to build a component.
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; import {HashLink} from 'react-router-hash-link';
 
 import OverviewMainPic from "./OverviewPicture/OverviewMainPic.jsx";
 
 import OverviewStyles from "./OverviewInfo/OverviewStyles.jsx"; import OverviewPrice from './OverviewInfo/OverviewPrice.jsx'
-import OverviewCart from "./OverviewInfo/OverviewCart.jsx"; // Huzzah for jsx!
+import OverviewCart from "./OverviewInfo/OverviewCart.jsx"; import './OverviewStylesheet.css'; import OverviewReviewInfo from './OverviewInfo/OverviewReviewInfo.jsx'; // Huzzah for jsx!
 
 var Overview = ({ current }) => {
 
-  //console.log(current, "current prop"); //include state variables for currently viewed product
+  const [itemreviews, setItemreviews] = useState(null); const [reviewNum, setReviewNum] = useState(null); const [starRating, setStarRating] = useState(null); const [hasReviews, setHasReviews] = useState(false);
+//console.log(current, "current prop"); //include state variables for currently viewed product
   const [itemView, setItemView] = useState({});
   const [styles, setStyles] = useState({});
   const [styleView, setStyleView] = useState({}); const [defaultPrice, setDefaultPrice] = useState(''); const [salePrice, setSalePrice] = useState(0);
-  let url = "http://localhost:3000"; //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
 
+  let url = "http://localhost:3000"; //const [styleIndex, setIndex] = useState(0); const [photoIndex, setPhotoIndex] = useState(0);
   const [mainPic, setMainPic] = useState(null);
   var changePic = (pic_url) => {
     setMainPic(pic_url);
   };
-
   var changeStyle = (style) => {
     setStyleView(style);
 
@@ -44,9 +44,27 @@ var Overview = ({ current }) => {
         console.log("axios req error:", err);
       });
   };
+
+
+  const GetProductReviews = (id) => { let params = {product_id: id, count: 1000}; //console.log('overview review params:', params)
+  return axios.get(`${url}/reviews/`, {params: params}).then((res) => { //console.log('GPR data:', res.data.results)
+
+    setItemreviews(res.data.results); setReviewNum(res.data.results.length); //console.log('overview Review retrieval:', itemreviews);
+    return axios.get(`${url}/reviews/meta`, {params: params})
+    .then((res) => { //console.log('GetRS:' , res.data.ratings)
+      setStarRating(res.data.ratings); //console.log('overviewMetaReview data retrieval:', starRating)
+    })
+
+    .catch((err) => {console.log('overviewReveiewData axios error:', err)})
+  })
+
+}
+
   useEffect(() => {
 
-    styleFinder(current.id);
+
+
+    styleFinder(current.id); GetProductReviews(current.id);
   }, [current]);
 
   //console.log('THE CURRENT PRICE:', current.default_price)//changeStyle(styles[0]);
@@ -62,12 +80,11 @@ var Overview = ({ current }) => {
       {" "}
 
       <div className="overviewContainer"style={{}}>
-
-
-
         <div className="overviewTop">
           <OverviewMainPic
             current={current}
+
+
             currentStyles={styles}
             styleView={styleView}
 
@@ -75,14 +92,16 @@ var Overview = ({ current }) => {
             mainPic={mainPic}
             setMain={setMainPic}
             picHandler={changePic}
-
           />
 
           <div className="overviewProductInfo">
-            <div className="info">Ratings Info</div>
+
+            <div className="OverviewReviewInfo info"><OverviewReviewInfo reviewNum={reviewNum} starRating={starRating} /></div>
+
             <div className="info">{current.category}</div>
             <div className="productName ">
               <h3>{current.name}</h3>
+
 
 
 
@@ -92,6 +111,10 @@ var Overview = ({ current }) => {
             </div><div style={{fontSize: 'small', flexShrink: '3'}}>{current.description}</div>
             <div className="overviewStyles info">
               <OverviewStyles
+
+
+
+
                 overviewStyles={styles}
                 mainPic={mainPic}
 
@@ -99,22 +122,29 @@ var Overview = ({ current }) => {
 
                 styleView={styleView}
                 setStyleView={setStyleView}defaultPrice={defaultPrice} setDefaultPrice={setDefaultPrice}
+
               />
             </div>
+
             <div className="overviewCart info">
               <OverviewCart current={current} styleView={styleView} itemName={current.name}/>
             </div>
+
           </div>
         </div>
         <div className="overviewBottom" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', fontSize: 'small'}}>
+
           {/* <div style={{}}>{current.description}</div> */}
-
-
         </div>
+
       </div>
     </>
-  );
 
+  );
   };
+
+
+
+
 
 export default Overview;

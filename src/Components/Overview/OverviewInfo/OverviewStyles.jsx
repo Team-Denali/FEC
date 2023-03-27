@@ -38,11 +38,11 @@ var OverviewStyles = ({
               key={overviewStyle.style_id}
 
               value={"thing"}
-              style={{display: 'flex', flexDirection: 'row-reverse',
+              style={{display: 'flex',
 
                 height: "35px",
                 width: "20px",
-                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '1 1 30',
+                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '0 0 25%',
                 backgroundSize: "cover", backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
                 borderRadius: "50%",
 
