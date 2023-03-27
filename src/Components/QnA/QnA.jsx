@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import QuestionList from "./QuestionList.jsx";
 import Qmodal from "./QuestionModal.jsx";
 import axios from "axios";
+import Button from '@mui/material/Button';
 import "./QnA.css";
 
 const QuestionsAnswers = ({ current }) => {
+
   let product =current.id
   const getQuestions = () => {
+    if(!current.id){return} else {
     axios
       .get("/qa/questions", {
         params: {
@@ -24,6 +27,7 @@ const QuestionsAnswers = ({ current }) => {
       .catch((err) => {
         console.log(err);
       });
+    }
   };
 
   useEffect(() => {
@@ -84,13 +88,9 @@ const QuestionsAnswers = ({ current }) => {
     }
   }
 
-  function formHandler(event) {
-    event.preventDefault();
-    setModal(false);
-  }
   return (
     <>
-      <h1>Q & A</h1>
+      <h4>Questions & Answers</h4>
       {qaData.length === 0 ? (
         <div className = 'qaMainContainer'>
           <h2>no questions</h2>
@@ -112,26 +112,26 @@ const QuestionsAnswers = ({ current }) => {
           <div className="qaListContainer">
             <div>
               {sortedArray.slice(0, result).map((question, i) => (
-                <QuestionList question={question} key={i} />
+                <QuestionList product = {current.name} question={question} key={i} />
               ))}
             </div>
           </div>
           <div className="qaButtonContainer">
             {hideButton && (
-              <button className="buttonStyle" onClick={() => clickHandler(2)}>
+              <Button variant = 'outlined' onClick={() => clickHandler(2)}>
                 MORE ANSWERED QUESTIONS
-              </button>
+              </Button>
             )}
             {result === sortedArray.length && (
-              <button className="buttonStyle" onClick={() => setResult(2)}>
+              <Button variant = 'outlined' onClick={() => setResult(2)}>
                 COLLAPSE QUESTIONS
-              </button>
+              </Button>
             )}
 
-            <button className="buttonStyle" onClick={() => setModal(true)}>
+            <Button variant ='outlined' onClick={() => setModal(true)}>
               ADD A QUESTION +
-            </button>
-            <Qmodal current={product} open={modal} onClose={setModal} />
+            </Button>
+            <Qmodal current={current} open={modal} onClose={setModal} />
           </div>
         </div>
       )}

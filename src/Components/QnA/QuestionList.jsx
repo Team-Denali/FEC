@@ -8,12 +8,13 @@ import {
 } from "react-icons/bs";
 import { MdOutlineExpandCircleDown } from "react-icons/md";
 import "./QnA.css";
+import Button from '@mui/material/Button';
 
-const QuestionList = ({ question }) => {
+
+const QuestionList = ({product, question }) => {
   const [answers, setAnswers] = useState(question.answers);
   const [result, setResult] = useState(2);
   const [modal, setModal] = useState(false);
-
   //formats our answers to make it able to slice
   function format(answers) {
     let answerArray = [];
@@ -51,7 +52,7 @@ const QuestionList = ({ question }) => {
   }
   //reports questions for violations
   function reportHandler(event) {
-    event.target.innerText = "ReportEDdddd";
+    event.target.innerText = "REPORTED";
     axios
       .put(`/qa/questions/${question.question_id}/report`, {
         params: {
@@ -84,41 +85,42 @@ const QuestionList = ({ question }) => {
           ))}
 
           {result < array.length && (
-            <button
-              className="buttonStyle"
-              style={{ height: "1rem" }}
+            <Button
+              size = 'small'
+              variant = 'outlined'
               onClick={() => clickHandler(array.length)}
             >
               Load More Answers <MdOutlineExpandCircleDown />
-            </button>
+            </Button>
           )}
           {array.length > 2 && result > array.length && (
-            <button
+            <Button
               className="buttonStyle"
               style={{ height: "1rem" }}
               onClick={() => setResult(2)}
             >
               Collapse Answers <MdOutlineExpandCircleDown />
-            </button>
+            </Button>
           )}
         </div>
         <div>
-          <BsFillArrowUpSquareFill className="vote" onClick={voteHandler} />(
-          {question.question_helpfulness}) Upvote!
-          <button
-            style={{ background: "white", border: "none", cursor: "pointer" }}
+          Helpful? <BsFillArrowUpSquareFill className="vote" onClick={voteHandler} />(
+          {question.question_helpfulness})
+          <Button
+            size= 'small'
             onClick={() => setModal(true)}
           >
             <b>Add Answer</b>
-          </button>{" "}
-          <a onClick={reportHandler} style={{ cursor: "pointer" }}>
+          </Button>{" "}
+          <Button size= 'small' onClick={reportHandler} style={{ cursor: "pointer" }}>
             Report
-          </a>
+          </Button>
         </div>
         <Amodal
           open={modal}
           onClose={setModal}
-          question={question.question_id}
+          question={question}
+          product = {product}
         />
       </div>
     </>
