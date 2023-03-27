@@ -161,6 +161,15 @@ const postForm = (req, res) => {
     }
   })
 }
+const postInteraction = (req, res) => {
+  API.postInteraction(req.body, (err, data) => {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(201).send();
+    }
+  })
+}
 
 module.exports = {
   getReviews,
@@ -176,5 +185,5 @@ module.exports = {
   submitAnswer,
   submitQuestion,
   getStyles,
-
+  postInteraction
 }
