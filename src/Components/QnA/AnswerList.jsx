@@ -33,7 +33,7 @@ var AnswerList = ({ answer }) => {
 
   function voteHandler(event) {
     event.currentTarget.classList.toggle("voted");
-    console.log(answer);
+    // console.log(answer);
     axios
       .put(`/qa/answers/${answer.id}/helpful`, {
         params: {
@@ -41,7 +41,7 @@ var AnswerList = ({ answer }) => {
         },
       })
       .then((res) => {
-        console.log("response to put for answers", res);
+        // console.log("response to put for answers", res);
       })
       .catch((err) => {
         console.log(err);
@@ -53,7 +53,7 @@ var AnswerList = ({ answer }) => {
     axios
       .put(`/qa/answers/${answer.id}/report`)
       .then((res) => {
-        console.log("response to put for questions", res);
+        // console.log("response to put for questions", res);
       })
       .catch((err) => {
         console.log(err);

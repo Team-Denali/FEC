@@ -10,11 +10,15 @@ import css from "./style.css";
 
 
 // Huzzah for jsx!
-const Reviews = () => { //include state variables for currently viewed product
-  const [product_id, setProduct_id] = useState("37322");
+const Reviews = (props) => { //include state variables for currently viewed product
+  //const [product_id, setProduct_id] = useState("37311");
   const [reviews, setReviews] = useState({});
   const [reviewStars, setReviewStars] = useState('');
   const [sortmethod,setSortmethod] = useState('relevant');
+  const [filter, setFilter] = useState(0);
+
+  //console.log('id:',props.current.id)
+  var product_id = props.current.id || "";
 
   const getReviews = () => {
     axios.get('/reviews', {
@@ -50,7 +54,7 @@ const Reviews = () => { //include state variables for currently viewed product
 
   const postForm = (params) => {
     console.log(params);
-    axios.post('/reviews',params)
+    axios.post('/reviews/',params)
     .then(()=>{
       getReviews();
     }).catch((err)=> {
@@ -63,16 +67,19 @@ const Reviews = () => { //include state variables for currently viewed product
     getReviewsStars();
   },[product_id, sortmethod]);
 
+  const setRating = (num) => {
+    props.setRating(num);
+  }
 
   return (
     <div>
     <div className="reviewtitle">Ratings & reviews</div>
     <div className ="Reviews">
       <div>
-    <Ratingbreakdown className="Ratingbreakdown" reviewStars={reviewStars}/>
+    <Ratingbreakdown className="Ratingbreakdown" reviewStars={reviewStars} setFilter={setFilter} setRating={setRating}/>
     <Productbreakdown className="Productbreakdown" reviewStars={reviewStars}/>
       </div>
-    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id} postForm={postForm} setSortmethod={setSortmethod} reviewStars={reviewStars}/>
+    <Reviewlist className="ReviewList" reviews= {reviews.results} product_id= {product_id} postForm={postForm} setSortmethod={setSortmethod} reviewStars={reviewStars} filter={filter}/>
       </div>
       </div>
   )

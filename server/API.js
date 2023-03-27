@@ -6,7 +6,7 @@ const API = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/`;
 const getReviews = (params, callback) => {
   const route = API + `reviews/`;
   axios.get(route, {headers:
-    {Authorization: `${TOKEN}`}, params: params})
+    {Authorization: TOKEN}, params: params})
 
   .then((res) => {
     callback(null, res.data)
@@ -35,7 +35,7 @@ const updateReviewHelpful = (params, callback) => {
   const route = API + `reviews/${params.review_id}/helpful`;
   //console.log(route);
   axios.put(route, null, {headers:
-    {authorization: TOKEN}, params: params})
+    {Authorization: TOKEN}, params: params})
   .then((res) => {
 
     callback(null, res.data)
@@ -85,7 +85,7 @@ const getReviewsMeta = (params, callback) => {
 };
 
 const postForm = (params, callback) => {
-  const route = API + `reviews`;
+  const route = API + `reviews/`;
   axios.post(route, params, {headers:
     {Authorization: TOKEN}})
   .then((res) => {

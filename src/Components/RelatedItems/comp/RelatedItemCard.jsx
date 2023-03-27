@@ -5,7 +5,7 @@ import ProductPreviewInformation from './ProductPreviewInformation.jsx';
 import ActionButton from './ActionButton.jsx';
 
 
-var RelatedItemCard = ({item, onClick, onButton}) => {
+var RelatedItemCard = ({item, onClick, onButton, icon}) => {
   function handleClick(event) {
     event.stopPropagation();
     onClick();
@@ -19,7 +19,8 @@ var RelatedItemCard = ({item, onClick, onButton}) => {
     borderRadius: '10%',
     overflow: 'hidden',
     backgroundColor: 'lightgrey',
-    width: 'max-content'
+    width: 'min-content',
+    maxWidth: '100%'
   };
 
   const liStyle = {
@@ -29,14 +30,11 @@ var RelatedItemCard = ({item, onClick, onButton}) => {
     textDecoration: 'none'
   }
   return (
-    <li style={liStyle} >
       <div style={divStyle} onClick={handleClick}>
-        {/* <h3>RelatedItemCard</h3> */}
         <ProductPreviewImages item={item} />
         <ProductPreviewInformation item={item} />
-        <ActionButton item={item} onButton={onButton} />
+        <ActionButton item={item} onButton={onButton} icon={icon} />
       </div>
-    </li>
   );
 }
 

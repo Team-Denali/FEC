@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 // const Upload = (props) => {
 
@@ -116,15 +117,16 @@ const Upload = (props) => {
 
   return (
     <div >
-      <br />
+      <br/>
       {[...Array(5)].map((_, index) =>
         photoArray[index] ? (
           <img src={photoArray[index]} key={index} className="ansPhotos" style={{height:50, width:50}} />
-        ) : (
-          <Button variant="outlined" key={index} onClick={upload}>upload</Button>
-
-        )
-      )}
+        ) : null
+      )
+      }
+      <div className='uploadbutton'>
+      <IconButton type="submit" size="small" onClick={upload}>upload</IconButton>
+      </div>
     </div>
   );
 };
