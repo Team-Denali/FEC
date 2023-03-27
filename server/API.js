@@ -177,7 +177,18 @@ const submitQuestion = (body, callback) => {
   })
 };
 
-
+const postInteraction = (params, callback) => {
+  const route = API + `interactions/`;
+  console.log(params);
+  axios.post(route, params, {headers:
+    {Authorization: TOKEN}})
+  .then((res) => {
+    callback(null, res.data)
+  })
+  .catch((err) => {
+    callback(err);
+  })
+};
 
 module.exports = {
   getReviews,
@@ -192,5 +203,6 @@ module.exports = {
   updateAnswerReport,
   submitAnswer,
   submitQuestion,
-  getStyles
+  getStyles,
+  postInteraction
 };

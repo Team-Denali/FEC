@@ -83,6 +83,8 @@ app.get('/outfit', (req, res) => {
   res.status(200).send(outfit);
 })
 
+app.post('/interactions', controller.postInteraction)
+
 app.get('/null', (req, res) => {
   // console.log('get null req: ', req.sessionStore)
   // console.log('GET /null req: WHY IS THIS HERE?')
