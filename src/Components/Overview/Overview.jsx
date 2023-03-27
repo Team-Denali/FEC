@@ -25,7 +25,7 @@ var Overview = ({ current }) => {
 
   };
   const styleFinder = (currentId) => {
-
+    if(!current){return}else {
     let styleId = currentId;
 
     let paramObj = { product_id: styleId };
@@ -43,6 +43,7 @@ var Overview = ({ current }) => {
       .catch((err) => {
         console.log("axios req error:", err);
       });
+    }
   };
   useEffect(() => {
 

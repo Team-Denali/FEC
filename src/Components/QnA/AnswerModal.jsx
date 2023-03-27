@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./QnA.css";
 
-var Amodal = ({ open, onClose, question }) => {
+var Amodal = ({ open, onClose, product, question }) => {
   if (!open) return null;
 
   const photoHandler = (event) => {
@@ -29,7 +29,7 @@ var Amodal = ({ open, onClose, question }) => {
   const [email, setEmail] = useState("");
   const [photos, setPhotos] = useState([]);
   const formData = {
-    question_id: question,
+    question_id: question.question_id,
     body: answer,
     name: nickname,
     email: email,
@@ -68,8 +68,11 @@ var Amodal = ({ open, onClose, question }) => {
     <>
       <div className="overlay">
         <form onSubmit = {submitHandler} id="amodal" className="qmodal">
-          <h1>Submit Your Answer</h1>
-          <h3>[Product Name: Quesiton Body]</h3>
+        <button onClick={()=> onClose(false)}>Close</button>
+
+
+          <h3>Product: {product}</h3>
+          <h3>Question: {question.question_body}</h3>
 
             <div>
               <label>Nickname:</label><br></br>

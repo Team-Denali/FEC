@@ -42,7 +42,6 @@ const App = () => {
   return ( <>
   <h1>Hello World</h1>
     <Overview current={current}/>
-
     <QuestionsAnswers current={current} />
     <Reviews current={current}/>
     <RelatedItems current={current} setCurrentById={setCurrentById} getProducts={getProducts}/>

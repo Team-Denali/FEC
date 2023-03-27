@@ -21,6 +21,7 @@ const Reviews = (props) => { //include state variables for currently viewed prod
   var product_id = props.current.id || "";
 
   const getReviews = () => {
+    if(!props.current.id){return}else {
     axios.get('/reviews', {
       params: {
         product_id: product_id,
@@ -36,8 +37,10 @@ const Reviews = (props) => { //include state variables for currently viewed prod
       console.log(err);
     })
   }
+  }
 
   const getReviewsStars = () => {
+    if(!props.current.id){return}else {
     axios.get('/reviews/meta', {
       params: {
         product_id
@@ -51,6 +54,7 @@ const Reviews = (props) => { //include state variables for currently viewed prod
       console.log(err);
     })
   }
+}
 
   const postForm = (params) => {
     console.log(params);

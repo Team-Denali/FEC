@@ -6,6 +6,8 @@ import {
   BsFillArrowDownSquareFill,
 } from "react-icons/bs";
 import axios from "axios";
+import Button from '@mui/material/Button';
+
 
 var AnswerList = ({ answer }) => {
   const monthNames = [
@@ -70,12 +72,12 @@ var AnswerList = ({ answer }) => {
             by <b>{answer.answerer_name}</b>,<time>{formatDate}</time>
           </div>
           <div>
-            <span>Upvote!</span>
+           Helpful?
             <BsFillArrowUpSquareFill onClick={voteHandler} className="vote" />(
             {answer.helpfulness})
-            <span className="q.report" onClick={reportHandler} value="Report">
+            <Button className="q.report" onClick={reportHandler} value="Report">
               Report
-            </span>
+            </Button>
           </div>
         </div>
         <div className="qModalContent">

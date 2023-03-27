@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./QnA.css";
 
-var Qmodal = ({ open, onClose, current }) => {
+var Qmodal = ({ open, onClose, current, }) => {
   if (!open) return null;
   const [question, setQuestion] = useState("");
   const [nickname, setNickname] = useState("");
@@ -11,7 +11,7 @@ var Qmodal = ({ open, onClose, current }) => {
     body: question,
     name: nickname,
     email: email,
-    product_id: current,
+    product_id: current.id,
   };
   const changeHandler = (e) => {
     if (e.target.name === "question") {
@@ -43,9 +43,11 @@ var Qmodal = ({ open, onClose, current }) => {
   return (
     <>
       <div id = 'qmodal' className="overlay">
+
         <form className="qmodal" onSubmit={submitHandler}>
-        <h1>Submit Question</h1>
-          <h3>[Product Name: Quesiton Body]</h3>
+        <button onClick={()=> onClose(false)}>Close</button>
+        <h2>Submit Question:</h2>
+          <h3>Product: {current.name}</h3>
           <div>
             <label>Nickname:</label><br></br>
             <input
