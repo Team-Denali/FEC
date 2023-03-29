@@ -40,9 +40,9 @@ var OverviewStyles = ({
               value={"thing"}
               style={{display: 'flex',
 
-                height: "35px",
+                height: "29px",
                 width: "20px",
-                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '0 0 25%',
+                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '0 0 20%',
                 backgroundSize: "cover", backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
                 borderRadius: "50%",
 

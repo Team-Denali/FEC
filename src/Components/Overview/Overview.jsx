@@ -31,7 +31,7 @@ var Overview = ({ current }) => {
     let paramObj = { product_id: styleId };
 
     axios
-      .get(`${url}/styles`, { params: paramObj })
+      .get(`/styles`, { params: paramObj })
       .then((res) => {
 
         //console.log("the data:", res.data);
@@ -47,11 +47,12 @@ var Overview = ({ current }) => {
 
 
   const GetProductReviews = (id) => { let params = {product_id: id, count: 1000}; //console.log('overview review params:', params)
-  return axios.get(`${url}/reviews/`, {params: params}).then((res) => { //console.log('GPR data:', res.data.results)
+  return axios.get(`/reviews/`, {params: params}).then((res) => { //console.log('GPR data:', res.data.results)
 
     setItemreviews(res.data.results); setReviewNum(res.data.results.length); //console.log('overview Review retrieval:', itemreviews);
     return axios.get(`${url}/reviews/meta`, {params: params})
     .then((res) => { //console.log('GetRS:' , res.data.ratings)
+      
       setStarRating(res.data.ratings); //console.log('overviewMetaReview data retrieval:', starRating)
     })
 
@@ -64,7 +65,7 @@ var Overview = ({ current }) => {
 
 
 
-    styleFinder(current.id); GetProductReviews(current.id);
+    if (current.id) {styleFinder(current.id); GetProductReviews(current.id);}
   }, [current]);
 
   //console.log('THE CURRENT PRICE:', current.default_price)//changeStyle(styles[0]);

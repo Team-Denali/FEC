@@ -30,11 +30,11 @@ const App = () => {
 
   useEffect(() => {
     if(!current.id) {
-      getProducts('37345')
+      getProducts('37311')
         .then(res => setCurrent(res.data))
       // getProducts('37311')
-      //   .then(res => setCurrent(res.data))
-    }
+      //   .then(res => 37345 setCurrent(res.data))
+    } //37315 - to test side panel carousel;
   }, [])
   //console.log(current, 'the current')
   return ( <>
