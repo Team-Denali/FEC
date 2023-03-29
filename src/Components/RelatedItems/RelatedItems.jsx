@@ -1,16 +1,18 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import _ from 'lodash';
+import uniq from 'lodash/uniq.js';
 
+import RelatedItemsModal from './/comp/RelatedItemsModal.jsx';
 import RelatedItemsList from './/comp/RelatedItemsList.jsx';
 import YourOutfitList from './/comp/YourOutfitList.jsx';
-import RelatedItemsModal from './/comp/RelatedItemsModal.jsx';
+
 import ElementContext from '../../ElementContext.js';
 
-var RelatedItems = ({current, setCurrentById, getProducts}) => {
+var RelatedItems = ({current, setCurrent}) => {
   const [related, setRelated] = useState([]);
   const [outfit, setOutfit] = useState([]);
+
   const [open, setOpen] = useState(false);
   const [comparison, setComparison] = useState([]);
   const [currentStyles, setCurrentStyles] = useState([]);
@@ -19,11 +21,13 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     fontFamily: 'Verdana, sans-serif',
     color: 'rgb(87 72 72)',
     backgroundColor: 'rgb(240, 240, 240)',
-    width: '960px'
-  }
+    width: '960px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  };
 
   function compareToCurrent(item) {
-    var comparison = [[current.name, '', item.name], [current.default_price, 'Price', item.default_price]]
+    var newComparison = [[current.name, '', item.name], [current.default_price, 'Price', item.default_price]]
     var mapFeatures = (features) => {
       var featureObj = {};
       features.forEach(feature => featureObj[feature.feature] = feature.value);
@@ -33,50 +37,60 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     var comparatorFeatures = mapFeatures(item.features);
     var currentKeys = Object.keys(currentFeatures);
     var comparatorKeys = Object.keys(comparatorFeatures);
-    var combinedKeys = _.uniq(currentKeys.concat(comparatorKeys)).sort();
+    var combinedKeys = uniq(currentKeys.concat(comparatorKeys)).sort();
     for (var i = 0; i < combinedKeys.length; i++) {
-      // if (currentFeatures[combinedKeys[i]] || comparatorFeatures[combinedKeys[i]]) {
-        comparison.push([currentFeatures[combinedKeys[i]], combinedKeys[i], comparatorFeatures[combinedKeys[i]]])
-      // }
+      newComparison.push([currentFeatures[combinedKeys[i]], combinedKeys[i], comparatorFeatures[combinedKeys[i]]]);
     }
-    setComparison(comparison);
-  }
+    setComparison(newComparison);
+  };
+
   function openComparisonModal(item) {
     compareToCurrent(item);
     setOpen(true);
-  }
+  };
+
   function outfitIndexOf(item) {
     return outfit.map(outfitItem => outfitItem.id).indexOf(item.id);
-  }
+  };
+
   function addToOutfit() {
     if(outfitIndexOf(current) >= 0) {
       return;
     }
-    var newOutfit = outfit.slice();
     getProducts(`${current.id}/styles`)
-    .then(results => {
-      // console.log('styles: ', results)
-      results = results.data.results
-      // console.log('styles: ', results)
-      return results;
-    })
-    .then(styles => {
-      // console.log(rel)
-      var currentWithStyles = {};
-      currentWithStyles = Object.assign(currentWithStyles, current);
+      .then(results => {
+        results = results.data.results
+        return results;
+      })
+      .then(styles => {
+        var newOutfit = outfit.slice();
+        var currentWithStyles = Object.assign({}, current);
         currentWithStyles.styles = styles;
-      // console.log('current, with style property', currentWithStyles)
-      newOutfit.push(currentWithStyles);
-      setOutfit(newOutfit);
-    })
-    .catch(err => console.log(err))
-  }
+        newOutfit.push(currentWithStyles);
+        setOutfit(newOutfit);
+      })
+      .catch(err => console.log(err));
+  };
+
   function removeFromOutfit(item) {
     var index = outfitIndexOf(item);
     var newOutfit = outfit.slice();
     newOutfit.splice(index, 1);
     setOutfit(newOutfit);
-  }
+  };
+
+  function getProducts(suffix) {
+    return axios.get(`/products${suffix === undefined ? '' : '/' + suffix}`)
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+
+  function setCurrentById(id) {
+    getProducts(id)
+        .then(res => setCurrent(res.data))
+  };
+
   function getRelated() {
     let rel;
     if(!current.id) {
@@ -85,7 +99,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     return getProducts(`${current.id}/related`)
       .then(res => {
         // console.log('response: ', res);
-        let relatedIds = _.uniq(res.data);
+        let relatedIds = uniq(res.data);
         relatedIds = relatedIds.map(id => getProducts(id));
         return Promise.all(relatedIds)
       })
@@ -112,35 +126,38 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
         setRelated(relatedWithStyles);
       })
       .catch(err => console.log(err))
-  }
+  };
 
   useEffect(() => {
-    // console.log('change to outfit: ', outfit);
-    if(outfit.length) {
-      axios.post('/outfit', outfit)
-      .then(res => {
-        // console.log('outfit change response:', res);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    if(!current.id) {
+      getProducts('37311')
+        .then(res => setCurrent(res.data))
     }
-  }, [outfit])
-
-  useEffect(() => {
     axios.get('/outfit')
       .then(res => {
-        // console.log('outfit cookie response:', res);
-        setOutfit(res.data);
+        if (res.data.length) {
+          setOutfit(res.data);
+        }
       })
       .catch(err => {
         console.log(err);
       })
-  }, [])
+  }, []);
 
   useEffect(() => {
-    getRelated()
-  }, [current])
+    if(current.id) {
+      getRelated();
+    }
+  }, [current]);
+
+  useEffect(() => {
+    if(outfit.length) {
+      axios.post('/outfit', outfit)
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }, [outfit]);
 
   return (
     <div style={componentStyle} >
@@ -148,7 +165,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
         <RelatedItemsModal open={open} setOpen={setOpen} comparison={comparison} />
       </ElementContext.Provider>
       <ElementContext.Provider value='ri-list'>
-        <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} openComparisonModal={openComparisonModal} />
+        <RelatedItemsList related={related} setCurrentById={setCurrentById} openComparisonModal={openComparisonModal} />
       </ElementContext.Provider>
       <ElementContext.Provider value='ri-outfit-list'>
         <YourOutfitList current={current} outfit={outfit} setCurrentById={setCurrentById} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} />
@@ -157,4 +174,4 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   );
 }
 
-export default RelatedItems
+export default RelatedItems;

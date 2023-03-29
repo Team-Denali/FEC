@@ -15,6 +15,10 @@ const genId = () => count++;
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log('serving: ', req.method, req.path, req.query);
+  next();
+})
 //app.get('/', (req, res) => {console.log('in root url get req!!!'); res.end})
 
 app.get("/reviews/", (req, res) => {
@@ -75,6 +79,7 @@ app.get('/styles', (req, res) => {
 
 app.post('/outfit/', (req, res) => {
   sessions.setOutfit(req.sessionID, req.body);
+  res.status(201).send()
 })
 
 app.get('/outfit', (req, res) => {

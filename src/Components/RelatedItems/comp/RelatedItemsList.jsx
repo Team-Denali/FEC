@@ -4,13 +4,12 @@ import RelatedItemCard from './RelatedItemCard.jsx';
 import Carousel from './Carousel.jsx';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
-import ModuleContext from './../../../ModuleContext.js';
 import ElementContext from './../../../ElementContext.js';
 import ClickTracker from '../../../ClickTracker.jsx';
 
-var RelatedItemsList = ({related, setCurrentById, getProducts, openComparisonModal}) => {
-  const module = useContext(ModuleContext);
+var RelatedItemsList = ({related, setCurrentById, openComparisonModal}) => {
   const element = useContext(ElementContext);
+
   const outerDivStyle = {
     // color: 'blue',
     // borderStyle: 'solid',
@@ -19,27 +18,7 @@ var RelatedItemsList = ({related, setCurrentById, getProducts, openComparisonMod
     borderRadius: '10%',
     overflow: 'hidden'
   };
-  const divStyle = {
-    overflow: 'hidden',
-    height: '24em',
-    width: '10000%'
-  };
-  const ulStyle = {
-    display: 'inline-block',
-    margin: '0 auto',
-    padding: '0 auto',
-    listStyleType: 'none',
-    height: '24em',
-    // width: '200vmin'
-  }
-  const liStyle = {
-    display: 'inline-block',
-    color: 'white',
-    textAlign: 'center',
-    textDecoration: 'none',
-    margin: '1%',
-    width: 'max-content'
-  }
+
   return (
     <ClickTracker selector={`${element}`} WrappedComponent={(
       <div style={outerDivStyle} >

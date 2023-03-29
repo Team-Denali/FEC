@@ -1,5 +1,8 @@
-import React from 'react';// Bring React in to build a component.
+import React from 'react';
 import {useState, useEffect, useContext} from 'react';
+import Grow from '@mui/material/Grow';
+import anime from 'animejs/lib/anime.es.js';
+
 import ClickTracker from '../../../ClickTracker.jsx';
 import ElementContext from './../../../ElementContext.js';
 import CurrentContext from './../../../CurrentContext.js';
@@ -23,9 +26,11 @@ var Carousel = ({items}) => {
     }
   }
 
+  const [transition, setTransition] = useState(true);
   const [scroll, setScroll] = useState(0);
   const [renderFwd, setRenderFwd] = useState(checkRenderFwd());
   const [renderBack, setRenderBack] = useState(checkRenderBack());
+
 
   const outerDivStyle = {
     color: 'blue',
@@ -90,31 +95,40 @@ var Carousel = ({items}) => {
     position: 'relative'
   }
 
-  //  if scroll < 0
-  //    render back
-
-  //  if scroll > 0
-  //    render forward
-
+  const retriggerTransition = () => {
+    console.log('retrigger transition?')
+    if (transition === false) {
+      console.log('YES')
+      setTransition(true);
+    } else {
+      console.log('NO')
+    }
+  }
+  const retriggerTransitionCB = (node, cb) => {
+    console.log('retrigger transition?')
+    if (transition === false) {
+      console.log('YES')
+      setTransition(true);
+    } else {
+      console.log('NO')
+    }
+  }
   useEffect(() => {
     // console.log('rendering carousel OR change to current item; resetting scroll\n', current)
     setScroll(0)
   }, [current])
-
   useEffect(() => {
     setRenderFwd(checkRenderFwd());
     setRenderBack(checkRenderBack());
   }, [scroll, items])
   var handleClickForward = (e) => {
     e.preventDefault();
-    // e.stopPropagation();
-    // console.log('clicked arrow');
+    setTransition(false);
     setScroll(scroll - 25);
   }
   var handleClickBack= (e) => {
     e.preventDefault();
-    // e.stopPropagation();
-    // console.log('clicked arrow');
+    setTransition(false);
     setScroll(scroll + 25);
   }
   var fwdArrow = (
@@ -137,7 +151,22 @@ var Carousel = ({items}) => {
       {renderFwd ? fwdArrow : ''}
       <div style={divStyle} >
           <ul style={ulStyle} >
-            {items.map((item, index) => <li key={index} style={liStyle} >{item}</li>)}
+            {items.map((item, index) =>
+              <li key={index} style={liStyle} >
+                <Grow
+                  in={transition}
+                  onEnter={() => console.log('enter')}
+                  onEntering={() => console.log('entering')}
+                  onEntered={() => console.log('entered')}
+                  onExit={() => console.log('exit')}
+                  onExiting={() => {console.log('exiting'); /*retriggerTransition();*/}}
+                  onExited={() => console.log('exited')}
+                  addEndListener={() => retriggerTransition()}
+                  timeout={{'enter?': 2000}} >
+                  <div>{item}</div>
+                </Grow>
+              </li>
+            )}
           </ul>
       </div>
       {renderBack ? backArrow : ''}

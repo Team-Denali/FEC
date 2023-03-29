@@ -44,7 +44,9 @@ var AddToOutfitCard = ({item, onClick}) => {
   return (
     <ClickTracker selector={`${element}-add-to-outfit-card`} WrappedComponent={(
       <div style={divStyle} onClick={handleClick}>
-        <h1 style={pStyle}>{`+`}</h1>
+        <div>
+          <h1 style={pStyle}>{`+`}</h1>
+        </div>
         <ProductPreviewInformation item={item} />
       </div>
     )}/>
