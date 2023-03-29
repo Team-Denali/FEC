@@ -2,7 +2,10 @@ import React from 'react';// Bring React in to build a component.
 import {useState, useEffect} from 'react';
 import RelatedItemsList from './/comp/RelatedItemsList.jsx';
 import YourOutfitList from './/comp/YourOutfitList.jsx';
-import _ from 'lodash';
+//import _ from 'lodash';
+//import {uniq} from 'lodash';
+import uniq from 'lodash/uniq';
+
 import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -141,7 +144,8 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     var comparatorFeatures = mapFeatures(item.features);
     var currentKeys = Object.keys(currentFeatures);
     var comparatorKeys = Object.keys(comparatorFeatures);
-    var combinedKeys = _.uniq(currentKeys.concat(comparatorKeys)).sort();
+    // var combinedKeys = _.uniq(currentKeys.concat(comparatorKeys)).sort();
+    var combinedKeys = uniq(currentKeys.concat(comparatorKeys)).sort();
     for (var i = 0; i < combinedKeys.length; i++) {
       // if (currentFeatures[combinedKeys[i]] || comparatorFeatures[combinedKeys[i]]) {
         comparison.push([currentFeatures[combinedKeys[i]], combinedKeys[i], comparatorFeatures[combinedKeys[i]]])
@@ -194,7 +198,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     return getProducts(`${current.id}/related`)
       .then(res => {
         // console.log('response: ', res);
-        let relatedIds = _.uniq(res.data);
+        let relatedIds = uniq(res.data);
         relatedIds = relatedIds.map(id => getProducts(id));
         return Promise.all(relatedIds)
       })
