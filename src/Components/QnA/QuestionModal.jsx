@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./QnA.css";
+import ElementContext from "../../ElementContext.js";
+import ClickTracker from "../../ClickTracker.jsx";
 
-var Qmodal = ({ open, onClose, current, }) => {
+var Qmodal = ({ open, onClose, current }) => {
   if (!open) return null;
+  const element = useContext(ElementContext);
+  const id = current.id;
   const [question, setQuestion] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
@@ -29,7 +33,7 @@ var Qmodal = ({ open, onClose, current, }) => {
     axios
       .post(`/qa/questions`, formData)
       .then((res) => {
-        console.log("response from answer modal axios submission", res);
+        // console.log("response from answer modal axios submission", res);
       })
       .catch((err) => {
         console.log(err);
@@ -42,14 +46,25 @@ var Qmodal = ({ open, onClose, current, }) => {
 
   return (
     <>
-      <div id = 'qmodal' className="overlay">
-
+      <div id="qmodal" className="overlay">
         <form className="qmodal" onSubmit={submitHandler}>
-        <button onClick={()=> onClose(false)}>Close</button>
-        <h2>Submit Question:</h2>
-          <h3>Product: {current.name}</h3>
+          <button onClick={() => onClose(false)}>Close</button>
+          <ClickTracker
+            selector={`${element}-Qmodal_Title-ProductId:${id}`}
+            WrappedComponent={
+              <div>
+                <h2>Submit Question:</h2>
+                <h3>Product: {current.name}</h3>
+              </div>
+            }
+          />
+ <ClickTracker
+            selector={`${element}-Qmodal_Form-ProductId:${id}`}
+            WrappedComponent={
+              <div>
           <div>
-            <label>Nickname:</label><br></br>
+            <label>Nickname:</label>
+            <br></br>
             <input
               onChange={changeHandler}
               type="text"
@@ -60,27 +75,32 @@ var Qmodal = ({ open, onClose, current, }) => {
             ></input>
           </div>
           <div>
-            <label>Email:</label><br></br>
+            <label>Email:</label>
+            <br></br>
             <input
               onChange={changeHandler}
               type="text"
               name="email"
               id="qemail"
               value={email}
-              pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             ></input>
           </div>
           <div>
-            <label>Question:</label><br></br>
+            <label>Question:</label>
+            <br></br>
             <textarea
               onChange={changeHandler}
-              maxLength='1000'
+              maxLength="1000"
               name="question"
               id="question"
-              value = {question}
+              value={question}
               required
             ></textarea>
           </div>
+          </div>
+        }
+          />
           <button type="submit">Submit Question</button>
         </form>
       </div>

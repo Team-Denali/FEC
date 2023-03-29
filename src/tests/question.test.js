@@ -127,7 +127,7 @@ const singleQuestion = {
         photos: [],
       },
     },
-  };
+};
 const singleAnswer = {
     id: 5988080,
     body: "hi",
@@ -135,7 +135,8 @@ const singleAnswer = {
     answerer_name: "Pencil Pusher",
     helpfulness: 0,
     photos: [],
-  }
+};
+const testProduct = 'camo onesie';
 
 test("expect QnA Component to render string", async () => {
   render(<QuestionsAnswers current={productData} />);
@@ -154,5 +155,25 @@ test("expect AnswerList Component to render string from the prop data passed in"
   render(<AnswerList answer={singleAnswer} />);
   let value =  screen.getByText(singleAnswer.answerer_name);
   expect(value).toBeInTheDocument();
+});
+
+test("expect Amodal to not render", async () => {
+  const value = render(<Amodal open={false} />);
+  await (()=> {
+  expect(value).toEqual(null)
+  });
+});
+
+test("expect Amodal to render the product name ", async () => {
+  render(<Amodal open = {true} question = '' product= {testProduct}/>);
+  let value =  screen.getByText('Product: camo onesie');
+  expect(value).toBeInTheDocument();
+});
+
+test("expect Qmodal to not render", async () => {
+  const value = render(<Qmodal open={false} />);
+  await (()=> {
+  expect(value).toEqual(null)
+  });
 });
 
