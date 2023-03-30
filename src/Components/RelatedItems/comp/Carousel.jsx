@@ -96,23 +96,15 @@ var Carousel = ({items}) => {
   }
 
   const retriggerTransition = () => {
-    console.log('retrigger transition?')
+    // console.log('retrigger transition?')
     if (transition === false) {
-      console.log('YES')
+      // console.log('YES')
       setTransition(true);
     } else {
-      console.log('NO')
+      // console.log('NO')
     }
   }
-  const retriggerTransitionCB = (node, cb) => {
-    console.log('retrigger transition?')
-    if (transition === false) {
-      console.log('YES')
-      setTransition(true);
-    } else {
-      console.log('NO')
-    }
-  }
+
   useEffect(() => {
     // console.log('rendering carousel OR change to current item; resetting scroll\n', current)
     setScroll(0)
@@ -161,7 +153,7 @@ var Carousel = ({items}) => {
                   // onExit={() => console.log('exit')}
                   // onExiting={() => {console.log('exiting');}}
                   // onExited={() => console.log('exited')}
-                  // addEndListener={() => retriggerTransition()}
+                  addEndListener={() => retriggerTransition()}
                   timeout={{'enter?': 2000}} >
                   <div>{item}</div>
                 </Grow>
