@@ -55,8 +55,10 @@ const QuestionsAnswers = ({ current }) => {
   });
   // get questions on initial render
   useEffect(() => {
-    getQuestions()
-    setResult(2);
+    if (product) {
+      getQuestions()
+      setResult(2);
+    }
   }, [product]);
 
   //sort an array of objects based no helpfulnes using the searched input as a first check

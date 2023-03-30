@@ -45,8 +45,9 @@ var Overview = ({ current }) => {
       });
   };
   useEffect(() => {
-
-    styleFinder(current.id);
+    if (current.id) {
+      styleFinder(current.id);
+    }
   }, [current]);
 
   //console.log('THE CURRENT PRICE:', current.default_price)//changeStyle(styles[0]);

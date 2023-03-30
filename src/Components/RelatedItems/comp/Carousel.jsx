@@ -155,13 +155,13 @@ var Carousel = ({items}) => {
               <li key={index} style={liStyle} >
                 <Grow
                   in={transition}
-                  onEnter={() => console.log('enter')}
-                  onEntering={() => console.log('entering')}
-                  onEntered={() => console.log('entered')}
-                  onExit={() => console.log('exit')}
-                  onExiting={() => {console.log('exiting'); /*retriggerTransition();*/}}
-                  onExited={() => console.log('exited')}
-                  addEndListener={() => retriggerTransition()}
+                  // onEnter={() => console.log('enter')}
+                  // onEntering={() => console.log('entering')}
+                  // onEntered={() => console.log('entered')}
+                  // onExit={() => console.log('exit')}
+                  // onExiting={() => {console.log('exiting');}}
+                  // onExited={() => console.log('exited')}
+                  // addEndListener={() => retriggerTransition()}
                   timeout={{'enter?': 2000}} >
                   <div>{item}</div>
                 </Grow>
