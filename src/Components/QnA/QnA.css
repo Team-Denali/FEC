@@ -12,8 +12,8 @@
   flex-direction: row;
   font-size: medium;
   justify-content: space-between;
-  background: white;
-  width: auto;
+  /* background: white; */
+  width: 900px;
   padding: 1rem;
   margin: 0.5rem;
 
@@ -25,11 +25,12 @@
   font-weight: 100;
   flex-direction: column;
   justify-content: space-between;
-  background: white;
+  /* background: white; */
+  width: 600px;
   width: 700px;
   padding: 1rem;
   margin: 0.5rem;
-  border: 2px solid darkgrey;
+  /* border: 2px solid darkgrey; */
   border-radius: 0.25rem;
 }
 
@@ -55,7 +56,7 @@
 .qaSearchContainer {
   display: flex;
   border: solid;
-  border-color: white;
+  /* border-color: white; */
   padding: 10px;
   margin: 10px;
   width: auto;
@@ -69,7 +70,7 @@
   flex-direction: row;
   justify-content: space-between;
   border: solid;
-  border-color: white;
+  /* border-color: white; */
   padding: 10px;
   margin: 10px;
   flex-basis: 500px;
@@ -79,7 +80,7 @@
   display: flex;
   justify-content: space-evenly;
   border: solid;
-  border-color: white;
+  /* border-color: white; */
   margin: 10px;
 }
 .qAnswerInfo {
@@ -99,7 +100,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  /* background-color: #fff; */
   padding: 40px;
   z-index: 1000;
   border-radius: 20px;
@@ -134,7 +135,7 @@
 
 .buttonStyle {
   align-items: center;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;

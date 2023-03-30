@@ -78,8 +78,10 @@ const Reviews = (props) => { //include state variables for currently viewed prod
   // }
 
   useEffect(() => {
-    getReviews();
-    getReviewsStars();
+    if (product_id) {
+      getReviews();
+      getReviewsStars();
+    }
   },[product_id, sortmethod]);
 
   return (

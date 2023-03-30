@@ -65,9 +65,10 @@ var Overview = ({ current }) => {
 
   useEffect(() => {
 
-
-
-    if (current.id) {styleFinder(current.id); GetProductReviews(current.id);}
+    if (current.id) {
+      styleFinder(current.id);
+      GetProductReviews(current.id);
+    }
   }, [current]);
 
   //console.log('THE CURRENT PRICE:', current.default_price)//changeStyle(styles[0]);
