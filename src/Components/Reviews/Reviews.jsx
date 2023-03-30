@@ -18,7 +18,7 @@ const Reviews = () => { //include state variables for currently viewed product
   const [filter, setFilter] = useState(0);
 
   //console.log('id:',props.current.id)
-  var product_id = props.current.id || "";
+  // var product_id = props.current.id || "";
 
   const getReviews = () => {
     axios.get('/reviews', {

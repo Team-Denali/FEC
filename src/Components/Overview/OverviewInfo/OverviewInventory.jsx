@@ -11,7 +11,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 // Huzzah for jsx!
 
-var OverviewInventory = ({ num }) => {
+var OverviewInventory = ({ num , cartQuantity, setCartQuantity}) => {
   let quantArr = _.range(num + 1);
   quantArr.shift(); //include state variables for currently viewed product
   if (num <= 0) {
@@ -30,7 +30,7 @@ var OverviewInventory = ({ num }) => {
     <>
       <FormControl >
         <InputLabel id="select-quantity">SELECT QUANTITY</InputLabel >
-        <Select style={{width: '200px'}}label="SELECT QUANTITY">
+        <Select style={{width: '200px'}}label="SELECT QUANTITY" onChange={(e) => {setCartQuantity(e.target.value)}}>
           {quantArr.map((num) => {
             if (num <= 15) {
               return <MenuItem value={num}>{num}</MenuItem>;
