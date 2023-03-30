@@ -1,9 +1,9 @@
 import React from "react";
 import $ from "jquery"; // Bring React in to build a component.
-
 import { useState, useEffect } from "react"; //var arr = [1, 2, 3];//import { createRoot } from "react-dom/client";
 
-const ExpandedView = require("./ExpandedView").ExpandedView;
+const ExpandedView = require("./ExpandedView").ExpandedView; import RefactoredCarousel from './RefactoredCarousel.jsx';
+
 import ZoomedView from "./ZoomedView";
 import FlipToBackIcon from "@mui/icons-material/FlipToBack"; //ChangePic = require('./ExpandedView').ChangePic;//SlMagnifier// Huzzah for jsx!
 
@@ -53,13 +53,13 @@ var OverviewMainPic = ({
         style={{
           position: "relative",
 
-          width: "100%", //overflow: 'hidden',
+          width: "50%", //overflow: 'hidden',
           height: "auto",
           display: "flex",
           justifyContent: "space-between",
         }}
-      >
-        {styleView.photos.map((photo, i) => (
+      ><RefactoredCarousel style={{zIndex: '5'}} items={styleView.photos}/>
+        {/* {styleView.photos.map((photo, i) => (
           <>
             <div
               key={i}
@@ -86,7 +86,7 @@ var OverviewMainPic = ({
             ></div>
             <br></br>
           </>
-        ))}
+        ))} */}
       </div>
 
       <div

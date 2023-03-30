@@ -69,7 +69,7 @@ var OverviewCart = ({ current, styleView, itemName }) => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select" style={{width: '150px'}}
-                value={cartSize}
+                value=''
                 label="SELECT SIZE"
                 onChange={(e) => {
                   console.log("switched", e.target.value);
