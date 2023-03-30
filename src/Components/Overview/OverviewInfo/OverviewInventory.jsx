@@ -59,7 +59,6 @@ onChange={(e) => {
   //console.log("switched", e.target.value);
   setNum(styleView.skus[e.target.value].quantity);
 
-<<<<<<< HEAD
   setCartSize(styleView.skus[e.target.value].size);
 
 }}
@@ -79,8 +78,6 @@ onChange={(e) => {
 </Select></FormControl> */
   }
 };
-=======
-}
->>>>>>> 815730a59e51888eef2ec7905e55ed82b8897552
+
 
 export default OverviewInventory;
