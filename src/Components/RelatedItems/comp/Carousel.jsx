@@ -1,7 +1,6 @@
 import React from 'react';
 import {useState, useEffect, useContext} from 'react';
 import Grow from '@mui/material/Grow';
-import anime from 'animejs/lib/anime.es.js';
 
 import ClickTracker from '../../../ClickTracker.jsx';
 import ElementContext from './../../../ElementContext.js';

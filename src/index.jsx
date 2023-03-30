@@ -8,7 +8,6 @@ const Reviews = lazy(() => import("./Components/Reviews/Reviews.jsx"));
 
 import axios from 'axios';
 
-import ModuleContext from './ModuleContext.js';
 import CurrentContext from './CurrentContext.js';
 import ModuleContext from './ModuleContext.js';
 

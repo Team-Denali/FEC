@@ -148,7 +148,7 @@ const QuestionsAnswers = ({ current }) => {
                   }
                 />
               )}
-              {!hideButton && (
+              {!hideButton && sortedArray.length > 2 && (
                 <Button variant="outlined" onClick={() => setResult(2)}>
                   COLLAPSE QUESTIONS
                 </Button>

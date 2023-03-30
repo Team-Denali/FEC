@@ -8,10 +8,6 @@ import RelatedItemsList from './/comp/RelatedItemsList.jsx';
 import YourOutfitList from './/comp/YourOutfitList.jsx';
 
 import ElementContext from '../../ElementContext.js';
-import uniq from 'lodash/uniq';
-
-
-
 
 var RelatedItems = ({current, setCurrent}) => {
   const [related, setRelated] = useState([]);
@@ -81,6 +77,7 @@ var RelatedItems = ({current, setCurrent}) => {
     var newOutfit = outfit.slice();
     newOutfit.splice(index, 1);
     setOutfit(newOutfit);
+  };
   function getProducts(suffix) {
     return axios.get(`/products${suffix === undefined ? '' : '/' + suffix}`)
       .catch((err) => {
@@ -175,5 +172,6 @@ var RelatedItems = ({current, setCurrent}) => {
     </div>
   );
 }
+
 
 export default RelatedItems;
