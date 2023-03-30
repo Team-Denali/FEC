@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AnswerList from "./AnswerList.jsx";
 import axios from "axios";
 import Amodal from "./AnswerModal.jsx";
-import {
-  BsFillArrowUpSquareFill,
-  BsFillArrowDownSquareFill,
-} from "react-icons/bs";
-import { MdOutlineExpandCircleDown } from "react-icons/md";
+// import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+//import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+// import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
+//import { MdOutlineExpandCircleDown } from "react-icons/md";
 import "./QnA.css";
+import Button from "@mui/material/Button";
+import ElementContext from "../../ElementContext.js";
+import ClickTracker from "../../ClickTracker.jsx";
 
-const QuestionList = ({ question }) => {
+const QuestionList = ({ product, question, key }) => {
+  const element = useContext(ElementContext);
   const [answers, setAnswers] = useState(question.answers);
   const [result, setResult] = useState(2);
   const [modal, setModal] = useState(false);
-
+  const id = question.question_id;
   //formats our answers to make it able to slice
   function format(answers) {
     let answerArray = [];
@@ -24,9 +27,24 @@ const QuestionList = ({ question }) => {
   }
   let array = format(answers);
   //set seller to #1 result
-  const sortedArray = array.sort((a, b) =>
+
+  let sortedArray = array.sort((a, b) =>
     a.helpfulness < b.helpfulness ? 1 : -1
   );
+
+  function concattedArray() {
+    let sortArray = sortedArray;
+    let concatArray = [];
+    sortArray.forEach((element, index) => {
+      if (element.answerer_name.toLowerCase() === "seller") {
+        concatArray = sortArray.splice(index, 1);
+      }
+    });
+    return concatArray.concat(sortArray);
+  }
+
+  const newArray = concattedArray();
+
   //slices the data to show more answers on request
   function clickHandler(amount) {
     setResult((currentResult) => {
@@ -43,7 +61,7 @@ const QuestionList = ({ question }) => {
         },
       })
       .then((res) => {
-        console.log("response to put for questions", res);
+        // console.log("response to put for questions", res);
       })
       .catch((err) => {
         console.log(err);
@@ -51,7 +69,7 @@ const QuestionList = ({ question }) => {
   }
   //reports questions for violations
   function reportHandler(event) {
-    event.target.innerText = "ReportEDdddd";
+    event.target.innerText = "REPORTED";
     axios
       .put(`/qa/questions/${question.question_id}/report`, {
         params: {
@@ -59,7 +77,7 @@ const QuestionList = ({ question }) => {
         },
       })
       .then((res) => {
-        console.log("response to put for questions", res);
+        // console.log("response to put for questions", res);
       })
       .catch((err) => {
         console.log(err);
@@ -67,58 +85,98 @@ const QuestionList = ({ question }) => {
   }
   //keeps the questions list updated
   useEffect(() => {
-    setAnswers(question.answers)
+    setAnswers(question.answers);
   }, [question]);
 
   return (
     <>
       <div className="qQuestionCard">
         <div>
-          <div>
-            <b>Q: {question.question_body}</b>
-          </div>
-          <br></br>
-
-          {array.slice(0, result).map((answer, i) => (
-            <AnswerList answer={answer} key={i} />
+          <ElementContext.Provider value={`${element}-Questioncard-${id}`}>
+            <ClickTracker
+              selector={`${element}-QuestionTitle-questionId:${id}`}
+              WrappedComponent={
+                <div>
+                  <b>Q: {question.question_body}</b>
+                </div>
+              }
+            />
+          </ElementContext.Provider>
+          {newArray.slice(0, result).map((answer, i) => (
+            <ClickTracker
+              selector={`${element}-AnswerCard-questionId:${id}`}
+              WrappedComponent={<AnswerList answer={answer} key={i} />}
+            />
           ))}
-
           {result < array.length && (
-            <button
-              className="buttonStyle"
-              style={{ height: "1rem" }}
-              onClick={() => clickHandler(array.length)}
-            >
-              Load More Answers <MdOutlineExpandCircleDown />
-            </button>
+            <ClickTracker
+              selector={`${element}-Load_More_Question_Button-${id}`}
+              WrappedComponent={
+                <Button
+                  size="small"
+                  variant="outlined"
+                  onClick={() => clickHandler(array.length)}
+                >
+                  Load More Answers <MdOutlineExpandCircleDown />
+                </Button>
+              }
+            />
           )}
           {array.length > 2 && result > array.length && (
-            <button
-              className="buttonStyle"
-              style={{ height: "1rem" }}
-              onClick={() => setResult(2)}
-            >
-              Collapse Answers <MdOutlineExpandCircleDown />
-            </button>
+            <ClickTracker
+              selector={`${element}-Collapse_Button-${id}`}
+              WrappedComponent={
+                <Button
+                  className="buttonStyle"
+                  style={{ height: "1rem" }}
+                  onClick={() => setResult(2)}
+                >
+                  Collapse Answers <MdOutlineExpandCircleDown />
+                </Button>
+              }
+            />
           )}
         </div>
-        <div>
-          <BsFillArrowUpSquareFill className="vote" onClick={voteHandler} />(
-          {question.question_helpfulness}) Upvote!
-          <button
-            style={{ background: "white", border: "none", cursor: "pointer" }}
-            onClick={() => setModal(true)}
-          >
-            <b>Add Answer</b>
-          </button>{" "}
-          <a onClick={reportHandler} style={{ cursor: "pointer" }}>
-            Report
-          </a>
+
+        <div style={{display: 'flex', flexDirection: 'column'}} >
+          Helpful?
+          <ClickTracker
+            selector={`${element}-Vote_Q_Button-${id}`}
+            WrappedComponent={
+              <Button style = {{fontSize: '12px'}} className="vote" onClick={voteHandler}>
+                Helpful?[
+                {question.question_helpfulness}]{" "}
+              </Button>
+            }
+          />
+          <ClickTracker
+            selector={`${element}-Add_Answer_Button-${id}`}
+            WrappedComponent={
+              <Button style = {{fontSize: '12px'}}  size="small" onClick={() => setModal(true)}>
+                <b>Add Answer</b>
+              </Button>
+            }
+          />
+          <ClickTracker
+            selector={`${element}-Report_Q_Button-${id}`}
+            WrappedComponent={
+              <Button
+              style = {{fontSize: '12px'}}
+                size="small"
+                onClick={reportHandler}
+                style={{ cursor: "pointer" }}
+              >
+                Report
+              </Button>
+            }
+          />
         </div>
+
         <Amodal
           open={modal}
           onClose={setModal}
-          question={question.question_id}
+          question={question}
+          product={product}
         />
       </div>
     </>

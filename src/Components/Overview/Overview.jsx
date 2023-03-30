@@ -25,6 +25,7 @@ var Overview = ({ current }) => {
 
   };
   const styleFinder = (currentId) => {
+    if (currentId) {
 
     let styleId = currentId;
 
@@ -43,6 +44,7 @@ var Overview = ({ current }) => {
       .catch((err) => {
         console.log("axios req error:", err);
       });
+    }
   };
 
 
@@ -52,7 +54,7 @@ var Overview = ({ current }) => {
     setItemreviews(res.data.results); setReviewNum(res.data.results.length); //console.log('overview Review retrieval:', itemreviews);
     return axios.get(`${url}/reviews/meta`, {params: params})
     .then((res) => { //console.log('GetRS:' , res.data.ratings)
-      
+
       setStarRating(res.data.ratings); //console.log('overviewMetaReview data retrieval:', starRating)
     })
 

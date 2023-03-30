@@ -1,12 +1,13 @@
-import React from 'react';
-import { useState, useEffect, createContext } from 'react';
+import React from 'react';// Bring React in to build a component.
+import { lazy, useState, useEffect, createContext } from 'react';
 import { createRoot } from "react-dom/client";
+const Overview = lazy(() => import("./Components/Overview/Overview.jsx"));
+const QuestionsAnswers = lazy(() => import("./Components/QnA/QnA.jsx"));
+const RelatedItems = lazy(() => import("./Components/RelatedItems/RelatedItems.jsx"));
+const Reviews = lazy(() => import("./Components/Reviews/Reviews.jsx"));
+
 import axios from 'axios';
 
-import Overview from './Components/Overview/Overview.jsx';
-import QuestionsAnswers from './Components/QnA/QnA.jsx';
-import Reviews from './Components/Reviews/Reviews.jsx';
-import RelatedItems from './Components/RelatedItems/RelatedItems.jsx';
 import ModuleContext from './ModuleContext.js';
 import CurrentContext from './CurrentContext.js';
 
@@ -39,6 +40,10 @@ const App = () => {
     //   getProducts('37345')
     //     .then(res => setCurrent(res.data))
     // }
+    // if(!current.id) {
+    //   getProducts('37345')
+    //     .then(res => setCurrent(res.data))
+    // }
     if(!current.id) {
       getProducts('37311')
         .then(res => setCurrent(res.data))
@@ -63,11 +68,11 @@ const App = () => {
         <ModuleContext.Provider value='questions-answers'>
           <QuestionsAnswers current={current} />
         </ModuleContext.Provider>
-        <ModuleContext.Provider value='reviews'>
-          <Reviews current={current}/>
-        </ModuleContext.Provider>
         <ModuleContext.Provider value='related-items'>
           <RelatedItems current={current} setCurrentById={setCurrentById} getProducts={getProducts}/>
+        </ModuleContext.Provider>
+        <ModuleContext.Provider value='reviews'>
+          <Reviews current={current.id}/>
         </ModuleContext.Provider>
       </CurrentContext.Provider>
     </>
