@@ -1,19 +1,19 @@
-import React from 'react';// Bring React in to build a component.
-import {useState, useEffect} from 'react';
+import React from 'react'; import $ from 'jquery';// Bring React in to build a component.
+import {useState, useEffect} from 'react'; const ExpandedView = require("./ExpandedView").ExpandedView;
 
 
-var RefactoredCarousel = ({items}) => {
+var RefactoredCarousel = ({items, pic, setPic}) => {
 
   var checkRenderFwd1 = () => {
     // console.log('scroll and length: ', scroll, items.length)
-    if (items.length > 7 && ((items.length - 7) * -14) < scroll1) { //change four to seven? 25 to ~14?
+    if (items.length > 7 && ((items.length - 7) * 14) > scroll1) { //change four to seven? 25 to ~14?
       return true
     } else {
       return false
     }
   }
   var checkRenderBack1 = () => {
-    if (scroll1 < 0 && items.length > 14) {
+    if (scroll1 > 0 && items.length > 7) {
 
       return true
     } else {
@@ -34,7 +34,7 @@ var RefactoredCarousel = ({items}) => {
     color: 'blue',
     borderStyle: 'solid',
 
-    margin: '2%',
+    margin: '2%', height: '80%',
     padding: '2%',
 
     borderRadius: '10%',
@@ -45,7 +45,7 @@ var RefactoredCarousel = ({items}) => {
     overflow: 'hidden',
     height: '100%',
     // width: `${Math.max(25 * items.length, 100)}%`,
-    width: `50%`,
+    width: `57%`,
     maxHeight: `75vh`
   };
   const ulStyle1 = {
@@ -66,7 +66,7 @@ var RefactoredCarousel = ({items}) => {
 
     textAlign: 'center',
     textDecoration: 'none',
-    // height: '14%',
+    border: '3px solid black',// height: '14%',
     margin: '0.1vw'
 
   }
@@ -74,14 +74,14 @@ var RefactoredCarousel = ({items}) => {
     position: 'absolute',
     zIndex: 6,
     color: 'rgb(87 72 72)',
-    top: '0%',
-    right: '-3%',
-    display: 'flex',
-    justifyContent: 'center',
-    height: '15%',
-    width: '100%',
-    alignItems: 'center',
-    background: 'linear-gradient(to right, #0000, #2a0303 50%)'
+    // top: '0%',
+    // right: '-3%',
+    // display: 'flex',
+    // justifyContent: 'center',
+    // height: '15%',
+    // width: '100%',
+    // alignItems: 'center',
+    background: 'linear-gradient(to right, #0000, #4e1919db 50%)'
   }
   const leftArrowStyle1 = {
     position: 'absolute',
@@ -93,8 +93,8 @@ var RefactoredCarousel = ({items}) => {
     // justifyContent: 'center',
     // height: '15%',
     // width: '100%',
-    // alignItems: 'center',
-    background: 'linear-gradient(to left, #0000, #090000 50%)'
+    bottom: '50px',// alignItems: 'center',
+    background: 'linear-gradient(to left, #0000, #4f1818c8 50%)'
 
 
   }
@@ -115,12 +115,12 @@ var RefactoredCarousel = ({items}) => {
   var handleClickForward1 = (e) => {
     e.stopPropagation();
     // console.log('clicked arrow');
-    setScroll1(scroll1 - 14);
+    setScroll1(scroll1 + 14);
   }
   var handleClickBack1= (e) => {
     e.stopPropagation();
     // console.log('clicked arrow');
-    setScroll1(scroll1 + 14);
+    setScroll1(scroll1 - 14);
   }
 
   return (
@@ -130,12 +130,20 @@ var RefactoredCarousel = ({items}) => {
       </div>) : ''}
       <div style={divStyle1} >
           <ul style={ulStyle1} >
-            {items.map((item, index) => {console.log(item); return (<li key={index} style={liStyle1} ><img style={{height:'50px', width: '50px' }} src={item.thumbnail_url}></img></li>)})}
+            {items.map((item, index) => {  return (<li key={index} style={liStyle1} ><img className='overviewMiniPic' onClick={(e) => {
+                e.preventDefault();
+                $(".overviewMiniPic").css({ "border-color": "black" });
+                $(document.getElementsByClassName("overviewMiniPic")[index]).css({
+                  "border-color": "yellow",
+                });
+                setPic(item.url);
+                e.stopPropagation();
+              }} style={{height:'70px', width: '59px' }} src={item.thumbnail_url}></img></li>)})}
           </ul>
       </div >
-      {renderBack1 ? (<div style={leftArrowStyle1} onClick={handleClickForward1} >
-        <h1>{''}</h1>
-      </div>) : '⌄'}
+      {renderFwd1 ? (<div style={leftArrowStyle1} onClick={handleClickForward1} >
+        <h1>{'⌄'}</h1>
+      </div>) : ''}
     </div>
   );
 }

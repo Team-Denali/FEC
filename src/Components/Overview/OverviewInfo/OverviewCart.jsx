@@ -26,7 +26,7 @@ var OverviewCart = ({ current, styleView, itemName }) => {
   const [cartPrice, setCartPrice] = useState("");
   const [clicked, setClicked] = useState(false);
   const [cartItem, setCartItem] = useState(itemName); //itemName
-
+var button = 'ADD TO CART'
   const [cartObj, setCartObj] = useState({});
   const [cart, setCart] = useState([]); //include state variables for currently viewed product
   if (!Object.keys(styleView).length) {
@@ -130,12 +130,17 @@ var OverviewCart = ({ current, styleView, itemName }) => {
 
             > */}
 
-            <OverviewInventory num={num} />
+            <OverviewInventory cartQuantity={cartQuantity} setCartQuantity={setCartQuantity} num={num} />
             {/* </select>{" "} */}
           </div>
         </div>
         <div className="cartBottomRow">
+
+          <div>SIZE: {cartSize}</div>
+            <div>QUANTITY: {cartQuantity}</div>
+
           <div className="addToCart">
+
             <Button
               className="cartAddButton"
               onClick={(e) => {
@@ -152,13 +157,13 @@ var OverviewCart = ({ current, styleView, itemName }) => {
                   size: cartSize,
                   quantity: cartQuantity,
                   price: cartPrice,
-                }); //setCart([...cart, cartObj])//}, [cartItem, cartStyle])
+                }); setCartSize(''); setCartQuantity('');//setCart([...cart, cartObj])//}, [cartItem, cartStyle])
 
-                console.log("item added:", cartObj);
+                console.log("Added to Cart!") ;
               }}
               variant="outlined"
             >
-              Add To Cart
+              {button}
             </Button>
           </div>
         </div>

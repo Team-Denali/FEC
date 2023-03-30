@@ -58,7 +58,7 @@ var OverviewMainPic = ({
           display: "flex",
           justifyContent: "space-between",
         }}
-      ><RefactoredCarousel style={{zIndex: '5'}} items={styleView.photos}/>
+      ><RefactoredCarousel pic={pic} setPic={setPic} style={{zIndex: '5'}} items={styleView.photos}/>
         {/* {styleView.photos.map((photo, i) => (
           <>
             <div
