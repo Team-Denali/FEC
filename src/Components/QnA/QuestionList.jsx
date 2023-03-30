@@ -117,7 +117,7 @@ const QuestionList = ({ product, question, key }) => {
                   variant="outlined"
                   onClick={() => clickHandler(array.length)}
                 >
-                  Load More Answers <MdOutlineExpandCircleDown />
+                  Load More Answers
                 </Button>
               }
             />
@@ -131,7 +131,7 @@ const QuestionList = ({ product, question, key }) => {
                   style={{ height: "1rem" }}
                   onClick={() => setResult(2)}
                 >
-                  Collapse Answers <MdOutlineExpandCircleDown />
+                  Collapse Answers 
                 </Button>
               }
             />

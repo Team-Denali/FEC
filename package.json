@@ -6,6 +6,7 @@
   "scripts": {
     "server-dev": "npx nodemon --watch server server/index.js",
     "test": "jest --watch",
+    "test-related-items": "jest --watchAll src/tests/related.test.js",
     "start": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
     "dev": "webpack serve --open"
@@ -51,6 +52,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-router-dom": "^6.9.0",
+    "react-router-hash-link": "^2.4.3",
     "style-loader": "^3.3.2",
     "styled-components": "^5.3.9",
     "webpack": "^5.76.3",

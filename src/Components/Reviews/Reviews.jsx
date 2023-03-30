@@ -17,7 +17,7 @@ import {BodyProvider} from '../../BodyContext.jsx';
 
 // Huzzah for jsx!
 const Reviews = (props) => { //include state variables for currently viewed product
-  //const [product_id, setProduct_id] = useState("37311");
+  // const [product_id, setProduct_id] = useState("37311");
   const [reviews, setReviews] = useState({});
   const [reviewStars, setReviewStars] = useState('');
   const [sortmethod,setSortmethod] = useState('relevant');
@@ -78,8 +78,10 @@ const Reviews = (props) => { //include state variables for currently viewed prod
   // }
 
   useEffect(() => {
-    getReviews();
-    getReviewsStars();
+    if (product_id) {
+      getReviews();
+      getReviewsStars();
+    }
   },[product_id, sortmethod]);
 
   return (

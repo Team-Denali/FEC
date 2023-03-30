@@ -41,7 +41,7 @@ var ProductStars = ({id, size}) => {
   }, [id]);
 
   return (
-    <Rating name="qtr-rating-read" defaultValue={2.5} value={rating} precision={0.25} readOnly size={size} />
+    <Rating name="qtr-rating-read" value={rating || 0} precision={0.25} readOnly size={size} />
   );
 }
 

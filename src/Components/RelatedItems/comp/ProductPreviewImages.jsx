@@ -1,5 +1,7 @@
 import React from 'react';// Bring React in to build a component.
 import {useState, useEffect, useContext} from 'react';
+import Grow from '@mui/material/Grow';
+
 import Carousel from './Carousel.jsx';
 
 import ElementContext from './../../../ElementContext.js';
@@ -61,12 +63,13 @@ var Thumbnail = ({image, setImage}) => {
     backgroundImage: `url(${image.url})`,
     filter: 'blur(8px)'
   }
-
   return (
     <ClickTracker selector={`${element}-thumbnail-${image.index}`} WrappedComponent={(
       <div style={outerDivStyle} >
         <div style={divStyle} onClick={e => {setImage(image);}} >
+        <Grow in={true} timeout={2000} >
           <img style={imgStyle} src={image.thumbnail_url} ></img>
+        </Grow>
           {/* <img style={imgBGStyle} src={image.url} ></img> */}
         </div>
       </div>
