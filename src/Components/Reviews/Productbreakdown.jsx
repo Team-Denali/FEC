@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 
 const Productbreakdown = (props) => {
   var ch = props.reviewStars.characteristics||{};
@@ -104,23 +105,265 @@ const Productbreakdown = (props) => {
   ];
     return (
       <div className="SizeComfort">
-      {ch.Comfort ? (<div  className="characteristic">comfort:
-      <Slider value={comfortv} step={0.1} marks={markcomfort} min={1} max={5} track={false} size={'small'} disabled />
+      {ch.Comfort ? (<div  className="characteristic">COMFORT
+
+      <Slider
+  value={comfortv}
+  step={0.5}
+  marks={markcomfort}
+  min={1}
+  max={5}
+  track={false}
+  size={'small'}
+  disabled
+  sx={{
+    height: 10,
+    '& .MuiSlider-track': {
+      height: 5,
+    },
+    '& .MuiSlider-rail': {
+      height: 5,
+      borderRadius: 0.5,
+      backgroundImage: 'linear-gradient(to right, #3f51b5, #3f51b5 24%, #eee 24%, #eee 26%, #3f51b5 26%, #3f51b5 49%, #eee 49%, #eee 51%, #3f51b5 51%, #3f51b5 74%, #eee 74%, #eee 76%, #3f51b5 76%, #3f51b5)',
+    },
+    '& .MuiSlider-mark': {
+      display: 'none',
+    },
+    '& .MuiSlider-markLabel': {
+      fontSize: '1px',
+      fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+      color: 'grey',
+    },
+    '& .MuiSlider-thumb': {
+      backgroundColor: 'transparent',
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+      borderWidth: '0 7px 14px 7px',
+      borderColor: 'transparent transparent #757575 transparent',
+      transform: 'translateY(-6px) rotate(180deg)',
+      boxShadow: 'none',
+    },
+  }}
+/>
       </div>):null}
-      { ch.Fit?(<div  className="characteristic"> &nbsp; &nbsp; fit: &nbsp; &nbsp; &nbsp;
-      <Slider value={fitv} step={0.1} marks={markfit} min={1} max={5} track={false} size={'small'} disabled />
+      { ch.Fit?(<div  className="characteristic"> FIT &nbsp; &nbsp; &nbsp;
+
+      <Slider
+  value={fitv}
+  step={0.5}
+  marks={markfit}
+  min={1}
+  max={5}
+  track={false}
+  size={'small'}
+  disabled
+  sx={{
+    height: 10,
+    '& .MuiSlider-track': {
+      height: 5,
+    },
+    '& .MuiSlider-rail': {
+      height: 5,
+      borderRadius: 0.5,
+      backgroundImage: 'linear-gradient(to right, #3f51b5, #3f51b5 24%, #eee 24%, #eee 26%, #3f51b5 26%, #3f51b5 49%, #eee 49%, #eee 51%, #3f51b5 51%, #3f51b5 74%, #eee 74%, #eee 76%, #3f51b5 76%, #3f51b5)',
+    },
+    '& .MuiSlider-mark': {
+      display: 'none',
+    },
+    '& .MuiSlider-markLabel': {
+      fontSize: '1px',
+      fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+      color: 'grey',
+    },
+    '& .MuiSlider-thumb': {
+      backgroundColor: 'transparent',
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+      borderWidth: '0 7px 14px 7px',
+      borderColor: 'transparent transparent #757575 transparent',
+      transform: 'translateY(-6px) rotate(180deg)',
+      boxShadow: 'none',
+    },
+  }}
+/>
+
       </div>) : null}
-      { ch.Length?(<div  className="characteristic">length: &nbsp; &nbsp;
-      <Slider value={lengthv} step={0.1} marks={marklength} min={1} max={5} track={false} size={'small'} disabled />
+      { ch.Length?(<div  className="characteristic">LENGTH &nbsp; &nbsp;
+
+      <Slider
+  value={lengthv}
+  step={0.5}
+  marks={marklength}
+  min={1}
+  max={5}
+  track={false}
+  size={'small'}
+  disabled
+  sx={{
+    height: 10,
+    '& .MuiSlider-track': {
+      height: 5,
+    },
+    '& .MuiSlider-rail': {
+      height: 5,
+      borderRadius: 0.5,
+      backgroundImage: 'linear-gradient(to right, #3f51b5, #3f51b5 24%, #eee 24%, #eee 26%, #3f51b5 26%, #3f51b5 49%, #eee 49%, #eee 51%, #3f51b5 51%, #3f51b5 74%, #eee 74%, #eee 76%, #3f51b5 76%, #3f51b5)',
+    },
+    '& .MuiSlider-mark': {
+      display: 'none',
+    },
+    '& .MuiSlider-markLabel': {
+      fontSize: '1px',
+      fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+      color: 'grey',
+    },
+    '& .MuiSlider-thumb': {
+      backgroundColor: 'transparent',
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+      borderWidth: '0 7px 14px 7px',
+      borderColor: 'transparent transparent #757575 transparent',
+      transform: 'translateY(-6px) rotate(180deg)',
+      boxShadow: 'none',
+    },
+  }}
+/>
+
+
       </div>) : null}
-      { ch.Quality?(<div  className="characteristic">quality: &nbsp;
-      <Slider value={qualityv} step={0.1} marks={markquality} min={1} max={5} track={false} size={'small'} disabled />
+      { ch.Quality?(<div  className="characteristic">QUALITY &nbsp;
+
+      <Slider
+  value={qualityv}
+  step={0.5}
+  marks={markquality}
+  min={1}
+  max={5}
+  track={false}
+  size={'small'}
+  disabled
+  sx={{
+    height: 10,
+    '& .MuiSlider-track': {
+      height: 5,
+    },
+    '& .MuiSlider-rail': {
+      height: 5,
+      borderRadius: 0.5,
+      backgroundImage: 'linear-gradient(to right, #3f51b5, #3f51b5 24%, #eee 24%, #eee 26%, #3f51b5 26%, #3f51b5 49%, #eee 49%, #eee 51%, #3f51b5 51%, #3f51b5 74%, #eee 74%, #eee 76%, #3f51b5 76%, #3f51b5)',
+    },
+    '& .MuiSlider-mark': {
+      display: 'none',
+    },
+    '& .MuiSlider-markLabel': {
+      fontSize: '1px',
+      fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+      color: 'grey',
+    },
+    '& .MuiSlider-thumb': {
+      backgroundColor: 'transparent',
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+      borderWidth: '0 7px 14px 7px',
+      borderColor: 'transparent transparent #757575 transparent',
+      transform: 'translateY(-6px) rotate(180deg)',
+      boxShadow: 'none',
+    },
+  }}
+/>
+
       </div>) : null}
-      { ch.Size?(<div  className="characteristic">&nbsp; size: &nbsp; &nbsp;
-      <Slider value={sizev} step={0.1} marks={marksize} min={1} max={5} track={false} size={'small'} disabled />
+
+      { ch.Size?(<div  className="characteristic">&nbsp; SIZE &nbsp; &nbsp;
+
+      <Slider
+  value={sizev}
+  step={0.5}
+  marks={marksize}
+  min={1}
+  max={5}
+  track={false}
+  size={'small'}
+  disabled
+  sx={{
+    height: 10,
+    '& .MuiSlider-track': {
+      height: 5,
+    },
+    '& .MuiSlider-rail': {
+      height: 5,
+      borderRadius: 0.5,
+      backgroundImage: 'linear-gradient(to right, #3f51b5, #3f51b5 24%, #eee 24%, #eee 26%, #3f51b5 26%, #3f51b5 49%, #eee 49%, #eee 51%, #3f51b5 51%, #3f51b5 74%, #eee 74%, #eee 76%, #3f51b5 76%, #3f51b5)',
+    },
+    '& .MuiSlider-mark': {
+      display: 'none',
+    },
+    '& .MuiSlider-markLabel': {
+      fontSize: '1px',
+      fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+      color: 'grey',
+    },
+    '& .MuiSlider-thumb': {
+      backgroundColor: 'transparent',
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+      borderWidth: '0 7px 14px 7px',
+      borderColor: 'transparent transparent #757575 transparent',
+      transform: 'translateY(-6px) rotate(180deg)',
+      boxShadow: 'none',
+    },
+  }}
+/>
+
+
       </div>) : null}
-      { ch.Width?(<div  className="characteristic">width:
-      <Slider value={widthv} step={0.1} marks={markwidth} min={1} max={5} track={false} size={'small'} disabled />
+      { ch.Width?(<div  className="characteristic">WIDTH
+
+      <Slider
+  value={widthv}
+  step={0.5}
+  marks={markwidth}
+  min={1}
+  max={5}
+  track={false}
+  size={'small'}
+  disabled
+  sx={{
+    height: 10,
+    '& .MuiSlider-track': {
+      height: 5,
+    },
+    '& .MuiSlider-rail': {
+      height: 5,
+      borderRadius: 0.5,
+      backgroundImage: 'linear-gradient(to right, #3f51b5, #3f51b5 24%, #eee 24%, #eee 26%, #3f51b5 26%, #3f51b5 49%, #eee 49%, #eee 51%, #3f51b5 51%, #3f51b5 74%, #eee 74%, #eee 76%, #3f51b5 76%, #3f51b5)',
+    },
+    '& .MuiSlider-mark': {
+      display: 'none',
+    },
+    '& .MuiSlider-markLabel': {
+      fontSize: '1px',
+      fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+      color: 'grey',
+    },
+    '& .MuiSlider-thumb': {
+      backgroundColor: 'transparent',
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+      borderWidth: '0 7px 14px 7px',
+      borderColor: 'transparent transparent #757575 transparent',
+      transform: 'translateY(-6px) rotate(180deg)',
+      boxShadow: 'none',
+    },
+  }}
+/>
+
       </div>) : null}
     </div>
    )

@@ -25,12 +25,13 @@ var Overview = ({ current }) => {
 
   };
   const styleFinder = (currentId) => {
-    if(!current){return}else {
+    if (currentId) {
+
     let styleId = currentId;
 
     let paramObj = { product_id: styleId };
 
-    axios
+      axios
       .get(`${url}/styles`, { params: paramObj })
       .then((res) => {
 

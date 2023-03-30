@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import "./QnA.css";
 import { format } from "date-fns";
-import {
-  BsFillArrowUpSquareFill,
-  BsFillArrowDownSquareFill,
-} from "react-icons/bs";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import ClickTracker from "../../ClickTracker.jsx";

@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import LinearProgressWithLabel from '@mui/material/LinearProgress';
+import ElementContext from '../../ElementContext.js';
+import ClickTracker from '../../ClickTracker.jsx';
+import Typography from '@mui/material/Typography';
 
 const Ratingbreakdown = (props) => {
+  const element = useContext(ElementContext);
   const [togglefilter5, setTogglefilter5]= useState(true);
   const [togglefilter4, setTogglefilter4]= useState(true);
   const [togglefilter3, setTogglefilter3]= useState(true);
@@ -131,10 +135,13 @@ const Ratingbreakdown = (props) => {
   var width = average * 20;
   return(
     <div className='rating-breakdown'>
+
      <div className="RatingText" onClick={nofilter}>{average}
      <Rating name="read-only" value={average}  precision={0.1} size={'small'} readOnly />
 </div>
     <div className="RecommendText">{rec?Math.round((Number(rec.true)/(Number(rec.true)+Number(rec.false)))*100): 0}% of reviews recommend this product</div>
+
+    <ClickTracker selector={`${element}-starfilter5`} WrappedComponent={(
     <div className='5star'>
       <div className="BarTitle">
         <div>
@@ -144,11 +151,20 @@ const Ratingbreakdown = (props) => {
           var temp = count5starclick;
           temp.push(Date.now());
           setCount5starclick(temp);
-          }}> Five Star: {fivestar}%</Button></span>
+          }}>
+            <Typography style={{ fontSize: '10px', fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',color:'gray' }}>
+             Five Star: {fivestar}%
+            </Typography>
+
+             </Button></span>
         </div>
-      <LinearProgressWithLabel variant="determinate" value={fivestar}/>
+        <LinearProgressWithLabel variant="determinate" value={fivestar} sx={{ bgcolor: 'lightgrey', '& .MuiLinearProgress-bar': { bgcolor: '#808080', }, }}/>
+
       </div>
     </div>
+      )}/>
+
+    <ClickTracker selector={`${element}-starfilter4`} WrappedComponent={(
     <div className='4star'>
       <div className="BarTitle">
         <div>
@@ -158,11 +174,18 @@ const Ratingbreakdown = (props) => {
           var temp = count4starclick;
           temp.push(Date.now());
           setCount4starclick(temp);
-          }}> Four Star: {fourstar}%</Button></span>
+          }}>
+            <Typography style={{ fontSize: '10px', fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',color:'gray' }}>
+             Four Star: {fourstar}%
+             </Typography>
+             </Button></span>
         </div>
-      <LinearProgressWithLabel variant="determinate" value={fourstar}/>
+        <LinearProgressWithLabel variant="determinate" value={fourstar} sx={{ bgcolor: 'lightgrey', '& .MuiLinearProgress-bar': { bgcolor: '#808080', }, }}/>
     </div>
     </div>
+      )}/>
+
+    <ClickTracker selector={`${element}-starfilter3`} WrappedComponent={(
     <div className='3star'>
       <div className="BarTitle">
       <div>
@@ -172,11 +195,18 @@ const Ratingbreakdown = (props) => {
           var temp = count3starclick;
           temp.push(Date.now());
           setCount3starclick(temp);
-          }}> Three Star: {threestar}%</Button></span>
+          }}>
+          <Typography style={{ fontSize: '10px', fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',color:'gray' }}>
+          Three Star: {threestar}%
+          </Typography>
+          </Button></span>
         </div>
-      <LinearProgressWithLabel variant="determinate" value={threestar}/>
+        <LinearProgressWithLabel variant="determinate" value={threestar} sx={{ bgcolor: 'lightgrey', '& .MuiLinearProgress-bar': { bgcolor: '#808080', }, }}/>
       </div>
     </div>
+      )}/>
+
+   <ClickTracker selector={`${element}-starfilter2`} WrappedComponent={(
     <div className='2star'>
       <div className="BarTitle">
       <div>
@@ -186,11 +216,18 @@ const Ratingbreakdown = (props) => {
           var temp = count2starclick;
           temp.push(Date.now());
           setCount2starclick(temp);
-          }}> Two Star: {twostar}%</Button></span>
+          }}>
+            <Typography style={{ fontSize: '10px', fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',color:'gray' }}>
+             Two Star: {twostar}%
+             </Typography>
+             </Button></span>
         </div>
-      <LinearProgressWithLabel variant="determinate" value={twostar}/>
+        <LinearProgressWithLabel variant="determinate" value={twostar} sx={{ bgcolor: 'lightgrey', '& .MuiLinearProgress-bar': { bgcolor: '#808080', }, }}/>
       </div>
     </div>
+    )}/>
+
+   <ClickTracker selector={`${element}-starfilter1`} WrappedComponent={(
     <div className='1star'>
        <div className="BarTitle">
        <div>
@@ -199,11 +236,16 @@ const Ratingbreakdown = (props) => {
           var temp = count1starclick;
           temp.push(Date.now());
           setCount1starclick(temp);
-          }}> One Star: {onestar}%</Button></span>
+          }}>
+            <Typography style={{ fontSize: '10px', fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',color:'gray' }}>
+             One Star: {onestar}%
+             </Typography>
+             </Button></span>
         </div>
-       <LinearProgressWithLabel variant="determinate" value={onestar}/>
+        <LinearProgressWithLabel variant="determinate" value={onestar} sx={{ bgcolor: 'lightgrey', '& .MuiLinearProgress-bar': { bgcolor: '#808080', }, }}/>
        </div>
     </div>
+    )}/>
     </div>
   )
 }

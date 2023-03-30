@@ -9,26 +9,24 @@ import ClickTracker from "../../ClickTracker.jsx";
 const QuestionsAnswers = ({ current }) => {
   let product = current.id;
   const getQuestions = () => {
-    if (!current.id) {
-      return;
-    } else {
+    if (product) {
       axios
-        .get("/qa/questions", {
-          params: {
-            product_id: product, //no questions
-            // product_id: 37323, //alot of questions
-            // product_id: product //default
-            page: 1,
-            count: 40,
-          },
-        })
-        .then((res) => {
-          setQaData(res.data.results);
-          // console.log("questions:", res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .get("/qa/questions", {
+        params: {
+          product_id: product, //no questions
+          // product_id: 37323, //alot of questions
+          // product_id: product //default
+          page: 1,
+          count: 40,
+        },
+      })
+      .then((res) => {
+        setQaData(res.data.results);
+        // console.log("questions:", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   };
   useEffect(() => {

@@ -1,12 +1,116 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import axios from 'axios';
-import _ from 'lodash';
-
 import RelatedItemsList from './/comp/RelatedItemsList.jsx';
 import YourOutfitList from './/comp/YourOutfitList.jsx';
+import axios from 'axios';
 import RelatedItemsModal from './/comp/RelatedItemsModal.jsx';
 import ElementContext from '../../ElementContext.js';
+import uniq from 'lodash/uniq';
+
+
+var RelatedItemsModal = ({open, setOpen, comparison}) => {
+  var gridStyle = {
+    textAlign: 'center'
+  }
+  const modalStyle = {
+    fontFamily: 'Verdana, sans-serif',
+    color: 'rgb(87 72 72)',
+    backgroundColor: 'rgb(240, 240, 240)'
+  }
+  var nameGrid = comparison.slice(0, 1).map(feature => (
+    <Grid key={feature[1]} container spacing={1} columns={12}>
+        <Grid item xs={3} sm={3} md={3}>
+          <h4>{feature[0]}</h4>
+        </Grid>
+        <Grid item xs={6} sm={6} md={6}>
+          <div>{feature[1]}</div>
+        </Grid>
+        <Grid item xs={3} sm={3} md={3}>
+          <h4>{feature[2]}</h4>
+        </Grid>
+    </Grid>
+  ))
+  var priceGrid = comparison.slice(1, 2).map(feature => (
+    <Grid key={feature[1]} container spacing={1} columns={12}>
+        <Grid item xs={12} sm={12} md={12}>
+          <Divider></Divider>
+        </Grid>
+        <Grid item xs={3} sm={3} md={3}>
+          <div>${feature[0]}</div>
+        </Grid>
+        <Grid item xs={6} sm={6} md={6}>
+          <div>{feature[1]}</div>
+        </Grid>
+        <Grid item xs={3} sm={3} md={3}>
+          <div>${feature[2]}</div>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12}>
+          <Divider></Divider>
+        </Grid>
+      </Grid>
+    ))
+    //case 1: both have feature and theyre equal =>
+    //case 2: both have feature and not equal =>
+    //case 3: only one has that feature =>
+  var comparisonGrid = comparison.slice(2).map(feature => {
+    var left, center, right;
+    if (feature[0] === null || feature[2] === null) {
+      left = feature[0] === null ? <CheckIcon /> : '';
+      right = feature[2] === null ? <CheckIcon /> : '';
+      center = `${feature[1]}`
+    } else if (feature[0] !== feature [2] && feature[0] !== undefined && feature[2] !== undefined) {
+      left = feature[0];
+      right = feature[2];
+      center = feature[1];
+    }
+    else if (feature[0] !== feature [2] && (feature[0] !== undefined || feature[2] !== undefined)) {
+      left = feature[0] ? feature[0]: '';
+      right = feature[2] ? feature[2] : '';
+      center = `${feature[1]}`
+    }
+    else {
+      left = '???';
+      right = '???';
+      center = 'WHAT';
+    }
+
+    return (
+    <Grid key={center} container spacing={1} columns={12}>
+        <Grid item xs={3} sm={3} md={3}>
+          <div>{left}</div>
+        </Grid>
+        <Grid item xs={6} sm={6} md={6}>
+          <div>{center}</div>
+        </Grid>
+        <Grid item xs={3} sm={3} md={3}>
+          <div>{right}</div>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12}>
+          <Divider></Divider>
+        </Grid>
+    </Grid>
+    )})
+  var grid = (
+  <Grid style={gridStyle} container spacing={2} columns={12}>
+    {nameGrid.concat(priceGrid.concat(comparisonGrid))}
+  </Grid>
+  );
+  return (
+    <div>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <DialogContent style={modalStyle} >
+          <h3>Comparing:</h3>
+        </DialogContent>
+        <DialogContent style={modalStyle} >
+          <div>{grid}</div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
 
 var RelatedItems = ({current, setCurrentById, getProducts}) => {
   const [related, setRelated] = useState([]);
@@ -33,7 +137,8 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     var comparatorFeatures = mapFeatures(item.features);
     var currentKeys = Object.keys(currentFeatures);
     var comparatorKeys = Object.keys(comparatorFeatures);
-    var combinedKeys = _.uniq(currentKeys.concat(comparatorKeys)).sort();
+    // var combinedKeys = _.uniq(currentKeys.concat(comparatorKeys)).sort();
+    var combinedKeys = uniq(currentKeys.concat(comparatorKeys)).sort();
     for (var i = 0; i < combinedKeys.length; i++) {
       // if (currentFeatures[combinedKeys[i]] || comparatorFeatures[combinedKeys[i]]) {
         comparison.push([currentFeatures[combinedKeys[i]], combinedKeys[i], comparatorFeatures[combinedKeys[i]]])
@@ -85,7 +190,7 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
     return getProducts(`${current.id}/related`)
       .then(res => {
         // console.log('response: ', res);
-        let relatedIds = _.uniq(res.data);
+        let relatedIds = uniq(res.data);
         relatedIds = relatedIds.map(id => getProducts(id));
         return Promise.all(relatedIds)
       })

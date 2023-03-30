@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Rating from '@mui/material/Rating';
 import Upload from './Upload.jsx';
 import Sizes from './Sizes.jsx';
@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { BodyContext } from '../../BodyContext.jsx';
 
 const Modal = (props) => {
   const [modalRating, setModalRating] = useState(0);
@@ -20,6 +21,7 @@ const Modal = (props) => {
   const [modalPhoto, setModalPhoto] = useState([]);
   const [value, setValue] = useState(null);
   const [hover, setHover] = useState(-1);
+  const { body1, setBody1 } = useContext(BodyContext);
 
   const handlesubmit = (e) => {
     e.preventDefault();
@@ -30,6 +32,9 @@ const Modal = (props) => {
     };
     props.setForm(true);
     props.closeModal();
+    body1.classList.remove('modal-open');
+    const modalOverlay = document.querySelector('.modal-overlay');
+    body1.removeChild(modalOverlay);
     alert("Submission Successful!");
   }
 
@@ -58,7 +63,14 @@ const Modal = (props) => {
 
   return (
     <div className="reviewmodal" style={{ display: props.show ? 'block' : 'none' }}>
-    <div className="reviewoverlay" onClick={props.closeModal}>      <IconButton aria-label="delete">
+    <div className="reviewoverlay" onClick={
+      () => {
+        props.closeModal();
+        body1.classList.remove('modal-open');
+        const modalOverlay = document.querySelector('.modal-overlay');
+        body1.removeChild(modalOverlay);
+        }}>
+        <IconButton aria-label="delete">
         <AcUnitIcon />
       </IconButton></div>
     <div className="modalContent">
@@ -73,7 +85,7 @@ const Modal = (props) => {
         }}
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}/>
       {value !== null && (
-        <Box sx={{ ml: 2 }}>{rlabels[hover !== -1 ? hover : value]}</Box>
+        <Box sx={{ fontSize: '10px', fontFamily: 'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',color:'gray' }}>{rlabels[hover !== -1 ? hover : value]}</Box>
       )}</div>
       </div>
 
@@ -124,15 +136,6 @@ const Modal = (props) => {
 
       <div>
           <label>
-            {/* Summary:
-            <input
-            onChange={(e)=>{setModalSummary(e.target.value); props.setSummary(e.target.value);}}
-            type="text"
-            maxLength="60"
-            placeholder="Tell us about your experience"
-            value={modalSummary}
-            required
-            /> */}
             <div className="modalSummary"> <TextField
           id="outlined-required"
           label="Suammry"
@@ -162,14 +165,6 @@ const Modal = (props) => {
 
         <div className="selec">
           <label>
-            {/* <input
-            onChange={(e)=>{setModalBody(e.target.value); props.setBody(e.target.value);}}
-            type="text"
-            maxLength="1000"
-            placeholder="Tell us about your experience"
-            value={modalBody}
-            required
-            /> */}
                   <Sizes handleCharacteristics={handleCharacteristics} reviewStars={props.reviewStars}/>
                   <div className="recom2">
         Recommend?:
@@ -207,15 +202,7 @@ const Modal = (props) => {
       <div className="submitreview">
       <IconButton type="submit" size="small">Submit</IconButton>
       </div>
-
-        {/* <input
-              className="modalBar modalSubmit"
-              type="submit"
-              value="Submit"
-              messsage='Submission Sucessful'
-            /> */}
       </form>
-      {/* <button title="Close" className="closeModal" onClick={props.closeModal} >close</button> */}
     </div>
   </div>
   );

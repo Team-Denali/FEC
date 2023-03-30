@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import AnswerList from "./AnswerList.jsx";
 import axios from "axios";
 import Amodal from "./AnswerModal.jsx";
-import {
-  BsFillArrowUpSquareFill,
-  BsFillArrowDownSquareFill,
-} from "react-icons/bs";
-import { MdOutlineExpandCircleDown } from "react-icons/md";
+// import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+//import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+// import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
+//import { MdOutlineExpandCircleDown } from "react-icons/md";
 import "./QnA.css";
 import Button from "@mui/material/Button";
 import ElementContext from "../../ElementContext.js";
