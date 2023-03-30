@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 
 const Sizes = ({handleCharacteristics, reviewStars}) => {
+  //console.log(reviewStars);
   var meta = reviewStars.characteristics||{};
-  //console.log(meta);
   const characteristics = {
     Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
 

@@ -7,7 +7,8 @@ import "./QnA.css";
 const QuestionsAnswers = ({ current }) => {
   let product =current.id
   const getQuestions = () => {
-    axios
+    if (product) {
+      axios
       .get("/qa/questions", {
         params: {
           product_id: product, //no questions
@@ -24,6 +25,7 @@ const QuestionsAnswers = ({ current }) => {
       .catch((err) => {
         console.log(err);
       });
+    }
   };
 
   useEffect(() => {

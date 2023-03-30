@@ -1,12 +1,9 @@
-import React from 'react';// Bring React in to build a component.
+import React from 'react';
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 import RelatedItemsList from './/comp/RelatedItemsList.jsx';
 import YourOutfitList from './/comp/YourOutfitList.jsx';
-//import _ from 'lodash';
-//import {uniq} from 'lodash';
 import uniq from 'lodash/uniq';
-
-import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
@@ -14,110 +11,10 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import CheckIcon from '@mui/icons-material/Check';
 import Divider from '@mui/material/Divider';
+import RelatedItemsModal from './/comp/RelatedItemsModal.jsx';
+import ElementContext from '../../ElementContext.js';
 
-var RelatedItemsModal = ({open, setOpen, comparison}) => {
-  var gridStyle = {
-    textAlign: 'center'
-  }
-  const modalStyle = {
-    fontFamily: 'Verdana, sans-serif',
-    color: 'rgb(87 72 72)',
-    backgroundColor: 'rgb(240, 240, 240)'
-  }
-  var nameGrid = comparison.slice(0, 1).map(feature => (
-    <Grid key={feature[1]} container spacing={1} columns={12}>
-        <Grid item xs={3} sm={3} md={3}>
-          <h4>{feature[0]}</h4>
-        </Grid>
-        <Grid item xs={6} sm={6} md={6}>
-          <div>{feature[1]}</div>
-        </Grid>
-        <Grid item xs={3} sm={3} md={3}>
-          <h4>{feature[2]}</h4>
-        </Grid>
-    </Grid>
-  ))
-  var priceGrid = comparison.slice(1, 2).map(feature => (
-    <Grid key={feature[1]} container spacing={1} columns={12}>
-        <Grid item xs={12} sm={12} md={12}>
-          <Divider></Divider>
-        </Grid>
-        <Grid item xs={3} sm={3} md={3}>
-          <div>${feature[0]}</div>
-        </Grid>
-        <Grid item xs={6} sm={6} md={6}>
-          <div>{feature[1]}</div>
-        </Grid>
-        <Grid item xs={3} sm={3} md={3}>
-          <div>${feature[2]}</div>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <Divider></Divider>
-        </Grid>
-      </Grid>
-    ))
-    //case 1: both have feature and theyre equal =>
-    //case 2: both have feature and not equal =>
-    //case 3: only one has that feature =>
-  var comparisonGrid = comparison.slice(2).map(feature => {
-    var left, center, right;
-    if (feature[0] === null || feature[2] === null) {
-      left = feature[0] === null ? <CheckIcon /> : '';
-      right = feature[2] === null ? <CheckIcon /> : '';
-      center = `${feature[1]}`
-    } else if (feature[0] !== feature [2] && feature[0] !== undefined && feature[2] !== undefined) {
-      left = feature[0];
-      right = feature[2];
-      center = feature[1];
-    }
-    else if (feature[0] !== feature [2] && (feature[0] !== undefined || feature[2] !== undefined)) {
-      left = feature[0] ? feature[0]: '';
-      right = feature[2] ? feature[2] : '';
-      center = `${feature[1]}`
-    }
-    else {
-      left = '???';
-      right = '???';
-      center = 'WHAT';
-    }
 
-    return (
-    <Grid key={center} container spacing={1} columns={12}>
-        <Grid item xs={3} sm={3} md={3}>
-          <div>{left}</div>
-        </Grid>
-        <Grid item xs={6} sm={6} md={6}>
-          <div>{center}</div>
-        </Grid>
-        <Grid item xs={3} sm={3} md={3}>
-          <div>{right}</div>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <Divider></Divider>
-        </Grid>
-    </Grid>
-    )})
-  var grid = (
-  <Grid style={gridStyle} container spacing={2} columns={12}>
-    {nameGrid.concat(priceGrid.concat(comparisonGrid))}
-  </Grid>
-  );
-  return (
-    <div>
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <DialogContent style={modalStyle} >
-          <h3>Comparing:</h3>
-        </DialogContent>
-        <DialogContent style={modalStyle} >
-          <div>{grid}</div>
-        </DialogContent>
-      </Dialog>
-    </div>
-  )
-}
 
 var RelatedItems = ({current, setCurrentById, getProducts}) => {
   const [related, setRelated] = useState([]);
@@ -151,7 +48,6 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
         comparison.push([currentFeatures[combinedKeys[i]], combinedKeys[i], comparatorFeatures[combinedKeys[i]]])
       // }
     }
-
     setComparison(comparison);
   }
   function openComparisonModal(item) {
@@ -252,15 +148,20 @@ var RelatedItems = ({current, setCurrentById, getProducts}) => {
   }, [])
 
   useEffect(() => {
-
     getRelated()
   }, [current])
 
   return (
     <div style={componentStyle} >
-      <RelatedItemsModal open={open} setOpen={setOpen} comparison={comparison} />
-      <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} openComparisonModal={openComparisonModal} />
-      <YourOutfitList current={current} outfit={outfit} setCurrentById={setCurrentById} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} />
+      <ElementContext.Provider value='ri-modal'>
+        <RelatedItemsModal open={open} setOpen={setOpen} comparison={comparison} />
+      </ElementContext.Provider>
+      <ElementContext.Provider value='ri-list'>
+        <RelatedItemsList related={related} setCurrentById={setCurrentById} getProducts={getProducts} openComparisonModal={openComparisonModal} />
+      </ElementContext.Provider>
+      <ElementContext.Provider value='ri-outfit-list'>
+        <YourOutfitList current={current} outfit={outfit} setCurrentById={setCurrentById} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} />
+      </ElementContext.Provider>
     </div>
   );
 }

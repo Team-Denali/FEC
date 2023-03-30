@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Rating from '@mui/material/Rating';
 import DoneIcon from '@mui/icons-material/Done';
@@ -8,9 +8,13 @@ import { format } from "date-fns";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-
+import ModuleContext from '../../ModuleContext.js';
+import ElementContext from '../../ElementContext.js';
+import ClickTracker from '../../ClickTracker.jsx';
 
 const ReviewItem = (props) => {
+  const module = useContext(ModuleContext);
+  const element = useContext(ElementContext);
   const [helpful, setHelpful] = useState(props.review.helpfulness);
   const [helpfulclick, setHelpfulclick] = useState(false);
   const [counthelpfulclick, setCounthelpfulclick] = useState([]);
@@ -23,6 +27,7 @@ const ReviewItem = (props) => {
     setOpen(true);
     setCurrentpic(index)
   }
+
   const handleClose = () => setOpen(false);
 
   const style = {
@@ -33,8 +38,8 @@ const ReviewItem = (props) => {
     width: 500,
     height: 500,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
+    border: 'none',
+    boxShadow: 'none',
     p: 4,
   };
 
@@ -86,16 +91,18 @@ const ReviewItem = (props) => {
       setHelpfulclick(true);
     }
   }
-
   const body = props.review.body.slice(0,80);
   const left = props.review.body.slice(80);
 
   return (
+    <ElementContext.Provider value={`${element}-card-${props.keys}`}>
+    <ClickTracker selector={`${element}-card-${props.keys}`} WrappedComponent={(
     <div className="Reviewitem">
       <div className='ratingname'>
       <Rating name="read-only" value={rating}  precision={0.1} size={'small'} readOnly />
       <span className="name">
-          {!props.review.reviewer_email ? (<VerifiedUserIcon size={"small"}>VerifiedUserIcon</VerifiedUserIcon>): null}
+          {!props.review.reviewer_email ? (
+          <VerifiedUserIcon style={{ width: '1rem', height: '1rem' }} size={"small"}>VerifiedUserIcon</VerifiedUserIcon>): null}
         {props.review.reviewer_name}
         </span>
       </div>
@@ -116,7 +123,7 @@ const ReviewItem = (props) => {
       <div className="reviewphoto">
       {photographs.map((_, index) =>
         photographs[index] ? (
-          <img src={photographs[index]['url']} key={index} onClick={() => {handleOpen(index)}} className="ansPhotos" style={{height:80, width:80}} />
+          <img src={photographs[index]['url']} key={index} onClick={() => {handleOpen(index)}} className="ansPhotos" width="80" height="80" loading="lazy" />
         ) : null
       )}
     </div>
@@ -127,7 +134,7 @@ const ReviewItem = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {photographs[currentpic] ?(<img src={photographs[currentpic]['url']} key={currentpic} className="ansPhotos" style={{height:500, width:500}} />):null}
+          {photographs[currentpic] ?(<img src={photographs[currentpic]['url']} key={currentpic} className="ansPhotos" style={{ width: '100%', height: '100%' }}  loading="lazy" />):null}
         </Box>
       </Modal>
       </div>
@@ -137,27 +144,59 @@ const ReviewItem = (props) => {
         {props.review.response ? props.review.response : null}
        </div>
       </div>
+
       <div className='helpful'>
-      <span> Helpful?
-        <Button size="small" onClick={() => {
+      <div className="click-tracker-container"> Helpful?
+
+      <ClickTracker selector={`${element}-card-${props.keys}-helpful`} WrappedComponent={(
+
+        <Button size="small"
+        sx={{
+          fontFamily:
+            'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+          fontWeight: 15,
+          fontSize: 12,
+          color: 'grey',
+          margin: '1px',
+          padding: '5px',
+        }}
+        onClick={() => {
         updateHelpful();
         var temp = counthelpfulclick;
         temp.push(Date.now());
         setCounthelpfulclick(temp);
         //console.log(counthelpfulclick)
       }}>Yes[{helpful}]</Button>
-          <Button size="small" onClick={() => {
+      )}/>
+
+      <ClickTracker selector={`${element}-card-${props.keys}-report`} WrappedComponent={(
+          <Button size="small"
+          sx={{
+            fontFamily:
+              'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+            fontWeight: 15,
+            fontSize: 12,
+            color: 'grey',
+            margin: '1px',
+            padding: '5px',
+          }}
+          onClick={() => {
         var temp = countreportclick;
         temp.push(Date.now());
         setCountreportclick(temp);
         //console.log(countreportclick)
       }}>Report</Button>
-      </span>
+      )}/>
+
+      </div>
       <span className='reviewdate'> <time>{formatDate}</time></span>
 </div>
 <div className='borderline'></div>
 
     </div>
+)}/>
+ </ElementContext.Provider>
+
   )
 }
 

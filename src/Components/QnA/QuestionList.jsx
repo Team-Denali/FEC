@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import AnswerList from "./AnswerList.jsx";
 import axios from "axios";
 import Amodal from "./AnswerModal.jsx";
-import {
-  BsFillArrowUpSquareFill,
-  BsFillArrowDownSquareFill,
-} from "react-icons/bs";
-import { MdOutlineExpandCircleDown } from "react-icons/md";
+// import {
+//   BsFillArrowUpSquareFill,
+//   BsFillArrowDownSquareFill,
+// } from "react-icons/bs";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+//import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
+//import { MdOutlineExpandCircleDown } from "react-icons/md";
 import "./QnA.css";
 
 const QuestionList = ({ question }) => {
@@ -89,7 +92,7 @@ const QuestionList = ({ question }) => {
               style={{ height: "1rem" }}
               onClick={() => clickHandler(array.length)}
             >
-              Load More Answers <MdOutlineExpandCircleDown />
+              Load More Answers <ExpandCircleDownIcon />
             </button>
           )}
           {array.length > 2 && result > array.length && (
@@ -98,12 +101,12 @@ const QuestionList = ({ question }) => {
               style={{ height: "1rem" }}
               onClick={() => setResult(2)}
             >
-              Collapse Answers <MdOutlineExpandCircleDown />
+              Collapse Answers <ExpandCircleDownIcon />
             </button>
           )}
         </div>
         <div>
-          <BsFillArrowUpSquareFill className="vote" onClick={voteHandler} />(
+          <ArrowUpwardIcon className="vote" onClick={voteHandler} />(
           {question.question_helpfulness}) Upvote!
           <button
             style={{ background: "white", border: "none", cursor: "pointer" }}

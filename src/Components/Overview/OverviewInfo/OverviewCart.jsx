@@ -1,5 +1,5 @@
 import React from "react";
-var _ = require("lodash"); // Bring React in to build a component.
+//var _ = require("lodash"); // Bring React in to build a component.
 
 import { useState, useEffect } from "react";
 import OverviewInventory from "./OverviewInventory.jsx"; //import { createRoot } from "react-dom/client";

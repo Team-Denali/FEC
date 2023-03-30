@@ -1,10 +1,12 @@
 import React from "react";
 import "./QnA.css";
 import { format } from "date-fns";
-import {
-  BsFillArrowUpSquareFill,
-  BsFillArrowDownSquareFill,
-} from "react-icons/bs";
+// import {
+//   BsFillArrowUpSquareFill,
+//   BsFillArrowDownSquareFill,
+// } from "react-icons/bs";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+
 import axios from "axios";
 
 var AnswerList = ({ answer }) => {
@@ -71,7 +73,7 @@ var AnswerList = ({ answer }) => {
           </div>
           <div>
             <span>Upvote!</span>
-            <BsFillArrowUpSquareFill onClick={voteHandler} className="vote" />(
+            <ArrowUpwardIcon onClick={voteHandler} className="vote" />(
             {answer.helpfulness})
             <span className="q.report" onClick={reportHandler} value="Report">
               Report

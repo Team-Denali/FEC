@@ -1,13 +1,17 @@
 import React from 'react';// Bring React in to build a component.
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import ProductPreviewImages from './ProductPreviewImages.jsx';
 import ProductPreviewInformation from './ProductPreviewInformation.jsx';
 import ActionButton from './ActionButton.jsx';
 
+import ElementContext from './../../../ElementContext.js';
+import ClickTracker from '../../../ClickTracker.jsx';
+
 
 var AddToOutfitCard = ({item, onClick}) => {
+  const element = useContext(ElementContext);
   function handleClick(event) {
-    event.stopPropagation();
+    // event.stopPropagation();
     onClick();
   }
   const divStyle = {
@@ -38,10 +42,12 @@ var AddToOutfitCard = ({item, onClick}) => {
     textDecoration: 'none'
   }
   return (
+    <ClickTracker selector={`${element}-add-to-outfit-card`} WrappedComponent={(
       <div style={divStyle} onClick={handleClick}>
         <h1 style={pStyle}>{`+`}</h1>
         <ProductPreviewInformation item={item} />
       </div>
+    )}/>
   );
 }
 

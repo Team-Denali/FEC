@@ -1,6 +1,7 @@
 node_modules
-public/bundle.js
+public/
 config/myConfig.js
+webpack.config.js
 
 .env
 
