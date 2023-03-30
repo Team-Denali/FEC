@@ -5,16 +5,9 @@ const Overview = lazy(() => import("./Components/Overview/Overview.jsx"));
 const QuestionsAnswers = lazy(() => import("./Components/QnA/QnA.jsx"));
 const RelatedItems = lazy(() => import("./Components/RelatedItems/RelatedItems.jsx"));
 const Reviews = lazy(() => import("./Components/Reviews/Reviews.jsx"));
-// import Overview from './Components/Overview/Overview.jsx';
-// import QuestionsAnswers from './Components/QnA/QnA.jsx';
-// import RelatedItems from './Components/RelatedItems/RelatedItems.jsx';
-// import Reviews from './Components/Reviews/Reviews.jsx';
+
 import axios from 'axios';
 
-// import Overview from './Components/Overview/Overview.jsx';
-// import QuestionsAnswers from './Components/QnA/QnA.jsx';
-// import Reviews from './Components/Reviews/Reviews.jsx';
-// import RelatedItems from './Components/RelatedItems/RelatedItems.jsx';
 import ModuleContext from './ModuleContext.js';
 import CurrentContext from './CurrentContext.js';
 
@@ -43,6 +36,10 @@ const App = () => {
         .then(res => setCurrent(res.data))
   };
   useEffect(() => {
+    // if(!current.id) {
+    //   getProducts('37345')
+    //     .then(res => setCurrent(res.data))
+    // }
     // if(!current.id) {
     //   getProducts('37345')
     //     .then(res => setCurrent(res.data))

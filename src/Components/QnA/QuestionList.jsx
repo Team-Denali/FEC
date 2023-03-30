@@ -123,27 +123,53 @@ const QuestionList = ({ product, question, key }) => {
             />
           )}
           {array.length > 2 && result > array.length && (
-            <button
-              className="buttonStyle"
-              style={{ height: "1rem" }}
-              onClick={() => setResult(2)}
-            >
-              Collapse Answers <MdOutlineExpandCircleDown />
-            </button>
+            <ClickTracker
+              selector={`${element}-Collapse_Button-${id}`}
+              WrappedComponent={
+                <Button
+                  className="buttonStyle"
+                  style={{ height: "1rem" }}
+                  onClick={() => setResult(2)}
+                >
+                  Collapse Answers <MdOutlineExpandCircleDown />
+                </Button>
+              }
+            />
           )}
         </div>
-        <div>
-          <BsFillArrowUpSquareFill className="vote" onClick={voteHandler} />(
-          {question.question_helpfulness}) Upvote!
-          <button
-            style={{ background: "white", border: "none", cursor: "pointer" }}
-            onClick={() => setModal(true)}
-          >
-            <b>Add Answer</b>
-          </button>{" "}
-          <a onClick={reportHandler} style={{ cursor: "pointer" }}>
-            Report
-          </a>
+
+        <div style={{display: 'flex', flexDirection: 'column'}} >
+          Helpful?
+          <ClickTracker
+            selector={`${element}-Vote_Q_Button-${id}`}
+            WrappedComponent={
+              <Button style = {{fontSize: '12px'}} className="vote" onClick={voteHandler}>
+                Helpful?[
+                {question.question_helpfulness}]{" "}
+              </Button>
+            }
+          />
+          <ClickTracker
+            selector={`${element}-Add_Answer_Button-${id}`}
+            WrappedComponent={
+              <Button style = {{fontSize: '12px'}}  size="small" onClick={() => setModal(true)}>
+                <b>Add Answer</b>
+              </Button>
+            }
+          />
+          <ClickTracker
+            selector={`${element}-Report_Q_Button-${id}`}
+            WrappedComponent={
+              <Button
+              style = {{fontSize: '12px'}}
+                size="small"
+                onClick={reportHandler}
+                style={{ cursor: "pointer" }}
+              >
+                Report
+              </Button>
+            }
+          />
         </div>
 
         <Amodal
