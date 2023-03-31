@@ -1,6 +1,7 @@
 import React from 'react';// Bring React in to build a component.
 import { lazy, useState, useEffect, createContext } from 'react';
 import { createRoot } from "react-dom/client";
+import Header from "./Header.jsx";
 const Overview = lazy(() => import("./Components/Overview/Overview.jsx"));
 const QuestionsAnswers = lazy(() => import("./Components/QnA/QnA.jsx"));
 const RelatedItems = lazy(() => import("./Components/RelatedItems/RelatedItems.jsx"));
@@ -10,6 +11,7 @@ import axios from 'axios';
 
 import CurrentContext from './CurrentContext.js';
 import ModuleContext from './ModuleContext.js';
+//import background from './background.jpg';
 
 const root = createRoot(document.getElementById("root"));
 
@@ -35,18 +37,19 @@ const App = () => {
     marginRight: 'auto',
   };
 
+
   return (
     <div className='app' style={appStyle}>
+      <Header />
       <CurrentContext.Provider value={current.id}>
         <ModuleContext.Provider value='overview'>
-          <h1>Hello World</h1>
           <Overview current={current}/>
-        </ModuleContext.Provider>
-        <ModuleContext.Provider value='questions-answers'>
-          <QuestionsAnswers current={current} />
         </ModuleContext.Provider>
         <ModuleContext.Provider value='related-items'>
           <RelatedItems current={current} setCurrent={setCurrent} />
+        </ModuleContext.Provider>
+        <ModuleContext.Provider value='questions-answers'>
+          <QuestionsAnswers current={current} />
         </ModuleContext.Provider>
         <ModuleContext.Provider value='reviews'>
           <Reviews current={current.id}/>

@@ -99,7 +99,7 @@ const ReviewItem = (props) => {
     <ClickTracker selector={`${element}-card-${props.keys}`} WrappedComponent={(
     <div className="Reviewitem">
       <div className='ratingname'>
-      <Rating name="read-only" value={rating}  precision={0.1} size={'small'} readOnly />
+      <Rating name="read-only" value={rating}  precision={0.1} size={'small'} readOnly   style={{color: '#3f51b5'}}/>
       <span className="name">
           {!props.review.reviewer_email ? (
           <VerifiedUserIcon style={{ width: '1rem', height: '1rem' }} size={"small"}>VerifiedUserIcon</VerifiedUserIcon>): null}
@@ -123,7 +123,10 @@ const ReviewItem = (props) => {
       <div className="reviewphoto">
       {photographs.map((_, index) =>
         photographs[index] ? (
-          <img src={photographs[index]['url']} key={index} onClick={() => {handleOpen(index)}} className="ansPhotos" width="80" height="80" loading="lazy" />
+          <img src={photographs[index]['url']} key={index} onClick={() => {handleOpen(index)}} className="ansPhotos" width="80" height="80" loading="lazy"   style={{
+            boxShadow: "0 0 5px 2px rgba(0,0,0,0.5)",
+            borderRadius: "5px"
+          }}  />
         ) : null
       )}
     </div>

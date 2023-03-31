@@ -55,7 +55,7 @@ var YourOutfitList = ({current, outfit, setCurrentById, addToOutfit, removeFromO
   return (
     <ClickTracker selector={`${element}`} WrappedComponent={(
       <div style={outerDivStyle} >
-        <h2>Your Outfit</h2>
+        <div className="reviewtitle">Your Outfit</div>
         <Carousel items={outfitList} />
       </div>
     )}/>

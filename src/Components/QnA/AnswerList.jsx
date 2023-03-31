@@ -77,12 +77,21 @@ var AnswerList = ({ answer }) => {
           <div>
             by <b>{answer.answerer_name}</b>,<time>{formatDate}</time>
           </div>
-          <div>
-            <span style={{ textSize: "10px", color: "grey" }}> Helpful?</span>
+          <div style={{display: 'flex', flexDirection: 'row'}} >
+            <span style={{ textSize: "10px", color: "grey", display: "flex", alignItems: "center"}}> Helpful?</span>
             <ClickTracker
               selector={`${element}-vote_A_Button-AnswerId:${id}`}
               WrappedComponent={
-                <Button onClick={voteHandler} className="vote">
+                <Button  sx={{
+                  fontFamily:
+                    'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                  fontWeight: 15,
+                  fontSize: 12,
+                  color: 'grey',
+                  margin: '1px',
+                  padding: '5px',
+                }}
+                onClick={voteHandler} className="vote">
                   YES [{answer.helpfulness}]
                 </Button>
               }
@@ -90,7 +99,15 @@ var AnswerList = ({ answer }) => {
             <ClickTracker
               selector={`${element}-Report_A_Button-AnswerId:${id}`}
               WrappedComponent={
-                <Button
+                <Button sx={{
+                  fontFamily:
+                    'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                  fontWeight: 15,
+                  fontSize: 12,
+                  color: 'grey',
+                  margin: '1px',
+                  padding: '5px',
+                }}
                   className="q.report"
                   onClick={reportHandler}
                   value="Report"
@@ -110,7 +127,7 @@ var AnswerList = ({ answer }) => {
                   <div key={index}>
                     {" "}
                     <img
-                      style={{ padding: ".25rem" }}
+                      style={{boxShadow: "0 0 5px 2px rgba(0,0,0,0.5)",borderRadius: "5px" }}
                       className="image"
                       src={photo}
                     />{" "}

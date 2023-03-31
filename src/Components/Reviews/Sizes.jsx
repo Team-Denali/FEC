@@ -79,6 +79,18 @@ const Sizes = ({handleCharacteristics, reviewStars}) => {
 
   return (
     <div>
+      {meta.Size &&
+        <div className="startrating">
+          <label>Size: </label>
+          {selectSize}
+        </div>}
+
+        {meta.Width &&
+        <div className="startrating">
+          <label>Width: </label>
+          {selectWidth}
+        </div>}
+
       {meta.Comfort &&
         <div className="startrating">
           <label>Comfort: </label>

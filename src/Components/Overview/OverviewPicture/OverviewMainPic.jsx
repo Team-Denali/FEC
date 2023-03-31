@@ -33,13 +33,16 @@ var OverviewMainPic = ({
       style={{
         cursor: "zoom-in",
         backgroundImage: `url(${pic})`,
-        maxWidth: "100%",
         maxHeight: "auto",
+        width:"600px",
+        height:"600px",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         display: "flex",
         justifyContent: "space-around",
+        borderRadius: "10%",
+        boxShadow: 'rgba(0, 0, 0, 0.5) 0px 0px 10px'
       }}
       onMouseEnter={(e) => {}}
       onClick={(e) => {

@@ -48,26 +48,58 @@ var Overview = ({ current }) => {
   };
 
 
-  const GetProductReviews = (id) => { let params = {product_id: id, count: 1000}; //console.log('overview review params:', params)
-  return axios.get(`/reviews/`, {params: params}).then((res) => { //console.log('GPR data:', res.data.results)
+  const GetProductReviews = (id) => {
+  let params = {product_id: id, count: 1000}; //console.log('overview review params:', params)
+  return axios.get(`/reviews/`, {params: params})
+  // .then((res) => { //console.log('GPR data:', res.data.results)
 
-    setItemreviews(res.data.results); setReviewNum(res.data.results.length); //console.log('overview Review retrieval:', itemreviews);
-    return axios.get(`${url}/reviews/meta`, {params: params})
-    .then((res) => { //console.log('GetRS:' , res.data.ratings)
+  //   setItemreviews(res.data.results); setReviewNum(res.data.results.length); //console.log('overview Review retrieval:', itemreviews);
+  //   return axios.get(`${url}/reviews/meta`, {params: params})
+  //   .then((res) => { //console.log('GetRS:' , res.data.ratings)
 
-      setStarRating(res.data.ratings); //console.log('overviewMetaReview data retrieval:', starRating)
-    })
-
-    .catch((err) => {console.log('overviewReveiewData axios error:', err)})
-  })
-
+  //     setStarRating(res.data.ratings); //console.log('overviewMetaReview data retrieval:', starRating)
+  //   })
+  //   .catch((err) => {console.log('overviewReveiewData axios error:', err)})
+  // })
 }
+
+  var getAverageRating = (id) => {
+    return axios.get('/reviews/meta', {
+      params: {
+        product_id: id
+      }
+    })
+    .then((res) => {
+      var ratings = res.data.ratings;
+      var count = (
+        Number.parseInt(ratings['1']) +
+        Number.parseInt(ratings['2']) +
+        Number.parseInt(ratings['3']) +
+        Number.parseInt(ratings['4']) +
+        Number.parseInt(ratings['5']));
+      var sum = (
+        Number.parseInt(ratings['1']) * 1 +
+        Number.parseInt(ratings['2']) * 2 +
+        Number.parseInt(ratings['3']) * 3 +
+        Number.parseInt(ratings['4']) * 4 +
+        Number.parseInt(ratings['5']) * 5);
+      return sum / count;
+    })
+    .catch((err)=> {
+      console.log(err);
+    })
+  }
+
+  const [rating, setRating] = useState(5);
+
 
   useEffect(() => {
 
     if (current.id) {
       styleFinder(current.id);
       GetProductReviews(current.id);
+      getAverageRating(current.id)
+      .then(avg => setRating(avg))
     }
   }, [current]);
 
@@ -86,12 +118,10 @@ var Overview = ({ current }) => {
       <div className="overviewContainer"style={{}}>
         <div className="overviewTop">
           <OverviewMainPic
+            key={current.id}
             current={current}
-
-
             currentStyles={styles}
             styleView={styleView}
-
             setStyle={setStyleView}
             mainPic={mainPic}
             setMain={setMainPic}
@@ -100,37 +130,31 @@ var Overview = ({ current }) => {
 
           <div className="overviewProductInfo">
 
-            <div className="OverviewReviewInfo info"><OverviewReviewInfo reviewNum={reviewNum} starRating={starRating} /></div>
+            <div className="OverviewReviewInfoinfo"><OverviewReviewInfo reviewNum={reviewNum} starRating={rating} /></div>
 
             <div className="info">{current.category}</div>
             <div className="productName ">
-              <h3>{current.name}</h3>
-
-
-
+              {current.name}
 
             </div>
             <div className='overviewPricing'>
-              <div><OverviewPrice defaultPrice={defaultPrice} salePrice={styleView.sale_price}/></div>
-            </div><div style={{fontSize: 'small', flexShrink: '3'}}>{current.description}</div>
-            <div className="overviewStyles info">
+              <OverviewPrice key = {defaultPrice} defaultPrice={defaultPrice} salePrice={styleView.sale_price}/>
+            </div><div style={{fontSize: 'small', flexShrink: '3'}}>
+            </div>
+            <div className='description'>
+            {current.description}
+            </div>
+            <div className="overviewStylesinfo">
               <OverviewStyles
-
-
-
-
                 overviewStyles={styles}
                 mainPic={mainPic}
-
                 picHandler={changePic}
-
                 styleView={styleView}
                 setStyleView={setStyleView}defaultPrice={defaultPrice} setDefaultPrice={setDefaultPrice}
-
               />
             </div>
 
-            <div className="overviewCart info">
+            <div className="overviewCartinfo">
               <OverviewCart current={current} styleView={styleView} itemName={current.name}/>
             </div>
 
@@ -146,9 +170,5 @@ var Overview = ({ current }) => {
 
   );
   };
-
-
-
-
 
 export default Overview;

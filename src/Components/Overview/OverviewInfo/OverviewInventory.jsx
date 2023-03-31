@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 var { range } = require("lodash"); // Bring React in to build a component.
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -8,10 +8,10 @@ import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 //import { createRoot } from "react-dom/client";
-
 // Huzzah for jsx!
 
 var OverviewInventory = ({ num , cartQuantity, setCartQuantity}) => {
+  const [quantity, setQuantity] = useState ('')
   let quantArr = _.range(num + 1);
   quantArr.shift(); //include state variables for currently viewed product
   if (num <= 0) {
@@ -30,7 +30,7 @@ var OverviewInventory = ({ num , cartQuantity, setCartQuantity}) => {
     <>
       <FormControl >
         <InputLabel id="select-quantity">SELECT QUANTITY</InputLabel >
-        <Select style={{width: '200px'}}label="SELECT QUANTITY" onChange={(e) => {setCartQuantity(e.target.value)}}>
+        <Select style={{width: '200px'}}label="SELECT QUANTITY" value={quantity} onChange={(e) => {setCartQuantity(e.target.value); setQuantity(e.target.value);}}>
           {quantArr.map((num) => {
             if (num <= 15) {
               return <MenuItem value={num}>{num}</MenuItem>;

@@ -28,7 +28,9 @@ var OverviewCart = ({ current, styleView, itemName }) => {
   const [cartItem, setCartItem] = useState(itemName); //itemName
 var button = 'ADD TO CART'
   const [cartObj, setCartObj] = useState({});
-  const [cart, setCart] = useState([]); //include state variables for currently viewed product
+  const [cart, setCart] = useState([]);
+  const [sizeforoverview,setSizeforoverview] = useState('')
+  //include state variables for currently viewed product
   if (!Object.keys(styleView).length) {
     return;
   }
@@ -65,19 +67,19 @@ var button = 'ADD TO CART'
           className="cartTopRow"
           style={{ display: "flex", flexDirection: "row" }}
         >
-          <div className="overviewCartSize cartSelector">
+          <div className="overviewCartSizecartSelector">
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">SELECT SIZE</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select" style={{width: '150px'}}
-                value=''
+                value={sizeforoverview}
                 label="SELECT SIZE"
                 onChange={(e) => {
                   console.log("switched", e.target.value);
                   setNum(styleView.skus[e.target.value].quantity);
-
                   setCartSize(styleView.skus[e.target.value].size);
+                  setSizeforoverview(e.target.value);
                 }}
               >
                 {Object.keys(styleView.skus).map((sku) => {
@@ -91,81 +93,50 @@ var button = 'ADD TO CART'
                 })}
               </Select>
             </FormControl>
-            {/* <select
-              id="selectSize"
-
-              name="sizeSelector"
-              form="sizeForm"
-              onChange={(e) => {
-
-                //console.log("switched", e.target.value);
-                setNum(styleView.skus[e.target.value].quantity);
-
-                setCartSize(styleView.skus[e.target.value].size);
-
-              }}>
-
-              <option value="select-size" selected>
-
-
-
-                SELECT SIZE
-              </option>
-
-            </select> */}
           </div>
+
           <div className="overviewCartQuantity">
-            {/* <select
-
-
-
-              className="overviewCartQuantity cartSelect"
-              id="selectQuantity"
-              name="quantitySelector"
-              form="quantityForm"
-              onChange={(e) => {
-                e.preventDefault();
-                setCartQuantity(e.target.value);
-              }}
-
-            > */}
-
             <OverviewInventory cartQuantity={cartQuantity} setCartQuantity={setCartQuantity} num={num} />
             {/* </select>{" "} */}
           </div>
         </div>
         <div className="cartBottomRow">
 
-          <div>SIZE: {cartSize}</div>
-            <div>QUANTITY: {cartQuantity}</div>
+          <div className="cartSize">SIZE: {cartSize}</div>
+            <div className="cartQuantity">QUANTITY: {cartQuantity}</div>
 
-          <div className="addToCart">
+            <div className='addToCart'>
+      <Button variant="outlined"
+                        sx={{
+                          fontFamily:
+                            'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                          fontWeight: '10px',
+                          width: '300px',
+                          fontSize: 15,
+                          color: '#3f51b5',
+                          margin: '5px',
+                          padding: '15px',
+                          borderColor: '#3f51b5',
+                        }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          console.log("clicked!");
+                          // setCartStyle(styleView.name);
+                          setCartItem(itemName);
+                          setCartObj({
+                            name: current.name,
+                            // updateStates().then(()=> {console.log("ADD TO CART:", cartObj, 'UPDATED STATES:', cartStyle, cartItem);})
 
-            <Button
-              className="cartAddButton"
-              onClick={(e) => {
-                e.preventDefault();
-                console.log("clicked!");
-                // setCartStyle(styleView.name);
-                setCartItem(itemName);
-                setCartObj({
-                  name: current.name,
-                  // updateStates().then(()=> {console.log("ADD TO CART:", cartObj, 'UPDATED STATES:', cartStyle, cartItem);})
+                            style: cartStyle,
 
-                  style: cartStyle,
+                            size: cartSize,
+                            quantity: cartQuantity,
+                            price: cartPrice,
+                          }); setCartSize(''); setCartQuantity('');//setCart([...cart, cartObj])//}, [cartItem, cartStyle])
 
-                  size: cartSize,
-                  quantity: cartQuantity,
-                  price: cartPrice,
-                }); setCartSize(''); setCartQuantity('');//setCart([...cart, cartObj])//}, [cartItem, cartStyle])
-
-                console.log("Added to Cart!") ;
-              }}
-              variant="outlined"
-            >
-              {button}
-            </Button>
-          </div>
+                          console.log("Added to Cart!") ;
+                        }}>{button}</Button>
+      </div>
         </div>
       </div>
     </>

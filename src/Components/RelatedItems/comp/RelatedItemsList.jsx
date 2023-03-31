@@ -22,7 +22,7 @@ var RelatedItemsList = ({related, setCurrentById, openComparisonModal}) => {
   return (
     <ClickTracker selector={`${element}`} WrappedComponent={(
       <div style={outerDivStyle} >
-        <h2>Related Items</h2>
+        <div className="reviewtitle">Related Items</div>
           <Carousel items={related.map(item => <RelatedItemCard key={item.id} id={item.id} item={item} onClick={_ => setCurrentById(item.id)} onButton={() => openComparisonModal(item)} icon={<StarBorderIcon />} />)} />
       </div>
     )

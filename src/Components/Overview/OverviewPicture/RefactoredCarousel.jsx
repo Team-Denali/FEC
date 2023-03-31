@@ -66,7 +66,7 @@ var RefactoredCarousel = ({items, pic, setPic}) => {
 
     textAlign: 'center',
     textDecoration: 'none',
-    border: '3px solid black',// height: '14%',
+    border: 'none',// height: '14%',
     margin: '0.1vw'
 
   }
@@ -94,9 +94,7 @@ var RefactoredCarousel = ({items, pic, setPic}) => {
     // height: '15%',
     // width: '100%',
     bottom: '50px',// alignItems: 'center',
-    background: 'linear-gradient(to left, #0000, #4f1818c8 50%)'
-
-
+    background: 'linear-gradient(to left, #0000, #4f1818c8 50%)',
   }
 
 
@@ -138,7 +136,8 @@ var RefactoredCarousel = ({items, pic, setPic}) => {
                 });
                 setPic(item.url);
                 e.stopPropagation();
-              }} style={{height:'70px', width: '59px' }} src={item.thumbnail_url}></img></li>)})}
+              }} style={{height:'70px', width: '59px', borderRadius: "10%",
+              boxShadow: 'rgba(0, 0, 0, 0.5) 0px 0px 10px' }} src={item.thumbnail_url}></img></li>)})}
           </ul>
       </div >
       {renderFwd1 ? (<div style={leftArrowStyle1} onClick={handleClickForward1} >

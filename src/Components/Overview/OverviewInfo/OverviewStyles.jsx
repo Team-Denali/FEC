@@ -8,7 +8,6 @@ var OverviewStyles = ({
   overviewStyles,
   mainPic,
   picHandler,
-
   styleView,
   setStyleView, defaultPrice, setDefaultPrice
 }) => {
@@ -30,7 +29,7 @@ var OverviewStyles = ({
 
       <div className="overviewStylesContainer">
 
-        <div>STYLE ▶ {styleView.name}</div>
+        <div className="styletext">STYLE ▶ {styleView.name}</div>
         <div className="styleSelectorArea">
           {overviewStyles.map((overviewStyle, i) => (
 
@@ -38,15 +37,19 @@ var OverviewStyles = ({
               key={overviewStyle.style_id}
 
               value={"thing"}
-              style={{display: 'flex',
-
-                height: "29px",
-                width: "20px",
-                backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`, padding: '5px', flex: '0 0 20%',
-                backgroundSize: "cover", backgroundPosition: 'center', backgroundRepeat: 'no-repeat',
-                borderRadius: "50%",
-
-              border: '3px solid lightcoral', }}
+              style={{
+              display: 'flex',
+              height: "29px",
+              width: "20px",
+              backgroundImage: `url(${overviewStyle.photos[0].thumbnail_url})`,
+              padding: '5px',
+              flex: '0 0 20%',
+              backgroundSize: "cover",
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              borderRadius: "50%",
+              border: '3px solid #3f51b5',
+            }}
               onClick={(e) => {
 
                 e.preventDefault(); setStyleView(overviewStyle);
