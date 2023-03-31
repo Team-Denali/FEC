@@ -5,7 +5,7 @@ const url = "http://localhost:3000";//import { createRoot } from "react-dom/clie
 // Huzzah for jsx!
 
 var OverviewReviewInfo = ({starRating, reviewNum}) => { // const [itemreviews, setItemreviews] = useState([]);
-if(!reviewNum) {return;}
+//if(!reviewNum) {return;}
 
 return (<div className='jumptorating'>
 
