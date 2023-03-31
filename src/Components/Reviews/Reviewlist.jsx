@@ -220,10 +220,10 @@ const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars, 
                     'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
                   fontWeight: '10px',
                   fontSize: 15,
-                  color: 'grey',
+                  color: '#3f51b5',
                   margin: '5px',
                   padding: '10px',
-                  borderColor: '#333',
+                  borderColor: '#3f51b5',
                 }}
       onClick={() => {
         addReview();
@@ -240,10 +240,10 @@ const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars, 
                             'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
                           fontWeight: '10px',
                           fontSize: 15,
-                          color: 'grey',
+                          color: '#3f51b5',
                           margin: '5px',
                           padding: '10px',
-                          borderColor: '#333',
+                          borderColor: '#3f51b5',
                         }}
         onClick={() => {
         createReview();
@@ -293,8 +293,28 @@ const Reviewlist = ({reviews, product_id, postForm, setSortmethod, reviewStars, 
       </div>
       No comment now. Be the first one to comment?
       <div className='SortContainer'>
-      <Button variant="outlined" onClick={createReview}>write a review +</Button>
-      </div>
+      <Button variant="outlined"
+                        sx={{
+                          fontFamily:
+                            'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                          fontWeight: '10px',
+                          fontSize: 15,
+                          color: '#3f51b5',
+                          margin: '5px',
+                          padding: '10px',
+                          borderColor: '#3f51b5',
+                        }}
+        onClick={() => {
+        createReview();
+        var temp = createReviewClick;
+        temp.push(Date.now())
+        setCreateReviewClick(temp);
+        const modalOverlay = document.createElement('div');
+        modalOverlay.classList.add('modal-overlay');
+        body1.classList.add('modal-open');
+        body1.appendChild(modalOverlay);
+        //console.log(createReviewClick)
+      }}>write a review +</Button>      </div>
     </div>
   }
 }

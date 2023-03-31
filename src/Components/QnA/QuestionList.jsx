@@ -116,6 +116,16 @@ const QuestionList = ({ product, question, key }) => {
                   size="small"
                   variant="outlined"
                   onClick={() => clickHandler(array.length)}
+                  sx={{
+                    fontFamily:
+                      'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                    fontWeight: '10px',
+                    fontSize: 15,
+                    color: '#3f51b5',
+                    margin: '5px',
+                    padding: '10px',
+                    borderColor: '#3f51b5',
+                  }}
                 >
                   Load More Answers
                 </Button>
@@ -127,23 +137,40 @@ const QuestionList = ({ product, question, key }) => {
               selector={`${element}-Collapse_Button-${id}`}
               WrappedComponent={
                 <Button
-                  className="buttonStyle"
-                  style={{ height: "1rem" }}
+                size="small"
+                variant="outlined"
+                  sx={{
+                    fontFamily:
+                      'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                    fontWeight: '10px',
+                    fontSize: 15,
+                    color: '#3f51b5',
+                    margin: '5px',
+                    padding: '10px',
+                    borderColor: '#3f51b5',
+                  }}
                   onClick={() => setResult(2)}
                 >
-                  Collapse Answers 
+                  Collapse Answers
                 </Button>
               }
             />
           )}
         </div>
 
-        <div style={{display: 'flex', flexDirection: 'column'}} >
-          Helpful?
+        <div style={{display: 'flex', flexDirection: 'row'}} >
           <ClickTracker
             selector={`${element}-Vote_Q_Button-${id}`}
             WrappedComponent={
-              <Button style = {{fontSize: '12px'}} className="vote" onClick={voteHandler}>
+              <Button  sx={{
+                fontFamily:
+                  'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                fontWeight: 15,
+                fontSize: 12,
+                color: 'grey',
+                margin: '1px',
+                padding: '5px',
+              }} className="vote" onClick={voteHandler}>
                 Helpful?[
                 {question.question_helpfulness}]{" "}
               </Button>
@@ -152,8 +179,16 @@ const QuestionList = ({ product, question, key }) => {
           <ClickTracker
             selector={`${element}-Add_Answer_Button-${id}`}
             WrappedComponent={
-              <Button style = {{fontSize: '12px'}}  size="small" onClick={() => setModal(true)}>
-                <b>Add Answer</b>
+              <Button  sx={{
+                fontFamily:
+                  'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                fontWeight: 15,
+                fontSize: 12,
+                color: 'grey',
+                margin: '1px',
+                padding: '5px',
+              }}  size="small" onClick={() => setModal(true)}>
+                Add Answer
               </Button>
             }
           />
@@ -161,7 +196,15 @@ const QuestionList = ({ product, question, key }) => {
             selector={`${element}-Report_Q_Button-${id}`}
             WrappedComponent={
               <Button
-              style = {{fontSize: '12px'}}
+              sx={{
+                fontFamily:
+                  'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                fontWeight: 15,
+                fontSize: 12,
+                color: 'grey',
+                margin: '1px',
+                padding: '5px',
+              }}
                 size="small"
                 onClick={reportHandler}
                 style={{ cursor: "pointer" }}

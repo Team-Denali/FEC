@@ -7,19 +7,17 @@ const url = "http://localhost:3000";//import { createRoot } from "react-dom/clie
 var OverviewReviewInfo = ({starRating, reviewNum}) => { // const [itemreviews, setItemreviews] = useState([]);
 if(!reviewNum) {return;}
 
-return (<><div>
+return (<div className='jumptorating'>
 
 <a href="" onClick={(e) => {
   e.preventDefault();
-  var div = document.getElementsByClassName('reviewtitle');
+  var div = document.getElementsByClassName('review-list');
   div[0].scrollIntoView();
-
-
-
-}}>Read all {reviewNum} Reviews</a>{/* <nav><HashLink smooth to="/#">Reviews</HashLink>
-</nav> */}
-<div><OverviewStarRating metaRatings={starRating}/></div></div>
-</>)
+}}>Read all {reviewNum} Reviews</a>
+<div>
+  <OverviewStarRating metaRatings={starRating}/>
+</div>
+</div>)
 }
 
 

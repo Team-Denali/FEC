@@ -90,17 +90,28 @@ const QuestionsAnswers = ({ current }) => {
 
   return (
     <>
-      <h4>Questions & Answers</h4>
+      <div className="reviewtitle">Questions & Answers</div>
       {qaData.length === 0 ? (
         <ElementContext.Provider value="noData">
           <ClickTracker
             selector={`${element}-NoQuestionLanding-ProductId:${id}`}
             WrappedComponent={
               <div className="qaMainContainer">
-                <h2>no questions</h2>
-                <button className="buttonStyle" onClick={() => setModal(true)}>
+                no questions
+
+                <Button variant="outlined" sx={{
+                                        fontFamily:
+                                          'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                                        fontWeight: '10px',
+                                        fontSize: 15,
+                                        color: '#3f51b5',
+                                        margin: '5px',
+                                        padding: '10px',
+                                        borderColor: '#3f51b5',
+                                      }}
+                onClick={() => setModal(true)}>
                   ADD A QUESTION +
-                </button>
+                </Button>
                 <Qmodal current={product} open={modal} onClose={setModal} />
               </div>
             }
@@ -115,7 +126,7 @@ const QuestionsAnswers = ({ current }) => {
                 WrappedComponent={
                   <input
                     onChange={changeHandler}
-                    className="qaSearchStyle"
+                    className="review-search"
                     type="text"
                     placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
                   ></input>
@@ -142,19 +153,52 @@ const QuestionsAnswers = ({ current }) => {
                 <ClickTracker
                   selector={`${element}-MoreQuestionsButton-ProductId:${id}`}
                   WrappedComponent={
-                    <Button variant="outlined" onClick={() => clickHandler(2)}>
+                    <Button variant="outlined"
+                    sx={{
+                      fontFamily:
+                        'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                      fontWeight: '10px',
+                      fontSize: 15,
+                      color: '#3f51b5',
+                      margin: '5px',
+                      padding: '10px',
+                      borderColor: '#3f51b5',
+                    }}
+                    onClick={() => clickHandler(2)}>
                       MORE ANSWERED QUESTIONS
                     </Button>
                   }
                 />
               )}
               {!hideButton && sortedArray.length > 2 && (
-                <Button variant="outlined" onClick={() => setResult(2)}>
+                <Button variant="outlined" onClick={() => setResult(2)}
+                sx={{
+                  fontFamily:
+                    'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                  fontWeight: '10px',
+                  fontSize: 15,
+                  color: '#3f51b5',
+                  margin: '5px',
+                  padding: '10px',
+                  borderColor: '#3f51b5',
+                }}
+                >
                   COLLAPSE QUESTIONS
                 </Button>
               )}
 
-              <Button variant="outlined" onClick={() => setModal(true)}>
+              <Button variant="outlined" onClick={() => setModal(true)}
+                                      sx={{
+                                        fontFamily:
+                                          'Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif',
+                                        fontWeight: '10px',
+                                        fontSize: 15,
+                                        color: '#3f51b5',
+                                        margin: '5px',
+                                        padding: '10px',
+                                        borderColor: '#3f51b5',
+                                      }}
+              >
                 ADD A QUESTION +
               </Button>
               <Qmodal current={current} open={modal} onClose={setModal} />

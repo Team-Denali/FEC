@@ -86,12 +86,10 @@ var Overview = ({ current }) => {
       <div className="overviewContainer"style={{}}>
         <div className="overviewTop">
           <OverviewMainPic
+            key={current.id}
             current={current}
-
-
             currentStyles={styles}
             styleView={styleView}
-
             setStyle={setStyleView}
             mainPic={mainPic}
             setMain={setMainPic}
@@ -100,37 +98,31 @@ var Overview = ({ current }) => {
 
           <div className="overviewProductInfo">
 
-            <div className="OverviewReviewInfo info"><OverviewReviewInfo reviewNum={reviewNum} starRating={starRating} /></div>
+            <div className="OverviewReviewInfoinfo"><OverviewReviewInfo reviewNum={reviewNum} starRating={starRating} /></div>
 
             <div className="info">{current.category}</div>
             <div className="productName ">
-              <h3>{current.name}</h3>
-
-
-
+              {current.name}
 
             </div>
             <div className='overviewPricing'>
-              <div><OverviewPrice defaultPrice={defaultPrice} salePrice={styleView.sale_price}/></div>
-            </div><div style={{fontSize: 'small', flexShrink: '3'}}>{current.description}</div>
-            <div className="overviewStyles info">
+              <OverviewPrice key = {defaultPrice} defaultPrice={defaultPrice} salePrice={styleView.sale_price}/>
+            </div><div style={{fontSize: 'small', flexShrink: '3'}}>
+            </div>
+            <div className='description'>
+            {current.description}
+            </div>
+            <div className="overviewStylesinfo">
               <OverviewStyles
-
-
-
-
                 overviewStyles={styles}
                 mainPic={mainPic}
-
                 picHandler={changePic}
-
                 styleView={styleView}
                 setStyleView={setStyleView}defaultPrice={defaultPrice} setDefaultPrice={setDefaultPrice}
-
               />
             </div>
 
-            <div className="overviewCart info">
+            <div className="overviewCartinfo">
               <OverviewCart current={current} styleView={styleView} itemName={current.name}/>
             </div>
 
@@ -146,9 +138,5 @@ var Overview = ({ current }) => {
 
   );
   };
-
-
-
-
 
 export default Overview;

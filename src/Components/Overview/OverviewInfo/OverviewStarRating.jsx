@@ -16,7 +16,7 @@ return total / numRatings
 
 
 if (metaRatings) { //console.log('STAR RATING:', AvgCalc(metaRatings))
-  return (<><Rating name="overview-star-rating" value={AvgCalc(metaRatings)} precision={0.25} readOnly/></>)
+  return (<><Rating name="overview-star-rating" value={AvgCalc(metaRatings)} precision={0.25} readOnly style={{color: '#3f51b5'}}/></>)
  }
 
 

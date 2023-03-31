@@ -278,7 +278,7 @@ const Productbreakdown = (props) => {
 
       </div>) : null}
 
-      { ch.Size?(<div  className="characteristic">&nbsp; SIZE &nbsp; &nbsp;
+      { ch.Size?(<div  className="characteristic">SIZE &nbsp; &nbsp;
 
       <Slider
   value={sizev}

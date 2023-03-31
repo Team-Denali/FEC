@@ -26,7 +26,8 @@ var RelatedItemCard = ({id, item, onClick, onButton, icon}) => {
     overflow: 'hidden',
     backgroundColor: 'lightgrey',
     width: 'min-content',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)'
   };
   const liStyle = {
     display: 'inline-block',

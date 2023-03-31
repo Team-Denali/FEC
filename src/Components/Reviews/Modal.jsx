@@ -79,7 +79,7 @@ const Modal = (props) => {
       <div>
         <div className="startrating" > Your rating for this product: </div>
         <div className='ratebar'>
-       <Rating name="simple-controlled" value={value} precision={1}
+       <Rating name="simple-controlled" value={value} style={{color: '#3f51b5'}} precision={1}
         getLabelText={getLabelText} onChange={(event, newvalue)=>{setModalRating(newvalue); props.setRating(newvalue); setValue(newvalue);}}         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}

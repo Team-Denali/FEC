@@ -137,7 +137,7 @@ const Ratingbreakdown = (props) => {
     <div className='rating-breakdown'>
 
      <div className="RatingText" onClick={nofilter}>{average}
-     <Rating name="read-only" value={average}  precision={0.1} size={'small'} readOnly />
+     <Rating name="read-only" value={average}  precision={0.1} size={'small'} readOnly   style={{color: '#3f51b5'}}/>
 </div>
     <div className="RecommendText">{rec?Math.round((Number(rec.true)/(Number(rec.true)+Number(rec.false)))*100): 0}% of reviews recommend this product</div>
 
