@@ -1,13 +1,16 @@
-What should be included in a README?
-What should be included in the README depends on the type of project being documented. However, there is some information that applies to nearly every project:
-
-DENALI - a storefront mvp from HackReactor RFE2302's Team Denali
+DENALI
+======
+a storefront mvp from HackReactor RFE2302's Team Denali
+-------------------------------------------------------
 
 Overview - A brief description outlining what the project
 
 Table of Contents:
 
-Description - A more detailed outline of the project. What does it do? Is there a high level list of features? If describing a project that has visual features, consider adding pictures or animations of the features and functionality in this section. See Adding Screen Captures below.
+1. [Description](#description)
+
+## Description 
+- A more detailed outline of the project. What does it do? Is there a high level list of features? If describing a project that has visual features, consider adding pictures or animations of the features and functionality in this section. See Adding Screen Captures below.
 
 Installation - How can another developer get your project up and running on their own? What dependencies are required? Are there environmental requirements? Be specific, and outline steps to take in order to get the project running.
 
